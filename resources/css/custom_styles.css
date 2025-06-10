@@ -1,0 +1,6 @@
+.hide-element {
+    display: none !important;
+}
+.show-element {
+    display: inline !important;
+}
