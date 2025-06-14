@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ComunController;
 
+
 Route::middleware("guest")->group(function(){
     Route::get('/', [AuthController::class, 'login_form'])-> name('login');
     Route::get('/comun/create', [ComunController::class, 'create'])-> name('create_comun');
