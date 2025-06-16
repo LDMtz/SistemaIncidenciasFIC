@@ -9,7 +9,7 @@
 </head>
 <body class="bg-bg-main flex flex-col min-h-screen" data-theme="dark">
     <x-header />
-    <main class="flex-grow flex py-6 px-8 text-text-1">
+    <main class="flex-grow flex py-6 text-text-1">
         {{$slot}}
     </main>
     <x-footer />
