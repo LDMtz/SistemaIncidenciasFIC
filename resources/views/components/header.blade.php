@@ -1,6 +1,7 @@
 <header class="py-2 px-8 border-b-2 bg-bg-header border-main-1 shadow-lg shadow-main-4/35 flex items-center justify-between">
     <a href="">
-        <img class="w-58" src="{{ asset('images/logo.svg') }}">
+        <img class="logo-light w-52 sm:w-58" src="{{ asset('images/logo_light.svg') }}">
+        <img class="logo-dark w-52 sm:w-58" src="{{ asset('images/logo_dark.svg') }}">
     </a>
 
     <div class="text-white">
@@ -13,15 +14,8 @@
             </button>
         </div>
 
-        <label class="inline-flex items-center cursor-pointer">
-            <input id="theme-toggle" type="checkbox" class="sr-only peer" checked>
-            <i id="icon-moon" class="fa-solid fa-moon text-main-2 text-2xl mr-3"></i>
-            <i id="icon-sun" class="fa-solid fa-sun text-main-2 text-2xl mr-3 hide-element"></i>
-            <div class="relative w-11 h-6 bg-gray-500 rounded-full peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-main-4"></div>
-        </label>
-
         <!-- Mobile -->
-        <button type="button" class="hover:text-main-2 cursor-pointer" hidden>
+        <button id="mobile-sidebar-toggle" type="button" class="cursor-pointer block sm:hidden">
             <i class="fa-solid fa-bars text-2xl"></i>
         </button>
         
@@ -29,7 +23,17 @@
         <a href="" class="hover:text-main-2">
             <i class="fa-solid fa-arrow-right-from-bracket text-2xl"></i>
         </a>
+
+        <label class="inline-flex items-center cursor-pointer">
+            <input id="theme-toggle-header" type="checkbox" class="sr-only peer" checked>
+            <i id="icon-moon-header" class="fa-solid fa-moon text-main-2 text-2xl mr-3"></i>
+            <i id="icon-sun-header" class="fa-solid fa-sun text-main-2 text-2xl mr-3 hide-element"></i>
+            <div class="relative w-11 h-6 bg-gray-500 rounded-full peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-main-4"></div>
+        </label>
         @endauth
+        <!-- Meter este al auth  -->
+
+
 
     </div>
     

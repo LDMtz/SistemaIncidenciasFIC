@@ -80,42 +80,53 @@
 
   //toggle theme
   document.addEventListener('DOMContentLoaded', () => {
-      const themeToggle = document.getElementById('theme-toggle-sidebar');
-      const body = document.body;
-      const iconMoon = document.getElementById('icon-moon-sidebar');
-      const iconSun = document.getElementById('icon-sun-sidebar');
+    const themeToggles = document.querySelectorAll('.theme-toggle-sidebar');
+    const body = document.body;
 
-      function updateIcons(isDark) {
-          if (isDark) {
-              iconMoon.classList.add('show-element');
-              iconMoon.classList.remove('hide-element');
-              iconSun.classList.add('hide-element');
-              iconSun.classList.remove('show-element');
-          } else {
-              iconMoon.classList.add('hide-element');
-              iconMoon.classList.remove('show-element');
-              iconSun.classList.add('show-element');
-              iconSun.classList.remove('hide-element');
-          }
-      }
+    function updateIcons(isDark, container) {
+        const moonIcon = container.querySelector('.icon-moon-sidebar');
+        const sunIcon = container.querySelector('.icon-sun-sidebar');
 
-      // Cargar tema guardado
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme) {
-          const isDark = savedTheme === 'dark';
-          body.setAttribute('data-theme', savedTheme);
-          themeToggle.checked = isDark;
-          updateIcons(isDark);
-      } else {
-          updateIcons(themeToggle.checked); // estado inicial por defecto
-      }
+        if (moonIcon && sunIcon) {
+            moonIcon.classList.toggle('show-element', isDark);
+            moonIcon.classList.toggle('hide-element', !isDark);
 
-      // Cambiar tema al hacer toggle
-      themeToggle.addEventListener('change', () => {
-          const isDark = themeToggle.checked;
-          const theme = isDark ? 'dark' : 'light';
-          body.setAttribute('data-theme', theme);
-          localStorage.setItem('theme', theme);
-          updateIcons(isDark);
-      });
-  });
+            sunIcon.classList.toggle('show-element', !isDark);
+            sunIcon.classList.toggle('hide-element', isDark);
+        }
+    }
+
+    function syncAllToggles(isDark) {
+        themeToggles.forEach(t => (t.checked = isDark));
+    }
+
+    // Estado inicial
+    const savedTheme = localStorage.getItem('theme');
+    const isDarkInitial = savedTheme === 'dark';
+    if (savedTheme) {
+        body.setAttribute('data-theme', savedTheme);
+    }
+
+    // Actualiza todos los toggles y sus íconos locales
+    themeToggles.forEach(toggle => {
+        toggle.checked = isDarkInitial;
+        const sidebar = toggle.closest('.sidebar');
+        if (sidebar) {
+            updateIcons(isDarkInitial, sidebar);
+        }
+
+        toggle.addEventListener('change', () => {
+            const isDark = toggle.checked;
+            const theme = isDark ? 'dark' : 'light';
+            body.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            syncAllToggles(isDark);
+
+            // Actualizar íconos solo dentro de cada sidebar
+            themeToggles.forEach(t => {
+                const s = t.closest('.sidebar');
+                if (s) updateIcons(isDark, s);
+            });
+        });
+    });
+});

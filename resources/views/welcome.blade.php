@@ -1,7 +1,6 @@
 <x-app-layout>
     <div class="flex flex-1">
-        
-        <!-- sidebar -->
+
         <x-sidebar-admin/>
 
         <!-- container -->

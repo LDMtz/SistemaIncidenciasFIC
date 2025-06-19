@@ -4,3 +4,10 @@
 .show-element {
     display: inline !important;
 }
+
+[data-theme="light"] .logo-dark {
+    display: none;
+}
+[data-theme="dark"] .logo-light {
+    display: none;
+}

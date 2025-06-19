@@ -33,13 +33,13 @@
     --color-bg-logo: #DAE5FB;
     --color-bg-header: #0A0D3D;
 
-    --color-text-1: #ffffff;
+    --color-text-1: #FFFFFF;
     --color-text-2: #B9B9B9;
     --color-text-3: #676767;
 }
 
 [data-theme="light"] {
-    --color-bg-main: #FFFFFF;
+    --color-bg-main: #FFF6E9;
     --color-main-1: #FFB407;
     --color-main-2: #FF9D00;
     --color-main-3: #D39033;
@@ -49,7 +49,7 @@
     --color-main-7: #FFE9CA;
 
     --color-bg-logo: #FBEEDA;
-    --color-bg-header: #073470;
+    --color-bg-header: #B98C44;
 
     --color-text-1: #000000;
     --color-text-2: #573C00;
