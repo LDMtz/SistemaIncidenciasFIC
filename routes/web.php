@@ -12,15 +12,12 @@ Route::get('/', function () {
 
 Route::middleware("guest")->group(function(){
     Route::get('/', [AuthController::class, 'login_form'])-> name('login');
+    Route::post('/to-login', [AuthController::class, 'to_login'])-> name('to_login');
+    
     Route::get('/comun/create', [ComunController::class, 'create'])-> name('create_comun');
-
-    //Ejemplo de posible login
-    //Route::post('/to-login', [AuthController::class, 'to_login'])-> name('to_login');
 });
 
 Route::middleware("auth")->group(function(){
     Route::get('/home', [AuthController::class, 'home'])-> name('home');
-
-    //Ejemplo de posible log out
-    //Route::get('/to-logout', [AuthController::class, 'to_logout'])-> name('to_logout');
+    Route::get('/to-logout', [AuthController::class, 'to_logout'])-> name('to_logout');
 });

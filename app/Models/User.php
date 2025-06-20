@@ -18,9 +18,14 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'rol_id',
+        'apellidos',
+        'nombres',
         'email',
+        'telefono',
         'password',
+        'foto',
+        'estado',
     ];
 
     /**
@@ -30,7 +35,6 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
     ];
 
     /**
@@ -41,8 +45,33 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function rol()
+    {
+        return $this->belongsTo(Rol::class);
+    }
+
+    //PARA LA AUTENTICACION
+    public function getAuthIdentifier()
+    {
+        return $this->getAttribute('id');
+    }
+
+    public function getAuthIdentifierName()
+    {
+        return 'id';
+    }
+
+    public function getAuthPassword()
+    {
+        return $this->getAttribute('password');
+    }
+
+    public function getAuthPasswordName()
+    {
+        return 'password';
     }
 }

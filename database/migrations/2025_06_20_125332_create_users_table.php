@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 return new class extends Migration
 {
@@ -13,11 +15,14 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->foreignId('rol_id')->constrained('roles')->onDelete('cascade');
+            $table->string('apellidos', 25);
+            $table->string('nombres', 25);
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('telefono',10);
             $table->string('password');
-            $table->rememberToken();
+            $table->string('foto')->nullable();
+            $table->boolean('estado')->default(true);
             $table->timestamps();
         });
 
@@ -29,6 +34,16 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+
+        //Insertando al administrador principal
+        DB::table('users')->insert([
+            'rol_id' => 1,
+            'apellidos' => 'Principal',
+            'nombres' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'telefono' => '0000000000',
+            'password' => Hash::make('admin123'),
+        ]);
     }
 
     /**

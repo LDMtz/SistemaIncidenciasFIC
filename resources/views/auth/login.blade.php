@@ -4,19 +4,19 @@
             <h1 class="text-center text-2xl font-bold text-text-1 mb-6">INICIO DE SESIÓN</h1>
             <h2 class="text-center text-base text-main-4 mb-8">¡Bienvenido de nuevo!</h2>
 
-            <form action="" method="POST">
+            <form action="{{route('to_login')}}" method="POST">
                 @csrf
                 @method('post')
-                <label for="" class="text-main-3 text-md font-semibold">Correo electrónico:</label>
+                <label for="correo" class="text-main-3 text-md font-semibold">Correo electrónico:</label>
                 <div class="relative mb-6">
                     <i class="fa-solid fa-circle-user absolute left-2 top-1/2 transform -translate-y-1/2 text-main-2"></i>
-                    <input name="" type="email" autocomplete="off" class="py-1 text-sm border-1 rounded-lg pl-8 border-main-2 bg-main-7 focus:outline-none focus:border-main-4 w-full">
+                    <input name="correo" type="email" autocomplete="off" class="py-1 text-sm border-1 rounded-lg pl-8 border-main-2 bg-main-7 focus:outline-none focus:border-main-4 w-full">
                 </div>
 
-                <label for="" class="text-main-3 text-md font-semibold">Contraseña:</label>
+                <label for="clave" class="text-main-3 text-md font-semibold">Contraseña:</label>
                 <div class="relative ">
                     <i class="fa-solid fa-key absolute left-2 top-1/2 transform -translate-y-1/2 text-main-2"></i>
-                    <input name="" type="password" autocomplete="off" class="py-1 text-sm border-1 rounded-lg pl-8 border-main-2 bg-main-7 focus:outline-none focus:border-main-4 w-full">
+                    <input name="clave" type="password" autocomplete="off" class="py-1 text-sm border-1 rounded-lg pl-8 border-main-2 bg-main-7 focus:outline-none focus:border-main-4 w-full">
                 </div>
 
                 <!-- Mostrar errores -->
