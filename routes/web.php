@@ -15,6 +15,7 @@ Route::middleware("guest")->group(function(){
     Route::post('/to-login', [AuthController::class, 'to_login'])-> name('to_login');
     
     Route::get('/comun/create', [ComunController::class, 'create'])-> name('create_comun');
+    Route::post('/comun/store', [ComunController::class, 'store'])-> name('store_comun');
 });
 
 Route::middleware("auth")->group(function(){

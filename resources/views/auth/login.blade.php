@@ -6,7 +6,7 @@
 
             <form action="{{route('to_login')}}" method="POST">
                 @csrf
-                @method('post')
+                @method('POST')
                 <label for="correo" class="text-main-3 text-md font-semibold">Correo electrónico:</label>
                 <div class="relative mb-6">
                     <i class="fa-solid fa-circle-user absolute left-2 top-1/2 transform -translate-y-1/2 text-main-2"></i>
@@ -47,4 +47,21 @@
             
         </div>
     </div>
+@push('scripts')
+    @vite('resources/js/success-modal.js')
+@endpush
 </x-app-layout>
+
+<!-- Modal Success -->
+@if(session('success'))
+    <div id="successModal" tabindex="-1" aria-hidden="true" class="fixed inset-0 z-50 flex justify-center items-center bg-black/50">
+        <div id="successModalContent" class="relative p-4 w-full max-w-md h-auto rounded-lg shadow bg-gray-800 m-10">
+            <div class="relative p-4 text-center">
+                <div class="w-12 h-12 rounded-full bg-green-900 p-2 flex items-center justify-center mx-auto mb-3.5">
+                    <i class="fa-solid fa-check text-green-400 text-xl"></i>
+                </div>
+                <p class="mb-4 text-lg font-semibold text-gray-900 dark:text-white">{{ session('success') }}</p>
+            </div>
+        </div>
+    </div>
+@endif
