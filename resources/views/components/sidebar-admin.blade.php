@@ -81,12 +81,14 @@
         <nav class="font-montserrat font-semibold p-3 text-lg text-main-3 flex flex-col gap-2 flex-1">
             <!-- Datos del usuario -->
             <div class="flex items-center gap-3 px-1 pb-3 border-b dark:border-bg-logo light:border-bg-header">
+                @auth
                  @php $user = Auth::user(); @endphp
                 <img  class="w-9 h-9 rounded-full" src="{{ asset('images/default-profile.jpg') }}">
                 <div class="leading-tight flex-1 min-w-0">
                     <p class="font-roboto font-bold text-base text-text-1 truncate">{{ $user->apellidos . ' ' .  $user->nombres}}</p>
                     <p class="font-montserrat font-normal text-xs text-text-1/80">{{ $user->rol->nombre}}</p>
                 </div>
+                @endauth
             </div>
             <a href="#" class="menu-item block p-2">
                 <i class="fa-solid fa-house align-middle inline-block w-6 text-center"></i>
