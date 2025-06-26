@@ -1,11 +1,11 @@
 <x-app-layout>
-    <div class="flex flex-1">
-
+    <div class="flex w-full">
         <x-sidebar-admin/>
 
         <!-- container -->
-        <div class="flex-1 mx-5">
-            <h1>HOME DEL USUARIO <span class="text-green-400">Administrador</span></h1>
+        <div class="mx-6 lg:mx-10 flex-1 overflow-auto">
+                <h1>HOME DEL USUARIO <span class="text-green-400">Administrador</span></h1>
         </div>
+        
     </div>
 </x-app-layout>

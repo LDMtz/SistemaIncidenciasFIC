@@ -7,18 +7,18 @@
         @auth
             <div class="flex items-center gap-4 ml-10 text-white">
                 @php $user = Auth::user(); @endphp
-                <img class="w-9 h-9 rounded-full hidden sm:block" src="{{ asset('images/default-profile.jpg') }}">
-                <span class="text-base font-semibold hidden sm:block truncate">{{ $user->apellidos . ' ' .  $user->nombres}}</span>
+                <img class="w-9 h-9 rounded-full hidden lg:block" src="{{ asset('images/default-profile.jpg') }}">
+                <span class="text-base font-semibold hidden lg:block truncate">{{ $user->apellidos . ' ' .  $user->nombres}}</span>
 
-                <button type="button" class="hover:text-main-2 cursor-pointer hidden sm:block">
+                <button type="button" class="hover:text-main-2 cursor-pointer hidden lg:block">
                     <i class="fa-regular fa-bell text-2xl"></i>
                 </button>
 
-                <a href="{{route('to_logout')}}" class="hover:text-main-2 hidden sm:block">
+                <a href="{{route('to_logout')}}" class="hover:text-main-2 hidden lg:block">
                     <i class="fa-solid fa-arrow-right-from-bracket text-2xl"></i>
                 </a>
 
-                <button id="mobile-sidebar-toggle" type="button" class="cursor-pointer block sm:hidden">
+                <button id="mobile-sidebar-toggle" type="button" class="cursor-pointer block lg:hidden">
                     <i class="fa-solid fa-bars text-2xl"></i>
                 </button>
             </div>

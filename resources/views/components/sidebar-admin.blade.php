@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-<aside id="sidebar" class="sidebar hidden sm:flex flex-col p-3 w-[13rem] bg-main-6 border border-main-2 border-l-0 rounded-r-lg transition-[width] duration-300 ease-in-out overflow-hidden">
+<aside id="sidebar" class="sidebar hidden lg:flex flex-col p-3 w-[13rem] bg-main-6 border border-main-2 border-l-0 rounded-r-lg transition-[width] duration-300 ease-in-out overflow-hidden flex-shrink-0 ">
     <!-- Header -->
     <header class="border-b dark:border-bg-logo light:border-bg-header pb-3 mb-3">
         <!-- Usamos un contenedor inline-block para logo y título -->
@@ -58,7 +58,7 @@
 
 
 <!-- Sidebar Mobile -->
-<div  id="mobile-sidebar" class="sm:hidden fixed top-0 left-0 bottom-0 w-[16rem] bg-main-6 border border-main-2 border-l-0 rounded-r-lg transform -translate-x-full transition-transform duration-300 ease-in-out z-40">
+<div  id="mobile-sidebar" class="lg:hidden fixed top-0 left-0 bottom-0 w-[16rem] bg-main-6 border border-main-2 border-l-0 rounded-r-lg transform -translate-x-full transition-transform duration-300 ease-in-out z-40">
     <aside class="sidebar h-full flex flex-col w-[16rem] bg-main-6 border border-main-2 border-l-0 rounded-r-lg">
         <!-- Header -->
         <header class="font-montserrat flex items-center gap-2 bg-main-2/20 border-b border-main-2 p-2">

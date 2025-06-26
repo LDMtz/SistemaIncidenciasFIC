@@ -1,0 +1,1 @@
+<th class="font-normal px-3 py-1">{{$slot}}</th>
