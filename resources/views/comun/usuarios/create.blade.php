@@ -80,7 +80,7 @@
                 <input hidden name="rol" type="number" value="3"></input>
 
                 <div class="flex flex-col items-center justify-center mt-6 gap-4">
-                    <button class="bg-main-5 border border-main-4 text-main-3 rounded-lg py-1 px-4 hover:bg-main-2 hover:text-text-1 hover:border-main-2">
+                    <button class="bg-main-5 border border-main-4 light:text-amber-700 text-main-3 rounded-lg py-1 px-4 hover:bg-main-2 hover:text-text-1 hover:border-main-2">
                         Registrase
                     </button>
 

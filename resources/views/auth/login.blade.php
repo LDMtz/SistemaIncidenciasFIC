@@ -31,7 +31,7 @@
                 @endif
                 
                 <div class="flex flex-col items-center justify-center mt-10 gap-20">
-                    <button class="bg-main-5 border border-main-4 text-main-3 rounded-lg py-1 px-4 hover:bg-main-2 hover:text-text-1 hover:border-main-2">
+                    <button class="bg-main-5 border border-main-4 text-main-3 light:text-amber-700 rounded-lg py-1 px-4 hover:bg-main-2 hover:text-text-1 hover:border-main-2">
                         Iniciar sesión
                     </button>
 
