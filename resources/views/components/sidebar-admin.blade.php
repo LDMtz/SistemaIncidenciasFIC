@@ -5,7 +5,7 @@
         <!-- Usamos un contenedor inline-block para logo y título -->
         <div class="whitespace-nowrap">
             <button id="toggle-expand" class="inline-block w-10 h-10 bg-bg-logo rounded-sm text-center align-middle cursor-pointer">
-                <img src="favicon.ico" class="w-8 h-8 object-contain inline-block align-middle" />
+                <img src="{{ asset('favicon.ico') }}" class="w-8 h-8 object-contain inline-block align-middle" />
             </button>
             <!-- Título: inline-block para poder hacer transition en ancho/opacidad -->
             <span class="sidebar-title inline-block align-middle ml-2 font-black leading-5 transition-[width,opacity,margin] duration-300 whitespace-nowrap">
@@ -21,28 +21,14 @@
     
     <!-- Menu -->
     <nav class="font-montserrat font-semibold text-lg text-main-3 flex flex-col gap-2 flex-1">
-        <!-- Cada item es display block para ocupar fila -->
-        <a href="#" class="menu-item block p-2 rounded-md border-r-6 border-transparent hover:border-main-2 hover:text-main-2 hover:bg-main-7 transition-colors whitespace-nowrap">
-            <i class="fa-solid fa-house align-middle inline-block w-6 text-center"></i>
-            <span class="sidebar-text inline-block align-middle ml-4 transition-[width,opacity,margin] duration-300 whitespace-nowrap">Inicio</span>
-        </a>
-        <a href="#" class="menu-item block p-2 rounded-md border-r-6 border-transparent hover:border-main-2 hover:text-main-2 hover:bg-main-7 transition-colors whitespace-nowrap">
-            <i class="fa-solid fa-user align-middle inline-block w-6 text-center"></i>
-            <span class="sidebar-text inline-block align-middle ml-4 transition-[width,opacity,margin] duration-300 whitespace-nowrap">Usuarios</span>
-        </a>
-        <a href="#" class="menu-item block p-2 rounded-md border-r-6 border-transparent hover:border-main-2 hover:text-main-2 hover:bg-main-7 transition-colors whitespace-nowrap">
-            <i class="fa-solid fa-folder-open align-middle inline-block w-6 text-center"></i>
-            <span class="sidebar-text inline-block align-middle ml-4 transition-[width,opacity,margin] duration-300 whitespace-nowrap">Reportes</span>
-        </a>
-        <a href="#" class="menu-item block p-2 rounded-md border-r-6 border-transparent hover:border-main-2 hover:text-main-2 hover:bg-main-7 transition-colors whitespace-nowrap">
-            <i class="fa-solid fa-file-lines align-middle inline-block w-6 text-center"></i>
-            <span class="sidebar-text inline-block align-middle ml-4 transition-[width,opacity,margin] duration-300 whitespace-nowrap">Informes</span>
-        </a>
-        <a href="#" class="menu-item block p-2 rounded-md border-r-6 border-transparent hover:border-main-2 hover:text-main-2 hover:bg-main-7 transition-colors whitespace-nowrap">
-            <i class="fa-solid fa-layer-group align-middle inline-block w-6 text-center"></i>
-            <span class="sidebar-text inline-block align-middle ml-4 transition-[width,opacity,margin] duration-300 whitespace-nowrap">Áreas</span>
-        </a>
-            <!-- toggle theme -->
+        <!-- Contenido dinámico -->
+        <x-sidebar-item route="home_admin" icon="fa-solid fa-house" screen="desktop">Inicio</x-sidebar-item>
+        <x-sidebar-item route="user_index_admin" icon="fa-solid fa-user" screen="desktop">Usuarios</x-sidebar-item>
+        <x-sidebar-item route="home_admin" icon="fa-solid fa-folder-open" screen="desktop">Reportes</x-sidebar-item>
+        <x-sidebar-item route="home_admin" icon="fa-solid fa-file-lines" screen="desktop">Informes</x-sidebar-item>
+        <x-sidebar-item route="home_admin" icon="fa-solid fa-layer-group" screen="desktop">Áreas</x-sidebar-item>
+
+        <!-- toggle theme -->
         <div class="p-2 relative border-t dark:border-bg-logo light:border-bg-header pt-3 mt-auto">
             <i class="icon-moon-sidebar fa-solid fa-moon align-middle inline-block w-6 text-center"></i>
             <i class="icon-sun-sidebar fa-solid fa-sun align-middle inline-block w-6 text-center"></i>
@@ -52,6 +38,7 @@
                 <div class="relative w-11 h-6 bg-gray-500 rounded-full peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-main-4"></div>
             </label>
         </div>
+
     </nav>
 </aside>
 
@@ -63,7 +50,7 @@
         <!-- Header -->
         <header class="font-montserrat flex items-center gap-2 bg-main-2/20 border-b border-main-2 p-2">
                 <div class="w-8 h-8 bg-bg-logo rounded-md flex items-center justify-center">
-                    <img src="favicon.ico" class="w-6 h-6" />
+                    <img src="{{ asset('favicon.ico') }}" class="w-6 h-6" />
                 </div>
 
                 <label class="font-black text-sm">
@@ -90,31 +77,16 @@
                 </div>
                 @endauth
             </div>
-            <a href="#" class="menu-item block p-2">
-                <i class="fa-solid fa-house align-middle inline-block w-6 text-center"></i>
-                <span class="sidebar-text inline-block align-middle ml-4">Inicio</span>
-            </a>
-            <a href="#" class="menu-item block p-2">
-                <i class="fa-solid fa-user align-middle inline-block w-6 text-center"></i>
-                <span class="sidebar-text inline-block align-middle ml-4 ">Usuarios</span>
-            </a>
-            <a href="#" class="menu-item block p-2">
-                <i class="fa-solid fa-folder-open align-middle inline-block w-6 text-center"></i>
-                <span class="sidebar-text inline-block align-middle ml-4 ">Reportes</span>
-            </a>
-            <a href="#" class="menu-item block p-2">
-                <i class="fa-solid fa-file-lines align-middle inline-block w-6 text-center"></i>
-                <span class="sidebar-text inline-block align-middle ml-4 ">Informes</span>
-            </a>
-            <a href="#" class="menu-item block p-2">
-                <i class="fa-solid fa-layer-group align-middle inline-block w-6 text-center"></i>
-                <span class="sidebar-text inline-block align-middle ml-4 ">Áreas</span>
-            </a>
+
+            <x-sidebar-item route="home_admin" icon="fa-solid fa-house" screen="mobile">Inicio</x-sidebar-item>
+            <x-sidebar-item route="user_index_admin" icon="fa-solid fa-user" screen="mobile">Usuarios</x-sidebar-item>
+            <x-sidebar-item route="home_admin" icon="fa-solid fa-folder-open" screen="mobile">Reportes</x-sidebar-item>
+            <x-sidebar-item route="home_admin" icon="fa-solid fa-file-lines" screen="mobile">Informes</x-sidebar-item>
+            <x-sidebar-item route="home_admin" icon="fa-solid fa-layer-group" screen="mobile">Áreas</x-sidebar-item>
+
             <div class="border-t dark:border-bg-logo light:border-bg-header pt-3 mt-2">
-                <a href="#" class="menu-item block p-2">
-                    <i class="fa-solid fa-bell align-middle inline-block w-6 text-center"></i>
-                    <span class="sidebar-text inline-block align-middle ml-4 ">Notificaciones</span>
-                </a>
+                <x-sidebar-item route="home_admin" icon="fa-solid fa-bell" screen="mobile">Notificaciones</x-sidebar-item>
+
                 <!-- toggle theme -->
                 <div class="p-3 relative">
                     <i class="icon-moon-sidebar fa-solid fa-moon align-middle inline-block w-6 text-center"></i>
@@ -129,10 +101,7 @@
             </div>
 
             <div class="border-t dark:border-bg-logo light:border-bg-header pt-3 mt-1">
-                <a href="{{route('to_logout')}}" class="menu-item block p-2">
-                    <i class="fa-solid fa-right-from-bracket align-middle inline-block w-6 text-center"></i>
-                    <span class="sidebar-text inline-block align-middle ml-4 ">Cerrar sesión</span>
-                </a>
+                <x-sidebar-item route="to_logout" icon="fa-solid fa-right-from-bracket" screen="mobile">Cerrar</x-sidebar-item>
             </div>
             
 

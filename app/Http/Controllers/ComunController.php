@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Hash;
 
 class ComunController extends Controller
 {
+    public function index(){
+        return view('comun.home');
+    }
+
     public function create()
     {
         return view('comun.create');
