@@ -24,7 +24,7 @@
             </div>
         @endauth
 
-        @if (request()->routeIs('login')||request()->routeIs('create_comun'))
+        @if (request()->routeIs('login')||request()->routeIs('usuarios.crear'))
             <label class="inline-flex items-center cursor-pointer">
                 <input id="theme-toggle-header" type="checkbox" class="sr-only peer" checked>
                 <i id="icon-moon-header" class="fa-solid fa-moon text-main-2 text-2xl mr-3"></i>

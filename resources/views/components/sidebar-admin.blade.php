@@ -22,11 +22,11 @@
     <!-- Menu -->
     <nav class="font-montserrat font-semibold text-lg text-main-3 flex flex-col gap-2 flex-1">
         <!-- Contenido dinámico -->
-        <x-sidebar-item route="home_admin" icon="fa-solid fa-house" screen="desktop">Inicio</x-sidebar-item>
-        <x-sidebar-item route="user_index_admin" icon="fa-solid fa-user" screen="desktop">Usuarios</x-sidebar-item>
-        <x-sidebar-item route="home_admin" icon="fa-solid fa-folder-open" screen="desktop">Reportes</x-sidebar-item>
-        <x-sidebar-item route="home_admin" icon="fa-solid fa-file-lines" screen="desktop">Informes</x-sidebar-item>
-        <x-sidebar-item route="home_admin" icon="fa-solid fa-layer-group" screen="desktop">Áreas</x-sidebar-item>
+        <x-sidebar-item route="home" icon="fa-solid fa-house" screen="desktop">Inicio</x-sidebar-item>
+        <x-sidebar-item route="admin.usuarios.index" icon="fa-solid fa-user" screen="desktop">Usuarios</x-sidebar-item>
+        <x-sidebar-item route="home" icon="fa-solid fa-folder-open" screen="desktop">Reportes</x-sidebar-item>
+        <x-sidebar-item route="home" icon="fa-solid fa-file-lines" screen="desktop">Informes</x-sidebar-item>
+        <x-sidebar-item route="home" icon="fa-solid fa-layer-group" screen="desktop">Áreas</x-sidebar-item>
 
         <!-- toggle theme -->
         <div class="p-2 relative border-t dark:border-bg-logo light:border-bg-header pt-3 mt-auto">
@@ -78,14 +78,14 @@
                 @endauth
             </div>
 
-            <x-sidebar-item route="home_admin" icon="fa-solid fa-house" screen="mobile">Inicio</x-sidebar-item>
-            <x-sidebar-item route="user_index_admin" icon="fa-solid fa-user" screen="mobile">Usuarios</x-sidebar-item>
-            <x-sidebar-item route="home_admin" icon="fa-solid fa-folder-open" screen="mobile">Reportes</x-sidebar-item>
-            <x-sidebar-item route="home_admin" icon="fa-solid fa-file-lines" screen="mobile">Informes</x-sidebar-item>
-            <x-sidebar-item route="home_admin" icon="fa-solid fa-layer-group" screen="mobile">Áreas</x-sidebar-item>
+            <x-sidebar-item route="home" icon="fa-solid fa-house" screen="mobile">Inicio</x-sidebar-item>
+            <x-sidebar-item route="admin.usuarios.index" icon="fa-solid fa-user" screen="mobile">Usuarios</x-sidebar-item>
+            <x-sidebar-item route="home" icon="fa-solid fa-folder-open" screen="mobile">Reportes</x-sidebar-item>
+            <x-sidebar-item route="home" icon="fa-solid fa-file-lines" screen="mobile">Informes</x-sidebar-item>
+            <x-sidebar-item route="home" icon="fa-solid fa-layer-group" screen="mobile">Áreas</x-sidebar-item>
 
             <div class="border-t dark:border-bg-logo light:border-bg-header pt-3 mt-2">
-                <x-sidebar-item route="home_admin" icon="fa-solid fa-bell" screen="mobile">Notificaciones</x-sidebar-item>
+                <x-sidebar-item route="home" icon="fa-solid fa-bell" screen="mobile">Notificaciones</x-sidebar-item>
 
                 <!-- toggle theme -->
                 <div class="p-3 relative">

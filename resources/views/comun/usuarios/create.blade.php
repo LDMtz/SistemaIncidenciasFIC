@@ -3,7 +3,7 @@
         <div class="font-montserrat bg-main-6 border-1 border-main-1 p-10 rounded-lg">
             <h1 class="text-center text-2xl font-bold text-text-1 mb-6">CREAR CUENTA</h1>
 
-            <form action="{{ route('store_comun') }}" method="POST">
+            <form action="{{ route('usuarios.guardar') }}" method="POST">
                 @csrf
                 @method('POST')
 
@@ -76,6 +76,8 @@
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror
                 </div>
+
+                <input hidden name="rol" type="number" value="3"></input>
 
                 <div class="flex flex-col items-center justify-center mt-6 gap-4">
                     <button class="bg-main-5 border border-main-4 text-main-3 rounded-lg py-1 px-4 hover:bg-main-2 hover:text-text-1 hover:border-main-2">

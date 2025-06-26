@@ -5,21 +5,26 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
-class ComunController extends Controller
+
+class UsuarioController extends Controller
 {
-    public function index(){
-        return view('comun.home');
+    //
+    public function admin_index(){
+        return view('admin.usuarios.index');
     }
 
-    public function create()
-    {
-        return view('comun.create');
+    public function create(){
+        //Asumimos que solo los usuarios comunes llaman esta funcion,
+        // ya que el admin lo tiene en el index de user
+        return view('comun.usuarios.create');
     }
 
     public function store(Request $request){
         //Validamos los datos recibidos
         $datos_validados = $request->validate([
+            'rol' => 'required|exists:roles,id',
             'apellidos' => 'required|string|max:40',
             'nombres' => 'required|string|max:40',
             'correo' => 'required|email|max:200|unique:users,email',
@@ -28,7 +33,7 @@ class ComunController extends Controller
         ]);
 
         User::create([
-            'rol_id' => 3,
+            'rol_id' => $datos_validados['rol'],
             'apellidos' => $datos_validados['apellidos'],
             'nombres' => $datos_validados['nombres'],
             'email' => $datos_validados['correo'],
@@ -38,6 +43,13 @@ class ComunController extends Controller
             'estado' => true,
         ]);
 
-        return redirect()->route('login')->with('success', '¡Usuario creado exitosamente!');
+        // Redirección basada en si hay sesión iniciada
+        if (Auth::check()) {
+            // Usuario autenticado (Admin creó otro usuario)
+            return redirect()->route('admin.usuarios.index')->with('success', '¡Usuario creado exitosamente!');
+        } else {
+            // Registro público sin sesión iniciada
+            return redirect()->route('login')->with('success', '¡Registro exitoso! Ahora puedes iniciar sesión.');
+        }
     }
 }

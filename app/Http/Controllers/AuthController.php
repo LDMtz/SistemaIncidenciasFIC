@@ -16,11 +16,11 @@ class AuthController extends Controller
         
         switch (Auth::user()->rol_id) {
             case 1:
-                return to_route('home_admin');
+                return view('admin.home');
             case 2:
-                return to_route('home_encargado');
+                return view('encargado.home');
             case 3:
-                return to_route('home_comun');
+                return view('comun.home');
             default:
                 abort(403, 'Acceso no autorizado');
         }
