@@ -3,7 +3,7 @@
         <div class="font-montserrat bg-main-6 border-1 border-main-1 p-10 rounded-lg">
             <h1 class="text-center text-2xl font-bold text-text-1 mb-6">CREAR CUENTA</h1>
 
-            <form action="{{ route('usuarios.guardar') }}" method="POST">
+            <form action="{{ route('comun.usuarios.guardar') }}" method="POST">
                 @csrf
                 @method('POST')
 
@@ -67,7 +67,7 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="clave_confirmation" class="text-main-3 text-md font-semibold">Repetir contraseña:</label>
+                    <label for="clave_confirmation" class="text-main-3 text-md font-semibold">Confirmar contraseña:</label>
                     <div class="relative">
                         <i class="fa-solid fa-key absolute left-2 top-1/2 transform -translate-y-1/2 text-main-2"></i>
                         <input name="clave_confirmation" type="password" required autocomplete="off" class="py-1 text-sm border-1 rounded-lg pl-8 border-main-2 bg-main-7 focus:outline-none focus:border-main-4 w-full">

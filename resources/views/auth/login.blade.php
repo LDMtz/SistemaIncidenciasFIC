@@ -37,7 +37,7 @@
 
                     <label class="text-main-3 font-semibold flex flex-wrap justify-center items-center text-sm gap-x-2">
                         <span>¿No tienes cuenta?</span> 
-                        <a href="{{route('usuarios.crear')}}" class="underline font-normal text-main-4 hover:text-text-1 hover:cursor-pointer">
+                        <a href="{{route('comun.usuarios.crear')}}" class="underline font-normal text-main-4 hover:text-text-1 hover:cursor-pointer">
                             Regístrate aquí
                         </a>
                     </label>
