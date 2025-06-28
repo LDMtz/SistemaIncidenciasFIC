@@ -11,8 +11,39 @@ use Illuminate\Support\Facades\Auth;
 class UsuarioController extends Controller
 {
     //
-    public function admin_index(){
-        return view('admin.usuarios.index');
+    public function admin_index(Request $request)
+    {
+        $sortOrder = $request->get('sort', 'asc'); // ascendente o descendente
+        $campo = $request->get('campo');           // campo a buscar
+        $valor = $request->get('valor');           // valor a buscar
+
+        $query = User::query();
+
+        // Campos válidos para filtrar
+        $camposPermitidos = ['nombres', 'apellidos', 'email', 'telefono', 'estado'];
+
+        // Validamos y aplicamos filtro
+        if ($campo && $valor !== null && in_array($campo, $camposPermitidos)) {
+            // Si el campo es booleano (estado), comparamos exacto
+            if ($campo === 'estado') {
+                // Convierte "activo" o "inactivo" a 1 o 0 si viene como texto
+                if (strtolower($valor) === 'activo') {
+                    $valor = 1;
+                } elseif (strtolower($valor) === 'inactivo') {
+                    $valor = 0;
+                }
+                $query->where($campo, $valor);
+            } else {
+                // Para texto: LIKE
+                $query->where($campo, 'like', '%' . $valor . '%');
+            }
+        }
+
+        $usuarios = $query->orderBy('created_at', $sortOrder)
+                        ->paginate(5)
+                        ->appends($request->query());
+
+        return view('admin.usuarios.index', compact('usuarios', 'sortOrder', 'campo', 'valor'));
     }
 
     public function create(){

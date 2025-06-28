@@ -8,12 +8,14 @@
     @vite('resources/js/header-scripts.js')
 </head>
 <body class="bg-bg-main flex flex-col min-h-screen" data-theme="dark">
+    <x-logout-modal/>
     <x-header />
     <main class="flex-grow flex py-6 text-text-1">
         {{$slot}}
     </main>
     <x-footer />
     @stack('scripts')
+
 </body>
 </html>
 
