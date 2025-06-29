@@ -4,10 +4,10 @@
 
         <!-- container -->
         <div class="mx-6 lg:mx-10 flex-1 overflow-auto">
-            <h1 class="font-roboto font-black text-2xl mb-3 ">Usuarios</h1>
+            <h1 class="font-roboto font-black sm:text-2xl text-xl mb-3 ">Usuarios</h1>
 
             <!-- Subtitulo -->
-            <h2 class="font-montserrat text-main-2 font-semibold mb-1 text-lg"><i class="fa-solid fa-user-plus mr-1"></i> Crear usuario</h2>
+            <h2 class="font-montserrat text-main-2 font-semibold mb-1 sm:text-lg text-base"><i class="fa-solid fa-user-plus mr-1"></i> Crear usuario</h2>
 
             <div class="rounded-lg px-5 py-3 w-full border-1 font-roboto light:shadow-md light:shadow-slate-950/25 mb-6
                     light:bg-slate-50 light:border-white
@@ -100,15 +100,16 @@
 
              <!-- Subtitulo -->
              <div class="flex items-center justify-between mb-2">
-                <h2 class="font-montserrat text-main-2 font-semibold text-lg">
+                <h2 class="font-montserrat text-main-2 font-semibold sm:text-lg text-base">
                     <i class="fa-solid fa-users mr-1"></i>
-                    Todos los usuarios
+                    Lista de usuarios
                 </h2>
-                <div class="flex items-center gap-2">
+                <div class="flex items-center md:gap-2 gap-1">
                     @php $newSortOrder = $sortOrder === 'asc' ? 'desc' : 'asc';@endphp
                     <a href="{{ route('admin.usuarios.index', ['sort' => $newSortOrder]) }}"
                     class="inline-flex items-center px-2 py-1 text-xs font-montserrat border rounded hover:bg-slate-200 dark:hover:bg-slate-700">
-                        Ordenar por fecha
+                        <i class="fa-solid fa-calendar-days mr-1"></i>
+                        <span class="hidden md:block">Ordenar por fecha</span>
                         @if ($sortOrder === 'asc')
                             <i class="fa-solid fa-angle-up ml-1"></i>
                         @else
@@ -118,15 +119,17 @@
 
                     <button id="open-modal-search" class="font-montserrat inline-flex items-center justify-center gap-2 px-2 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-500 cursor-pointer">
                         <i class="fa-solid fa-magnifying-glass text-sm"></i>
-                        <span class="text-sm">Buscar</span>
+                        <span class="text-sm hidden md:block">Buscar</span>
                     </button>
 
                     @if(request()->has('campo') || request()->has('valor') || request()->has('sort'))
                         <a href="{{ route('admin.usuarios.index') }}" class="font-montserrat inline-flex items-center justify-center gap-2 px-2 py-1 bg-gray-700 text-white rounded-lg hover:bg-gray-800">
                             <i class="fa-solid fa-filter-circle-xmark text-sm"></i>
-                            <span class="text-sm">Quitar filtros</span>
+                            <span class="text-sm hidden md:block">Quitar filtros</span>
                         </a>
                     @endif
+                    
+
                 </div>
 
 
@@ -162,24 +165,12 @@
         </div>
     </div>
 @push('scripts')
-    @vite('resources/js/success-modal.js')
     @vite('resources/js/search-modal.js')
 @endpush
 </x-app-layout>
 
-<!-- Modal Success -->
-@if(session('success'))
-    <div id="successModal" tabindex="-1" aria-hidden="true" class="fixed inset-0 z-50 flex justify-center items-center bg-black/50">
-        <div id="successModalContent" class="relative p-4 w-full max-w-md h-auto rounded-lg shadow dark:bg-gray-800 light:bg-gray-100 m-10">
-            <div class="relative p-4 text-center">
-                <div class="w-12 h-12 rounded-full dark:bg-green-900 light:bg-green-600 p-2 flex items-center justify-center mx-auto mb-3.5">
-                    <i class="fa-solid fa-check dark:text-green-400 light:text-green-100 text-xl"></i>
-                </div>
-                <p class="mb-4 text-lg font-semibold text-text-1">{{ session('success') }}</p>
-            </div>
-        </div>
-    </div>
-@endif
+<!-- Success modal -->
+<x-success-modal/>
 
 <!-- Modal Buscar -->
 <div id="search-modal" class="hidden">
@@ -222,7 +213,6 @@
                         </button>
                     </div>
                 </div>
-            
         </div>
     </div>
 </div>

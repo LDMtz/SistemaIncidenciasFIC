@@ -1,7 +1,7 @@
 <footer class="w-full">
     <hr class="bg-text-2 mx-5 h-0.5 mb-3">
 
-    <div class="flex flex-col md:flex-row justify-between items-center text-base text-text-2 px-4 md:px-8 gap-2 md:gap-0 mb-3 w-full text-center md:text-left">
+    <div class="flex flex-col md:flex-row justify-between items-center text-xs md:text-base text-text-2 px-4 md:px-8 gap-2 md:gap-0 mb-3 w-full text-center md:text-left">
         <p>Incidencias - Facultad de Informática Culiacán</p>
         <p>Universidad Autónoma de Sinaloa</p>
 
