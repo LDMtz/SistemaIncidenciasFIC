@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sistema de incidencias - Facultad de Informática Culiacán</title>
     @vite('resources/css/app.css') <!-- TailwindCss-->
-    @vite('resources/js/header-scripts.js')
+    @vite('resources/js/header-scripts.js') 
+    @vite('resources/js/generic-modal.js')
 </head>
 <body class="bg-bg-main flex flex-col min-h-screen" data-theme="dark">
     <x-logout-modal/>

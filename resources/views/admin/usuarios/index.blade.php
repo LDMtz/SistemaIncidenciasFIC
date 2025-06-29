@@ -117,7 +117,7 @@
                         @endif
                     </a>
 
-                    <button id="open-modal-search" class="font-montserrat inline-flex items-center justify-center gap-2 px-2 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-500 cursor-pointer">
+                    <button onclick="openModal('search-modal')" class="font-montserrat inline-flex items-center justify-center gap-2 px-2 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-500 cursor-pointer">
                         <i class="fa-solid fa-magnifying-glass text-sm"></i>
                         <span class="text-sm hidden md:block">Buscar</span>
                     </button>
@@ -164,9 +164,6 @@
 
         </div>
     </div>
-@push('scripts')
-    @vite('resources/js/search-modal.js')
-@endpush
 </x-app-layout>
 
 <!-- Success modal -->
@@ -179,7 +176,7 @@
             <!-- Modal header -->
             <div class="flex justify-between items-center border-b dark:border-slate-700 light:border-slate-300 px-5 py-3 dark:bg-slate-700/60 light:bg-slate-100">
                 <h3 class="font-roboto text-sm font-semibold text-text-1">BUSCAR</h3>
-                <button id="close-modal-search" class="text-slate-400 hover:text-red-500 cursor-pointer">
+                <button onclick="closeModal('search-modal')"  class="text-slate-400 hover:text-red-500 cursor-pointer">
                     <i class="fa-solid fa-x text-xs"></i>
                 </button>
             </div>

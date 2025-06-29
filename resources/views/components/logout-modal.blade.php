@@ -9,7 +9,7 @@
                 <p class="mb-4 text-lg font-semibold text-text-1">¿Estás seguro que quieres cerrar sesión?</p>
                 <div class="mt-6 flex justify-center gap-4">
                     <!-- Botón cancelar -->
-                    <button onclick="closeLogoutModal()" type="button" class="px-4 py-2 light:bg-gray-300 dark:bg-gray-700 light:text-black dark:text-white dark:hover:bg-gray-600 light:hover:bg-gray-400 rounded">
+                    <button onclick="closeModal('logoutModal')" type="button" class="px-4 py-2 light:bg-gray-300 dark:bg-gray-700 light:text-black dark:text-white dark:hover:bg-gray-600 light:hover:bg-gray-400 rounded">
                         No
                     </button>
 
@@ -25,16 +25,3 @@
         </div>
     </div>
 </div>
-
-<script>
-//Modal logout
-const logoutModal = document.getElementById('logoutModal');
-
-function openLogoutModal() {
-    logoutModal.classList.remove('hidden');
-}
-
-function closeLogoutModal() {
-    logoutModal.classList.add('hidden');
-}
-</script>
