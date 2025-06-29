@@ -14,7 +14,7 @@
                     <i class="fa-regular fa-bell text-2xl"></i>
                 </button>
 
-                <button onclick="openLogoutModal()" class="hover:text-main-2 hidden lg:block cursor-pointer">
+                <button onclick="openModal('logoutModal')" class="hover:text-main-2 hidden lg:block cursor-pointer">
                     <i class="fa-solid fa-arrow-right-from-bracket text-2xl"></i>
                 </button>
 
