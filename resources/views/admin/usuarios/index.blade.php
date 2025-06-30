@@ -210,6 +210,94 @@
                         </button>
                     </div>
                 </div>
+            </form>
+
         </div>
     </div>
 </div>
+
+<!-- Modal show-user -->
+<div id="show-user-modal" class="">
+    <div class="flex fixed top-0 left-0 w-full h-full bg-black/50 z-50 justify-center items-center ">
+        <div class="dark:bg-slate-800 light:bg-slate-50 rounded-lg shadow-lg w-full max-w-md overflow-hidden border-2 dark:border-slate-700 light:border-slate-300 m-10">
+
+            <div class="relative light:bg-slate-300/60 dark:bg-slate-700/60 h-14 md:h-17 px-5 border-b-2 dark:border-slate-700 light:border-slate-300">
+                <div class="absolute -bottom-8 md:-bottom-10">
+                    <img class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 light:border-slate-300 dark:border-slate-700" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Perfil">
+                </div>
+                <button onclick="closeModal('show-user-modal')" class="absolute top-2 right-4 text-slate-400 hover:text-red-500 cursor-pointer">
+                    <i class="fa-solid fa-x text-xs"></i>
+                </button>
+                <label class="absolute top-20 right-7 inline-flex items-center text-[0.65rem] md:text-xs font-black font-roboto leading-none">
+                    <span class="self-center w-[0.40rem] h-[0.40rem] md:w-2 md:h-2 mr-2 rounded-full dark:bg-green-400 light:bg-green-600"></span>
+                    <span class="dark:text-green-400 light:text-green-600 leading-none">ACTIVO</span>
+                </label>
+            </div>
+
+            <!-- Modal body -->
+            <div class="p-6 mt-6 max-w-2xl w-full mx-auto">
+                <!-- Encabezado -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gray-600 pb-2 mb-2 md:pb-4 md:mb-4">
+                    <div>
+                        <h2 class="text-sm md:text-lg font-bold text-text-1">Leoncio Daniel Martinez Gonzalez</h2>
+                        <p class="text-xs md:text-sm text-text-1/80">dj.gonzalez18@info.uas.edu.mx</p>
+                    </div>
+                </div>
+
+                <!-- Formulario -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 text-[0.70rem] md:text-sm text-text-1">
+                    <!-- Apellido -->
+                    <div>
+                    <label class="text-main-3 block">Apellidos</label>
+                    <input name="apellidos" type="text" value="Gonzalez Ochoa" class="bg-transparent border border-slate-500 px-2 py-1.5 md:px-3 md:py-2 rounded w-full focus:outline-none focus:ring-0 focus:border-main-3" readonly />
+                    </div>
+
+                    <!-- Nombre -->
+                    <div class="mt-auto">
+                    <label class="text-main-3 block">Nombres</label>
+                    <input name="nombres" type="text" value="Daniel Andres" class="bg-transparent border border-slate-500 px-2 py-1.5 md:px-3 md:py-2 rounded w-full focus:outline-none focus:ring-0 focus:border-main-3" readonly />
+                    </div>
+
+                    <!-- Correo (col-span-2 para ocupar las dos columnas) -->
+                    <div class="md:col-span-2">
+                    <label class="text-main-3 block" >Correo</label>
+                    <div class="relative w-full">
+                    <i class="fa-solid fa-envelope absolute left-3 top-1/2 transform -translate-y-1/2 text-text-1"></i>
+                    <input name="email" type="text" value="dj.gonzalez18@info.uas.edu.mx" class="w-full bg-transparent border border-slate-500 pl-8 py-1.5 md:py-2 rounded focus:outline-none focus:ring-0 focus:border-main-3" readonly
+                    />
+                    </div>
+                    </div>
+
+                    <!-- Teléfono -->
+                    <div>
+                    <label class="text-main-3 block">Teléfono</label>
+                    <input name="telefono" type="text" value="6671980710" class="bg-transparent border border-slate-500 px-2 py-1.5 md:px-3 md:py-2 rounded w-full focus:outline-none focus:ring-0 focus:border-main-3" readonly />
+                    </div>
+
+                    <!-- Rol -->
+                    <div>
+                    <label class="text-main-3 block ">Rol</label>
+                    <input name="rol_nombre" type="text" value="Administrador" class="bg-transparent border border-slate-500 px-2 py-1.5 md:px-3 md:py-2 rounded w-full focus:outline-none focus:ring-0 focus:border-main-3" readonly />
+                    </div>
+
+                    <!-- Fecha de registro -->
+                    <div>
+                    <label class="text-main-3 block ">Fecha de registro</label>
+                    <input name="created_at_fecha" type="text" value="2025-06-20" class="bg-transparent border border-slate-500 px-2 py-1.5 md:px-3 md:py-2 rounded w-full focus:outline-none focus:ring-0 focus:border-main-3" readonly />
+                    </div>
+
+                    <!-- Hora de registro -->
+                    <div>
+                    <label class="text-main-3 block ">Hora de registro</label>
+                    <input name="created_at_hora" type="text" value="08:40" class="bg-transparent border border-slate-500 px-2 py-1.5 md:px-3 md:py-2 rounded w-full focus:outline-none focus:ring-0 focus:border-main-3" readonly />
+                    </div>
+                </div>
+            </div>
+           
+
+        </div>
+    </div>
+</div>
+
+
+
