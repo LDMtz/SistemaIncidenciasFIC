@@ -85,6 +85,7 @@
             <x-sidebar-item route="home" icon="fa-solid fa-layer-group" screen="mobile">Áreas</x-sidebar-item>
 
             <div class="border-t dark:border-bg-logo light:border-bg-header pt-3 mt-2">
+                <x-sidebar-item route="home" icon="fa-solid fa-circle-user" screen="mobile">Perfil</x-sidebar-item>
                 <x-sidebar-item route="home" icon="fa-solid fa-bell" screen="mobile">Notificaciones</x-sidebar-item>
 
                 <!-- toggle theme -->
