@@ -11,8 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class UsuarioController extends Controller
 {
     //
-    public function admin_index(Request $request)
-    {
+    public function admin_index(Request $request){
         $sortOrder = $request->get('sort', 'asc'); // ascendente o descendente
         $campo = $request->get('campo');           // campo a buscar
         $valor = $request->get('valor');           // valor a buscar
@@ -46,8 +45,7 @@ class UsuarioController extends Controller
         return view('admin.usuarios.index', compact('usuarios', 'sortOrder', 'campo', 'valor'));
     }
 
-    public function admin_update(Request $request, $id)
-    {
+    public function admin_update(Request $request, $id){
         if ($id == 1) {
             return redirect()->route('admin.usuarios.index')->with('error', 'Este usuario no puede ser editado.');
         }
