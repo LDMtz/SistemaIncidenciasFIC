@@ -153,7 +153,7 @@
                         <x-td-table type="normal" :content="$usuario['telefono']" />
                         <x-td-table type="normal" :content="$usuario['created_at'] ? $usuario['created_at']->format('Y-m-d') : 'Sin fecha'" />
                         <x-td-table type="state" :content="$usuario['estado']" />
-                        <x-td-table type="actions" :content="['section' => 'product', 'id' => $usuario['id']]" />
+                        <x-td-table type="actions-modal" :content="['section' => 'admin.usuarios', 'id' => $usuario['id']]" />
                     </tr>
                     @endforeach
                 </x-slot>
@@ -168,6 +168,9 @@
 
 <!-- Success modal -->
 <x-success-modal/>
+
+<!-- Error modal -->
+<x-error-modal/>
 
 <!-- Modal Buscar -->
 <div id="search-modal" class="hidden">
@@ -217,87 +220,354 @@
 </div>
 
 <!-- Modal show-user -->
-<div id="show-user-modal" class="">
+<div id="show-user-modal" class="hidden">
     <div class="flex fixed top-0 left-0 w-full h-full bg-black/50 z-50 justify-center items-center ">
         <div class="dark:bg-slate-800 light:bg-slate-50 rounded-lg shadow-lg w-full max-w-md overflow-hidden border-2 dark:border-slate-700 light:border-slate-300 m-10">
 
-            <div class="relative light:bg-slate-300/60 dark:bg-slate-700/60 h-14 md:h-17 px-5 border-b-2 dark:border-slate-700 light:border-slate-300">
-                <div class="absolute -bottom-8 md:-bottom-10">
-                    <img class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 light:border-slate-300 dark:border-slate-700" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Perfil">
-                </div>
-                <button onclick="closeModal('show-user-modal')" class="absolute top-2 right-4 text-slate-400 hover:text-red-500 cursor-pointer">
-                    <i class="fa-solid fa-x text-xs"></i>
-                </button>
-                <label class="absolute top-20 right-7 inline-flex items-center text-[0.65rem] md:text-xs font-black font-roboto leading-none">
-                    <span class="self-center w-[0.40rem] h-[0.40rem] md:w-2 md:h-2 mr-2 rounded-full dark:bg-green-400 light:bg-green-600"></span>
-                    <span class="dark:text-green-400 light:text-green-600 leading-none">ACTIVO</span>
-                </label>
-            </div>
-
-            <!-- Modal body -->
-            <div class="p-6 mt-6 max-w-2xl w-full mx-auto">
-                <!-- Encabezado -->
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gray-600 pb-2 mb-2 md:pb-4 md:mb-4">
-                    <div>
-                        <h2 class="text-sm md:text-lg font-bold text-text-1">Leoncio Daniel Martinez Gonzalez</h2>
-                        <p class="text-xs md:text-sm text-text-1/80">dj.gonzalez18@info.uas.edu.mx</p>
-                    </div>
-                </div>
-
-                <!-- Formulario -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 text-[0.70rem] md:text-sm text-text-1">
-                    <!-- Apellido -->
-                    <div>
-                    <label class="text-main-3 block">Apellidos</label>
-                    <input name="apellidos" type="text" value="Gonzalez Ochoa" class="bg-transparent border border-slate-500 px-2 py-1.5 md:px-3 md:py-2 rounded w-full focus:outline-none focus:ring-0 focus:border-main-3" readonly />
-                    </div>
-
-                    <!-- Nombre -->
-                    <div class="mt-auto">
-                    <label class="text-main-3 block">Nombres</label>
-                    <input name="nombres" type="text" value="Daniel Andres" class="bg-transparent border border-slate-500 px-2 py-1.5 md:px-3 md:py-2 rounded w-full focus:outline-none focus:ring-0 focus:border-main-3" readonly />
-                    </div>
-
-                    <!-- Correo (col-span-2 para ocupar las dos columnas) -->
-                    <div class="md:col-span-2">
-                    <label class="text-main-3 block" >Correo</label>
-                    <div class="relative w-full">
-                    <i class="fa-solid fa-envelope absolute left-3 top-1/2 transform -translate-y-1/2 text-text-1"></i>
-                    <input name="email" type="text" value="dj.gonzalez18@info.uas.edu.mx" class="w-full bg-transparent border border-slate-500 pl-8 py-1.5 md:py-2 rounded focus:outline-none focus:ring-0 focus:border-main-3" readonly
-                    />
-                    </div>
-                    </div>
-
-                    <!-- Teléfono -->
-                    <div>
-                    <label class="text-main-3 block">Teléfono</label>
-                    <input name="telefono" type="text" value="6671980710" class="bg-transparent border border-slate-500 px-2 py-1.5 md:px-3 md:py-2 rounded w-full focus:outline-none focus:ring-0 focus:border-main-3" readonly />
-                    </div>
-
-                    <!-- Rol -->
-                    <div>
-                    <label class="text-main-3 block ">Rol</label>
-                    <input name="rol_nombre" type="text" value="Administrador" class="bg-transparent border border-slate-500 px-2 py-1.5 md:px-3 md:py-2 rounded w-full focus:outline-none focus:ring-0 focus:border-main-3" readonly />
-                    </div>
-
-                    <!-- Fecha de registro -->
-                    <div>
-                    <label class="text-main-3 block ">Fecha de registro</label>
-                    <input name="created_at_fecha" type="text" value="2025-06-20" class="bg-transparent border border-slate-500 px-2 py-1.5 md:px-3 md:py-2 rounded w-full focus:outline-none focus:ring-0 focus:border-main-3" readonly />
-                    </div>
-
-                    <!-- Hora de registro -->
-                    <div>
-                    <label class="text-main-3 block ">Hora de registro</label>
-                    <input name="created_at_hora" type="text" value="08:40" class="bg-transparent border border-slate-500 px-2 py-1.5 md:px-3 md:py-2 rounded w-full focus:outline-none focus:ring-0 focus:border-main-3" readonly />
-                    </div>
+            <!-- Spinner de carga -->
+            <div id="usuario-loading-show" class="hidden p-3">
+                <div class="flex flex-col items-center p-3 space-y-2">
+                    <p class="text-text-1 font-roboto font-medium">Cargando datos del usuario</p>
+                    <svg class="animate-spin h-8 w-8 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"/>
+                    </svg>
                 </div>
             </div>
-           
+
+            <!-- Contenido -->
+            <div id="usuario-detalles-show" class="">
+                <div class="relative light:bg-slate-300/60 dark:bg-slate-700/60 h-14 md:h-17 px-5 border-b-2 dark:border-slate-700 light:border-slate-300">
+                    <div class="absolute -bottom-8 md:-bottom-10">
+                        <img id="fotoShow" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 light:border-slate-300 dark:border-slate-700" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Perfil">
+                    </div>
+                    <button onclick="closeModal('show-user-modal')" class="absolute top-2 right-4 text-slate-400 hover:text-red-500 cursor-pointer">
+                        <i class="fa-solid fa-x text-xs"></i>
+                    </button>
+                    <label id="estadoActivoShow" class="hidden absolute top-20 right-7 items-center text-[0.65rem] md:text-xs font-black font-roboto leading-none">
+                        <span class="self-center w-[0.40rem] h-[0.40rem] md:w-2 md:h-2 mr-2 rounded-full dark:bg-green-400 light:bg-green-600"></span>
+                        <span class="dark:text-green-400 light:text-green-600 leading-none">ACTIVO</span>
+                    </label>
+                    <label id="estadoInactivoShow" class="hidden absolute top-20 right-7 items-center text-[0.65rem] md:text-xs font-black font-roboto leading-none">
+                        <span class="self-center w-[0.40rem] h-[0.40rem] md:w-2 md:h-2 mr-2 rounded-full dark:bg-red-400 light:bg-red-600"></span>
+                        <span class="dark:text-red-400 light:text-red-600 leading-none">INACTIVO</span>
+                    </label>
+                </div>
+
+                <!-- Modal body -->
+                <div class="p-6 mt-6 max-w-2xl w-full mx-auto">
+                    <!-- Encabezado -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gray-600 pb-2 mb-2 md:pb-4 md:mb-4">
+                        <div>
+                            <h2 id="nombreCompletoShow" class="text-sm md:text-lg font-bold text-text-1">Leoncio Daniel Martinez Gonzalez</h2>
+                            <p id="correoHeaderShow" class="text-xs md:text-sm text-text-1/80">dj.gonzalez18@info.uas.edu.mx</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 text-[0.70rem] md:text-sm text-text-1">
+                        <!-- Apellido -->
+                        <div>
+                            <label class="text-main-3 block">Apellidos</label>
+                            <input id="apellidosShow" type="text" value="" class="bg-transparent border border-slate-500 px-2 py-1.5 md:px-3 md:py-2 rounded w-full focus:outline-none focus:ring-0 focus:border-main-3" readonly />
+                        </div>
+
+                        <!-- Nombre -->
+                        <div class="mt-auto">
+                            <label class="text-main-3 block">Nombres</label>
+                            <input id="nombresShow" type="text" value="" class="bg-transparent border border-slate-500 px-2 py-1.5 md:px-3 md:py-2 rounded w-full focus:outline-none focus:ring-0 focus:border-main-3" readonly />
+                        </div>
+
+                        <!-- Correo -->
+                        <div class="md:col-span-2">
+                            <label class="text-main-3 block" >Correo</label>
+                            <div class="relative w-full">
+                                <i class="fa-solid fa-envelope absolute left-3 top-1/2 transform -translate-y-1/2 text-text-1"></i>
+                                <input id="emailShow" type="text" value="" class="w-full bg-transparent border border-slate-500 pl-8 py-1.5 md:py-2 rounded focus:outline-none focus:ring-0 focus:border-main-3" readonly
+                                />
+                            </div>
+                        </div>
+
+                        <!-- Teléfono -->
+                        <div>
+                            <label class="text-main-3 block">Teléfono</label>
+                            <input id="telefonoShow" type="text" value="" class="bg-transparent border border-slate-500 px-2 py-1.5 md:px-3 md:py-2 rounded w-full focus:outline-none focus:ring-0 focus:border-main-3" readonly />
+                        </div>
+
+                        <!-- Rol -->
+                        <div>
+                            <label class="text-main-3 block ">Rol</label>
+                            <input id="rolShow" type="text" value="" class="bg-transparent border border-slate-500 px-2 py-1.5 md:px-3 md:py-2 rounded w-full focus:outline-none focus:ring-0 focus:border-main-3" readonly />
+                        </div>
+
+                        <!-- Fecha de registro -->
+                        <div>
+                            <label class="text-main-3 block ">Fecha de registro</label>
+                            <input id="fechaCreacionShow" type="text" value="" class="bg-transparent border border-slate-500 px-2 py-1.5 md:px-3 md:py-2 rounded w-full focus:outline-none focus:ring-0 focus:border-main-3" readonly />
+                        </div>
+
+                        <!-- Hora de registro -->
+                        <div>
+                            <label class="text-main-3 block ">Hora de registro</label>
+                            <input id="horaCreacionShow" type="text" value="" class="bg-transparent border border-slate-500 px-2 py-1.5 md:px-3 md:py-2 rounded w-full focus:outline-none focus:ring-0 focus:border-main-3" readonly />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
 
         </div>
     </div>
 </div>
 
+<!-- Modal edit-user -->
+<div id="edit-user-modal" class="hidden">
+    <div class="flex fixed top-0 left-0 w-full h-full bg-black/50 z-50 justify-center items-center ">
+        <div class="dark:bg-slate-800 light:bg-slate-50 rounded-lg shadow-lg w-full max-w-md overflow-hidden border-2 dark:border-slate-700 light:border-slate-300 m-10">
 
+            <!-- Spinner de carga -->
+            <div id="usuario-loading-edit" class="hidden p-3">
+                <div class="flex flex-col items-center p-3 space-y-2">
+                    <p class="text-text-1 font-roboto font-medium">Cargando datos del usuario</p>
+                    <svg class="animate-spin h-8 w-8 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Contenido -->
+            <div id="usuario-detalles-edit" class="">
+                <div class="relative light:bg-slate-300/60 dark:bg-slate-700/60 h-14 md:h-17 px-5 border-b-2 dark:border-slate-700 light:border-slate-300">
+                    <div class="absolute -bottom-8 md:-bottom-10">
+                        <img id="fotoEdit" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 light:border-slate-300 dark:border-slate-700" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Perfil">
+                    </div>
+                    <button onclick="closeModal('edit-user-modal')" class="absolute top-2 right-4 text-slate-400 hover:text-red-500 cursor-pointer">
+                        <i class="fa-solid fa-x text-xs"></i>
+                    </button>
+                    <label id="estadoActivoEdit" class="hidden absolute top-20 right-7 items-center text-[0.65rem] md:text-xs font-black font-roboto leading-none">
+                        <span class="self-center w-[0.40rem] h-[0.40rem] md:w-2 md:h-2 mr-2 rounded-full dark:bg-green-400 light:bg-green-600"></span>
+                        <span class="dark:text-green-400 light:text-green-600 leading-none">ACTIVO</span>
+                    </label>
+                    <label id="estadoInactivoEdit" class="hidden absolute top-20 right-7 items-center text-[0.65rem] md:text-xs font-black font-roboto leading-none">
+                        <span class="self-center w-[0.40rem] h-[0.40rem] md:w-2 md:h-2 mr-2 rounded-full dark:bg-red-400 light:bg-red-600"></span>
+                        <span class="dark:text-red-400 light:text-red-600 leading-none">INACTIVO</span>
+                    </label>
+                </div>
+
+                <!-- Modal body -->
+                <div class="p-6 mt-6 max-w-2xl w-full mx-auto">
+                    <!-- Encabezado -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gray-600 pb-2 mb-2 md:pb-4 md:mb-4">
+                        <div>
+                            <h2 id="nombreCompletoEdit" class="text-sm md:text-lg font-bold text-text-1">Leoncio Daniel Martinez Gonzalez</h2>
+                            <p id="correoHeaderEdit" class="text-xs md:text-sm text-text-1/80">dj.gonzalez18@info.uas.edu.mx</p>
+                        </div>
+                    </div>
+
+                    <!-- Nota: El action se va asignar desde el script js -->
+                    <form id="formEditUsuario" action="" method="POST">
+                        @csrf
+                        @method('PATCH')
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 text-[0.70rem] md:text-sm text-text-1/60">
+                            <!-- Apellido -->
+                            <div>
+                                <label class="text-main-3 block">Apellidos</label>
+                                <input id="apellidosEdit" type="text" value="" class="bg-transparent border border-slate-500 px-2 py-1.5 md:px-3 md:py-2 rounded w-full" disabled />
+                            </div>
+
+                            <!-- Nombre -->
+                            <div class="mt-auto">
+                                <label class="text-main-3 block">Nombres</label>
+                                <input id="nombresEdit" type="text" value="" class="bg-transparent border border-slate-500 px-2 py-1.5 md:px-3 md:py-2 rounded w-full " disabled />
+                            </div>
+
+                            <!-- Correo -->
+                            <div class="md:col-span-2">
+                                <label class="text-main-3 block" >Correo</label>
+                                <div class="relative w-full">
+                                    <i class="fa-solid fa-envelope absolute left-3 top-1/2 transform -translate-y-1/2 text-text-1/60"></i>
+                                    <input id="emailEdit" type="text" value="" class="w-full bg-transparent border border-slate-500 pl-8 py-1.5 md:py-2 rounded " disabled
+                                    />
+                                </div>
+                            </div>
+
+                            <!-- Teléfono -->
+                            <div>
+                                <label class="text-main-3 block">Teléfono</label>
+                                <input id="telefonoEdit" type="text" value="" class="bg-transparent border border-slate-500 px-2 py-1.5 md:px-3 md:py-2 rounded w-full " disabled />
+                            </div>
+
+                            <!-- Fecha de registro -->
+                            <div>
+                                <label class="text-main-3 block ">Fecha de registro</label>
+                                <input id="fechaCreacionEdit" type="text" value="" class="bg-transparent border border-slate-500 px-2 py-1.5 md:px-3 md:py-2 rounded w-full " disabled />
+                            </div>
+
+                            
+                            <!-- Rol -->
+                            <div class="text-text-1">
+                                <label class="text-main-3 block">Rol</label>
+                                <select id="rolSelectEdit" name="rol" class="bg-transparent border border-slate-500 px-2 py-1.5 md:px-3 md:py-2 rounded w-full focus:outline-none focus:ring-0 focus:border-main-3">
+                                    <option class="dark:bg-slate-600 text-xs" value="1">Administrador</option>
+                                    <option class="dark:bg-slate-600 text-xs" value="2">Encargado</option>
+                                    <option class="dark:bg-slate-600 text-xs" value="3">Común</option>
+                                </select>
+                            </div>
+
+                            <!-- Estado -->
+                            <div class="text-text-1">
+                                <label class="text-main-3 block">Estado</label>
+                                <select id="estadoSelectEdit" name="estado" class="bg-transparent border border-slate-500 px-2 py-1.5 md:px-3 md:py-2 rounded w-full focus:outline-none focus:ring-0 focus:border-main-3">
+                                    <option class="dark:bg-slate-600 text-xs" value="1">Activo</option>
+                                    <option class="dark:bg-slate-600 text-xs" value="0">Inactivo</option>
+                                </select>
+                            </div>
+
+                            <!-- Botón Guardar -->
+                            <div class="md:col-span-2 flex justify-center mt-2">
+                                <button type="submit" class="font-montserrat inline-flex items-center justify-center gap-2 px-2 py-1 bg-blue-500 hover:bg-blue-400 text-white rounded-lg cursor-pointer">
+                                    <i class="fa-solid fa-pen-to-square text-sm"></i>
+                                    <span class="text-sm">Editar</span>
+                                </button>
+                            </div>
+                            
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    //Ver elemento para generalizar, pero elemento es "usuario" en este caso
+    function verElemento(id) {
+
+        openModal('show-user-modal');
+
+        const usuarioLoading = document.getElementById('usuario-loading-show');
+        const usuarioDetalles = document.getElementById('usuario-detalles-show');
+
+        // Mostrar el spinner, ocultar detalles
+        usuarioLoading.classList.remove('hidden');
+        usuarioDetalles.classList.add('hidden');
+
+        // Solicitud al backend
+        fetch(`/admin/usuarios/${id}`)
+            .then(res => res.json())
+            .then(data => {
+
+                // Llenar datos
+
+                if(data.foto){
+                    //
+                }else{
+                    //
+                }
+
+                if(data.estado){
+                    document.getElementById('estadoActivoShow').style.display = 'inline-flex';
+                    document.getElementById('estadoInactivoShow').style.display = 'none';
+                } else{
+                    document.getElementById('estadoActivoShow').style.display = 'none';
+                    document.getElementById('estadoInactivoShow').style.display = 'inline-flex';
+                }
+
+                if (data.created_at) {
+                    const [fecha, tiempoConResto] = data.created_at.split('T'); // 1. Separa en ["2025-06-20", "08:40:39.000000Z"]
+                    const tiempo = tiempoConResto.replace('Z', '').split('.')[0]; // 2. Quita la "Z" y los microsegundos dejando solo "08:40:39"
+                    const horaMin = tiempo.substring(0, 5);
+                    document.getElementById('fechaCreacionShow').value = fecha;
+                    document.getElementById('horaCreacionShow').value = horaMin;
+                } else {
+                    document.getElementById('fechaCreacionShow').value = 'Sin fecha';
+                    document.getElementById('horaCreacionShow').value = 'Sin hora';
+                }
+
+                document.getElementById('nombreCompletoShow').textContent  = data.apellidos + ' ' + data.nombres;
+                document.getElementById('correoHeaderShow').textContent  = data.email;
+                document.getElementById('apellidosShow').value = data.apellidos;
+                document.getElementById('nombresShow').value = data.nombres;
+                document.getElementById('emailShow').value = data.email;
+                document.getElementById('telefonoShow').value = data.telefono;
+                document.getElementById('rolShow').value = data.rol.nombre;
+
+                // Ocultar spinner, mostrar contenido
+                usuarioLoading.classList.add('hidden');
+                usuarioDetalles.classList.remove('hidden');
+            })
+            .catch(error => {
+                console.error('Error al cargar usuario:', error);
+                usuarioLoading.innerHTML = '<p class="text-red-500">Error al cargar datos</p>';
+        });
+    }
+
+    function editarElemento(id) {
+
+        openModal('edit-user-modal');
+
+        const usuarioLoading = document.getElementById('usuario-loading-edit');
+        const usuarioDetalles = document.getElementById('usuario-detalles-edit');
+
+        // Mostrar el spinner, ocultar detalles
+        usuarioLoading.classList.remove('hidden');
+        usuarioDetalles.classList.add('hidden');
+
+        // Solicitud al backend
+        fetch(`/admin/usuarios/modificar/${id}`)
+            .then(res => res.json())
+            .then(data => {
+
+                //Asignamos el action al form
+                const form = document.getElementById('formEditUsuario');
+                form.setAttribute('action', `{{ url("admin/usuarios/actualizar") }}/${data.id}`);
+
+                // Llenar datos
+
+                if(data.foto){
+                    //
+                }else{
+                    //
+                }
+
+                if(data.estado){
+                    document.getElementById('estadoActivoEdit').style.display = 'inline-flex';
+                    document.getElementById('estadoInactivoEdit').style.display = 'none';
+                } else{
+                    document.getElementById('estadoActivoEdit').style.display = 'none';
+                    document.getElementById('estadoInactivoEdit').style.display = 'inline-flex';
+                }
+
+                if (data.created_at) {
+                    const fecha = data.created_at.split('T')[0].trim(); // 1. Separa en ["2025-06-20", "08:40:39.000000Z"]
+                    document.getElementById('fechaCreacionEdit').value = fecha;
+                } else {
+                    document.getElementById('fechaCreacionEdit').value = 'Sin fecha';
+                }
+
+                document.getElementById('nombreCompletoEdit').textContent  = data.apellidos + ' ' + data.nombres;
+                document.getElementById('correoHeaderEdit').textContent  = data.email;
+                document.getElementById('apellidosEdit').value = data.apellidos;
+                document.getElementById('nombresEdit').value = data.nombres;
+                document.getElementById('emailEdit').value = data.email;
+                document.getElementById('telefonoEdit').value = data.telefono;
+
+                document.getElementById('rolSelectEdit').value = data.rol_id;
+                document.getElementById('estadoSelectEdit').value = data.estado ? '1' : '0';
+
+                // Ocultar spinner, mostrar contenido
+                usuarioLoading.classList.add('hidden');
+                usuarioDetalles.classList.remove('hidden');
+            })
+            .catch(error => {
+                console.error('Error al cargar usuario:', error);
+                usuarioLoading.innerHTML = '<p class="text-red-500">Error al cargar datos</p>';
+        });
+    }
+</script>
 

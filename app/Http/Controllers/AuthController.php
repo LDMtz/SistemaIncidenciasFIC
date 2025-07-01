@@ -39,6 +39,12 @@ class AuthController extends Controller
         ];
 
         if(Auth::attempt($credenciales)){
+
+            if (!Auth::user()->estado) {
+                Auth::logout(); // Cerramos sesión por si acaso entró
+                return back()->withErrors(['login' => 'La cuenta está inactiva']);
+            }
+
             $request->session()->regenerate();
 
             return redirect()->route('home');

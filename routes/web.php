@@ -22,8 +22,13 @@ Route::middleware("auth")->group(function(){
     Route::get('/inicio', [AuthController::class, 'home'])-> name('home');
     Route::get('/to-logout', [AuthController::class, 'to_logout'])-> name('to_logout');
 
-    Route::get('/admin/usuarios', [UsuarioController::class, 'admin_index'])-> name('admin.usuarios.index');
+    Route::get('admin/usuarios', [UsuarioController::class, 'admin_index'])-> name('admin.usuarios.index');
     Route::post('admin/usuarios/guardar', [UsuarioController::class, 'store'])-> name('admin.usuarios.guardar');
-    //Route::post('/admin/usuario/guardar', [AdminController::class, 'store_user'])-> name('store_user_admin');
+    Route::get('admin/usuarios/{id}', [UsuarioController::class, 'show'])-> name('admin.usuarios.mostrar');
+    Route::get('admin/usuarios/modificar/{id}', [UsuarioController::class, 'edit'])-> name('admin.usuarios.modificar');
+    Route::patch('admin/usuarios/actualizar/{id}', [UsuarioController::class, 'admin_update'])-> name('admin.usuarios.actualizar');
+    Route::delete('admin/usuarios/eliminar/{id}', [UsuarioController::class, 'destroy'])-> name('admin.usuarios.eliminar');
+
+
 
 });

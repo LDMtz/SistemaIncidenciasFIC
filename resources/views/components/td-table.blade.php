@@ -61,20 +61,25 @@
             @endswitch
         @break
 
-        @case('actions')
+        @case('actions-modal')
             <div class="text-base space-x-3">
                 <!-- Ver -->
-                <a class="text-violet-500 hover:text-violet-400 transition-colors duration-100 cursor-pointer">
+                <button onclick="verElemento({{ $content['id'] }})" class="text-violet-500 hover:text-violet-400 transition-colors duration-100 cursor-pointer">
                     <i class="fa-solid fa-eye"></i>
-                </a>
+                </button>
                 <!-- Editar -->
-                <a class="text-blue-500 hover:text-blue-400 transition-colors duration-100 cursor-pointer">
+                <button onclick="editarElemento({{ $content['id'] }})" class="text-blue-500 hover:text-blue-400 transition-colors duration-100 cursor-pointer">
                     <i class="fa-solid fa-pen-to-square"></i>
-                </a>
+                </button>
                 <!-- Eliminar -->
-                <a class="text-red-500 hover:text-red-400 transition-colors duration-100 cursor-pointer">
-                    <i class="fa-solid fa-trash-can"></i>
-                </a>
+                <form action="{{ route($content['section'] . '.eliminar', ['id' => $content['id']]) }}" method="POST" class="inline-block">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="text-red-500 hover:text-red-400 transition-colors duration-100 cursor-pointer">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </form>
+
             </div>
         @break
 
