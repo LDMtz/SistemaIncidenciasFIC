@@ -4,7 +4,7 @@
     @switch($type)
         @case('special_user')
             <div class="flex items-center space-x-3">
-                <img class="w-8 h-8 rounded-full object-cover" src="{{ asset('images/default-profile.jpg') }}">
+                <img draggable="false" class="w-8 h-8 rounded-full object-cover" src="{{ asset('images/default-profile.jpg') }}">
                 <div class="leading-tight overflow-hidden">
                     <p class="font-semibold text-text-1 whitespace-nowrap text-ellipsis overflow-hidden">
                         {{ $content['name'] }}

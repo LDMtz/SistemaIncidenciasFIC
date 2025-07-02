@@ -67,6 +67,30 @@ class UsuarioController extends Controller
         }
     }
 
+    public function update_profile(Request $request, $id){
+        $datos_validados = $request->validate([
+            'apellidos' => 'required|string|max:40',
+            'nombres' => 'required|string|max:40',
+            'telefono' => 'required|string|size:10',
+            //'foto' => 'image',
+        ]);
+
+        $usuario = User::findOrFail($id);
+        $actualizado = $usuario->update([
+            'apellidos' => $datos_validados['apellidos'],
+            'nombres' => $datos_validados['nombres'],
+            'telefono' => $datos_validados['telefono'],
+            //'foto' => $datos_validados['nombres'], //Ver el tema de la foto
+        ]);
+
+        if ($actualizado) {
+            return redirect()->route('home')->with('success', 'Usuario actualizado correctamente.');
+        } else {
+            return redirect()->route('home')->with('error', 'No se pudo actualizar el usuario.');
+        }
+        //TODO FALTA LA FOTO
+    }
+
     public function create(){
         //Asumimos que solo los usuarios comunes llaman esta funcion,
         // ya que el admin lo tiene en el index de user
@@ -127,6 +151,20 @@ class UsuarioController extends Controller
 
          return redirect()->route('admin.usuarios.index')->with('success', 'Usuario eliminado correctamente.');
          //TODO: Validar que el usuario no tenga asociado un reporte o incidencia
+    }
+
+    public function profile(){
+        $usuario = Auth::user();
+        switch ($usuario->rol_id) {
+            case 1:
+                return view('admin.usuarios.profile', compact('usuario'));
+            case 2:
+                return view('encargado.home', compact('usuario')); //Home temporalmente
+            case 3:
+                return view('comun.home', compact('usuario'));  //Home temporalmente
+            default:
+                abort(403, 'Acceso no autorizado');
+        }
     }
 
 

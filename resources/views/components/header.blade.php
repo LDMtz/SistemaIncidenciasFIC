@@ -1,7 +1,7 @@
 <header class="py-2 px-8 border-b-2 bg-bg-header border-main-1 shadow-lg shadow-main-4/35 flex items-center justify-between">
-    <a href="">
-        <img class="logo-light w-52 sm:w-58" src="{{ asset('images/logo_light.svg') }}">
-        <img class="logo-dark w-52 sm:w-58" src="{{ asset('images/logo_dark.svg') }}">
+    <a href="{{route('home')}}">
+        <img class="logo-light w-52 sm:w-58" draggable="false" src="{{ asset('images/logo_light.svg') }}">
+        <img class="logo-dark w-52 sm:w-58" draggable="false" src="{{ asset('images/logo_dark.svg') }}">
     </a>
 
     @auth
@@ -18,20 +18,21 @@
                 <!-- Dropdown Menu -->
                 <div id="dropdown-header" class="z-10 hidden light:bg-slate-50 dark:bg-slate-600 light:shadow divide-y rounded-b-lg w-38 absolute top-full left-0 mt-3 py-2">
                     <ul class="text-sm font-semibold text-text-1" aria-labelledby="dropdownHeaderDefaultButton">
-                        <li class="flex items-center rounded hover:text-main-2 dark:hover:bg-slate-700 light:hover:bg-slate-200 m-1">
-                            <a href="#" class="block px-3 py-2">
+                        <li class="m-1">
+                            <a href="{{route('usuarios.perfil')}}" class="flex items-center w-full rounded px-3 py-2 hover:text-main-2 dark:hover:bg-slate-700 light:hover:bg-slate-200">
                                 <i class="fa-solid fa-circle-user mr-2"></i>
                                 <span>Perfil</span>
                             </a>
                         </li>
-                        <li class="flex items-center rounded hover:text-main-2 dark:hover:bg-slate-700 light:hover:bg-slate-200 m-1">
-                            <a href="#" class="block px-3 py-2">
+                        </li>
+                        <li class="m-1">
+                            <a href="#" class="flex items-center w-full rounded px-3 py-2 hover:text-main-2 dark:hover:bg-slate-700 light:hover:bg-slate-200">
                                 <i class="fa-solid fa-bell mr-2"></i>
                                 <span>Notificaciones</span>
                             </a>
                         </li>
-                        <li class="flex items-center rounded hover:text-main-2 dark:hover:bg-slate-700 light:hover:bg-slate-200 m-1">
-                            <button onclick="openModal('logoutModal')" class="block px-3 py-2 cursor-pointer">
+                        <li class="m-1">
+                            <button onclick="openModal('logoutModal')" class="flex items-center w-full rounded px-3 py-2 hover:text-main-2 dark:hover:bg-slate-700 light:hover:bg-slate-200 cursor-pointer">
                                 <i class="fa-solid fa-right-from-bracket mr-2"></i>
                                 <span>Cerrar sesión</span>
                             </button>
@@ -42,12 +43,21 @@
             </div>
 
             @php $user = Auth::user(); @endphp
-            <img class="w-9 h-9 rounded-full hidden lg:block" src="{{ asset('images/default-profile.jpg') }}">
+            <img draggable="false" class="w-9 h-9 rounded-full hidden lg:block" src="{{ asset('images/default-profile.jpg') }}">
             <span class="text-base font-semibold hidden lg:block truncate">{{ $user->apellidos . ' ' .  $user->nombres}}</span>
 
-            <button id="mobile-sidebar-toggle" type="button" class="cursor-pointer block lg:hidden">
+            @php 
+                switch ($user->rol_id) {
+                    case 1: $sidebar_id = 'mobile-sidebar-toggle'; break;
+                    case 2: $sidebar_id = ''; break;
+                    case 3: $sidebar_id = ''; break;
+                    default: $sidebar_id = ''; break;
+                }
+            @endphp 
+            <button id="{{$sidebar_id}}" type="button" class="cursor-pointer block lg:hidden">
                 <i class="fa-solid fa-bars text-2xl"></i>
             </button>
+
         </div>
     @endauth
 

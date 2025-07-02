@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="flex justify-center items-center w-full">
+    <div class="flex justify-center items-center w-full mx-6">
         <div class="font-montserrat bg-main-6 border-1 border-main-1 p-10 rounded-lg">
             <h1 class="text-center text-2xl font-bold text-text-1 mb-6">INICIO DE SESIÓN</h1>
             <h2 class="text-center text-base text-main-4 mb-8">¡Bienvenido de nuevo!</h2>

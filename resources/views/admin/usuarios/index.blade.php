@@ -240,7 +240,7 @@
             <div id="usuario-detalles-show" class="">
                 <div class="relative light:bg-slate-300/60 dark:bg-slate-700/60 h-14 md:h-17 px-5 border-b-2 dark:border-slate-700 light:border-slate-300">
                     <div class="absolute -bottom-8 md:-bottom-10">
-                        <img id="fotoShow" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 light:border-slate-300 dark:border-slate-700" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Perfil">
+                        <img id="fotoShow" draggable="false" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 light:border-slate-300 dark:border-slate-700" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Perfil">
                     </div>
                     <button onclick="closeModal('show-user-modal')" class="absolute top-2 right-4 text-slate-400 hover:text-red-500 cursor-pointer">
                         <i class="fa-solid fa-x text-xs"></i>
@@ -341,7 +341,7 @@
             <div id="usuario-detalles-edit" class="">
                 <div class="relative light:bg-slate-300/60 dark:bg-slate-700/60 h-14 md:h-17 px-5 border-b-2 dark:border-slate-700 light:border-slate-300">
                     <div class="absolute -bottom-8 md:-bottom-10">
-                        <img id="fotoEdit" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 light:border-slate-300 dark:border-slate-700" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Perfil">
+                        <img id="fotoEdit" draggable="false" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 light:border-slate-300 dark:border-slate-700" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Perfil">
                     </div>
                     <button onclick="closeModal('edit-user-modal')" class="absolute top-2 right-4 text-slate-400 hover:text-red-500 cursor-pointer">
                         <i class="fa-solid fa-x text-xs"></i>

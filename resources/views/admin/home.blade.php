@@ -9,3 +9,9 @@
         
     </div>
 </x-app-layout>
+
+<!-- Success modal -->
+<x-success-modal/>
+
+<!-- Error modal -->
+<x-error-modal/>

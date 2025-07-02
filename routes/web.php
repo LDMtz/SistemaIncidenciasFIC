@@ -22,6 +22,9 @@ Route::middleware("auth")->group(function(){
     Route::get('/inicio', [AuthController::class, 'home'])-> name('home');
     Route::get('/to-logout', [AuthController::class, 'to_logout'])-> name('to_logout');
 
+    Route::get('usuarios/perfil', [UsuarioController::class, 'profile'])-> name('usuarios.perfil');
+    Route::patch('usuarios/perfil/actualizar/{id}', [UsuarioController::class, 'update_profile'])-> name('usuarios.perfil.actualizar');
+    
     Route::get('admin/usuarios', [UsuarioController::class, 'admin_index'])-> name('admin.usuarios.index');
     Route::post('admin/usuarios/guardar', [UsuarioController::class, 'store'])-> name('admin.usuarios.guardar');
     Route::get('admin/usuarios/{id}', [UsuarioController::class, 'show'])-> name('admin.usuarios.mostrar');
