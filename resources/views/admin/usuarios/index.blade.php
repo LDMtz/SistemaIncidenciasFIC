@@ -148,7 +148,7 @@
                 <x-slot name="bodyTable">
                     @foreach($usuarios as $usuario)
                     <tr class="text-sm border-b-1 whitespace-nowrap">
-                        <x-td-table type="special_user" :content="['name' => $usuario['apellidos']. ' ' .$usuario['nombres'], 'email' => $usuario->email]" />
+                        <x-td-table type="special_user" :content="['name' => $usuario['apellidos']. ' ' .$usuario['nombres'], 'email' => $usuario->email, 'foto' => $usuario['foto'] ? $usuario['foto'] : null  ]" />
                         <x-td-table type="role" :content="$usuario['rol_id']" />
                         <x-td-table type="normal" :content="$usuario['telefono']" />
                         <x-td-table type="normal" :content="$usuario['created_at'] ? $usuario['created_at']->format('Y-m-d') : 'Sin fecha'" />
@@ -164,7 +164,11 @@
 
         </div>
     </div>
+    @push('scripts')
+        @vite('resources/js/users-section-scripts.js')
+    @endpush
 </x-app-layout>
+
 
 <!-- Success modal -->
 <x-success-modal/>
@@ -240,7 +244,7 @@
             <div id="usuario-detalles-show" class="">
                 <div class="relative light:bg-slate-300/60 dark:bg-slate-700/60 h-14 md:h-17 px-5 border-b-2 dark:border-slate-700 light:border-slate-300">
                     <div class="absolute -bottom-8 md:-bottom-10">
-                        <img id="fotoShow" draggable="false" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 light:border-slate-300 dark:border-slate-700" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Perfil">
+                        <img id="fotoShow" draggable="false" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 light:border-slate-300 dark:border-slate-700" src="" alt="Perfil">
                     </div>
                     <button onclick="closeModal('show-user-modal')" class="absolute top-2 right-4 text-slate-400 hover:text-red-500 cursor-pointer">
                         <i class="fa-solid fa-x text-xs"></i>
@@ -341,7 +345,7 @@
             <div id="usuario-detalles-edit" class="">
                 <div class="relative light:bg-slate-300/60 dark:bg-slate-700/60 h-14 md:h-17 px-5 border-b-2 dark:border-slate-700 light:border-slate-300">
                     <div class="absolute -bottom-8 md:-bottom-10">
-                        <img id="fotoEdit" draggable="false" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 light:border-slate-300 dark:border-slate-700" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Perfil">
+                        <img id="fotoEdit" draggable="false" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 light:border-slate-300 dark:border-slate-700" src="" alt="Perfil">
                     </div>
                     <button onclick="closeModal('edit-user-modal')" class="absolute top-2 right-4 text-slate-400 hover:text-red-500 cursor-pointer">
                         <i class="fa-solid fa-x text-xs"></i>
@@ -445,129 +449,7 @@
 </div>
 
 <script>
-    //Ver elemento para generalizar, pero elemento es "usuario" en este caso
-    function verElemento(id) {
-
-        openModal('show-user-modal');
-
-        const usuarioLoading = document.getElementById('usuario-loading-show');
-        const usuarioDetalles = document.getElementById('usuario-detalles-show');
-
-        // Mostrar el spinner, ocultar detalles
-        usuarioLoading.classList.remove('hidden');
-        usuarioDetalles.classList.add('hidden');
-
-        // Solicitud al backend
-        fetch(`/admin/usuarios/${id}`)
-            .then(res => res.json())
-            .then(data => {
-
-                // Llenar datos
-
-                if(data.foto){
-                    //
-                }else{
-                    //
-                }
-
-                if(data.estado){
-                    document.getElementById('estadoActivoShow').style.display = 'inline-flex';
-                    document.getElementById('estadoInactivoShow').style.display = 'none';
-                } else{
-                    document.getElementById('estadoActivoShow').style.display = 'none';
-                    document.getElementById('estadoInactivoShow').style.display = 'inline-flex';
-                }
-
-                if (data.created_at) {
-                    const [fecha, tiempoConResto] = data.created_at.split('T'); // 1. Separa en ["2025-06-20", "08:40:39.000000Z"]
-                    const tiempo = tiempoConResto.replace('Z', '').split('.')[0]; // 2. Quita la "Z" y los microsegundos dejando solo "08:40:39"
-                    const horaMin = tiempo.substring(0, 5);
-                    document.getElementById('fechaCreacionShow').value = fecha;
-                    document.getElementById('horaCreacionShow').value = horaMin;
-                } else {
-                    document.getElementById('fechaCreacionShow').value = 'Sin fecha';
-                    document.getElementById('horaCreacionShow').value = 'Sin hora';
-                }
-
-                document.getElementById('nombreCompletoShow').textContent  = data.apellidos + ' ' + data.nombres;
-                document.getElementById('correoHeaderShow').textContent  = data.email;
-                document.getElementById('apellidosShow').value = data.apellidos;
-                document.getElementById('nombresShow').value = data.nombres;
-                document.getElementById('emailShow').value = data.email;
-                document.getElementById('telefonoShow').value = data.telefono;
-                document.getElementById('rolShow').value = data.rol.nombre;
-
-                // Ocultar spinner, mostrar contenido
-                usuarioLoading.classList.add('hidden');
-                usuarioDetalles.classList.remove('hidden');
-            })
-            .catch(error => {
-                console.error('Error al cargar usuario:', error);
-                usuarioLoading.innerHTML = '<p class="text-red-500">Error al cargar datos</p>';
-        });
-    }
-
-    function editarElemento(id) {
-
-        openModal('edit-user-modal');
-
-        const usuarioLoading = document.getElementById('usuario-loading-edit');
-        const usuarioDetalles = document.getElementById('usuario-detalles-edit');
-
-        // Mostrar el spinner, ocultar detalles
-        usuarioLoading.classList.remove('hidden');
-        usuarioDetalles.classList.add('hidden');
-
-        // Solicitud al backend
-        fetch(`/admin/usuarios/modificar/${id}`)
-            .then(res => res.json())
-            .then(data => {
-
-                //Asignamos el action al form
-                const form = document.getElementById('formEditUsuario');
-                form.setAttribute('action', `{{ url("admin/usuarios/actualizar") }}/${data.id}`);
-
-                // Llenar datos
-
-                if(data.foto){
-                    //
-                }else{
-                    //
-                }
-
-                if(data.estado){
-                    document.getElementById('estadoActivoEdit').style.display = 'inline-flex';
-                    document.getElementById('estadoInactivoEdit').style.display = 'none';
-                } else{
-                    document.getElementById('estadoActivoEdit').style.display = 'none';
-                    document.getElementById('estadoInactivoEdit').style.display = 'inline-flex';
-                }
-
-                if (data.created_at) {
-                    const fecha = data.created_at.split('T')[0].trim(); // 1. Separa en ["2025-06-20", "08:40:39.000000Z"]
-                    document.getElementById('fechaCreacionEdit').value = fecha;
-                } else {
-                    document.getElementById('fechaCreacionEdit').value = 'Sin fecha';
-                }
-
-                document.getElementById('nombreCompletoEdit').textContent  = data.apellidos + ' ' + data.nombres;
-                document.getElementById('correoHeaderEdit').textContent  = data.email;
-                document.getElementById('apellidosEdit').value = data.apellidos;
-                document.getElementById('nombresEdit').value = data.nombres;
-                document.getElementById('emailEdit').value = data.email;
-                document.getElementById('telefonoEdit').value = data.telefono;
-
-                document.getElementById('rolSelectEdit').value = data.rol_id;
-                document.getElementById('estadoSelectEdit').value = data.estado ? '1' : '0';
-
-                // Ocultar spinner, mostrar contenido
-                usuarioLoading.classList.add('hidden');
-                usuarioDetalles.classList.remove('hidden');
-            })
-            .catch(error => {
-                console.error('Error al cargar usuario:', error);
-                usuarioLoading.innerHTML = '<p class="text-red-500">Error al cargar datos</p>';
-        });
-    }
+    //Le definimos esta ruta al script 'users-section-scripts.js', pq no puede ser interpretado 
+    // si se encuentra en otro archivo aparte
+    const rutaActualizarUsuario = "{{ url('admin/usuarios/actualizar') }}";
 </script>
-

@@ -42,12 +42,16 @@
 
             </div>
 
-            @php $user = Auth::user(); @endphp
-            <img draggable="false" class="w-9 h-9 rounded-full hidden lg:block" src="{{ asset('images/default-profile.jpg') }}">
-            <span class="text-base font-semibold hidden lg:block truncate">{{ $user->apellidos . ' ' .  $user->nombres}}</span>
+            @php $usuario = Auth::user(); @endphp
+            <div class="w-9 h-9 rounded-full overflow-hidden hidden lg:block">
+                <img draggable="false"
+                    class="w-full h-full object-cover"
+                    src="{{ $usuario->foto ? asset('storage/' . $usuario->foto) : asset('images/default-profile.jpg') }}">
+            </div>
+            <span class="text-base font-semibold hidden lg:block truncate">{{ $usuario->apellidos . ' ' .  $usuario->nombres}}</span>
 
             @php 
-                switch ($user->rol_id) {
+                switch ($usuario->rol_id) {
                     case 1: $sidebar_id = 'mobile-sidebar-toggle'; break;
                     case 2: $sidebar_id = ''; break;
                     case 3: $sidebar_id = ''; break;

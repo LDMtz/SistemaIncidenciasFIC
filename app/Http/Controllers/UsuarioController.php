@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 
 class UsuarioController extends Controller
@@ -68,19 +69,35 @@ class UsuarioController extends Controller
     }
 
     public function update_profile(Request $request, $id){
+        
         $datos_validados = $request->validate([
             'apellidos' => 'required|string|max:40',
             'nombres' => 'required|string|max:40',
             'telefono' => 'required|string|size:10',
-            //'foto' => 'image',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         $usuario = User::findOrFail($id);
+
+        // Inicializa variable
+        $rutaFoto = $usuario->foto; // conserva la anterior por defecto
+
+        // Si se sube una nueva foto...
+        if ($request->hasFile('foto')) {
+            // Elimina la foto anterior si existe
+            if ($usuario->foto && Storage::disk('public')->exists($usuario->foto)) {
+                Storage::disk('public')->delete($usuario->foto);
+            }
+
+            // Guarda la nueva foto
+            $rutaFoto = $request->file('foto')->store('fotos', 'public');
+        }
+
         $actualizado = $usuario->update([
             'apellidos' => $datos_validados['apellidos'],
             'nombres' => $datos_validados['nombres'],
             'telefono' => $datos_validados['telefono'],
-            //'foto' => $datos_validados['nombres'], //Ver el tema de la foto
+            'foto' => $rutaFoto,
         ]);
 
         if ($actualizado) {
@@ -88,7 +105,6 @@ class UsuarioController extends Controller
         } else {
             return redirect()->route('home')->with('error', 'No se pudo actualizar el usuario.');
         }
-        //TODO FALTA LA FOTO
     }
 
     public function create(){

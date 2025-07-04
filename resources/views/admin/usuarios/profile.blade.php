@@ -13,7 +13,7 @@
                 </div>
 
                 <a href="{{ url()->previous() }}" 
-                class="inline-flex items-center gap-x-1 text-sm sm:text-base font-semibold text-white border-b border-transparent hover:border-white">
+                class="inline-flex items-center gap-x-1 text-sm sm:text-base font-semibold text-text-1 border-b border-transparent hover:border-text-1">
                     <i class="fa-solid fa-arrow-left text-sm"></i>
                     <span>Volver</span>
                 </a>
@@ -26,13 +26,15 @@
                     <div class="p-6 max-w-2xl w-full mx-auto">
 
                         <h2 class="font-montserrat text-lg md:text-xl font-bold text-text-1 text-center mb-2">Datos del usuario</h2>
-                        <form action="{{route('usuarios.perfil.actualizar', $usuario->id)}}" method="POST">
+                        <form action="{{route('usuarios.perfil.actualizar', $usuario->id)}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
                             <div class="flex justify-center mb-5 md:mb-10 relative">
-                                <img src="https://randomuser.me/api/portraits/men/32.jpg" draggable="false" class="w-22 h-22 md:w-28 md:h-28 rounded-full border-3 
-                                    dark:border-slate-500 light:border-slate-600">
-                                <input type="file" name="foto" id="subirFoto" accept="image/*" class="hidden" />
+                                <div class="w-22 h-22 md:w-28 md:h-28 rounded-full border-3 overflow-hidden dark:border-slate-500 light:border-slate-600">
+                                    <img id="fotoPreview" src="{{ $usuario->foto ? asset('storage/' . $usuario->foto) : asset('images/default-profile.jpg') }}"
+                                        draggable="false" class="w-full h-full object-cover" />
+                                </div>
+                                <input type="file" name="foto" id="subirFoto" accept=".jpg,.jpeg,.png" class="hidden" />
                                 <button onclick="document.getElementById('subirFoto').click()" type="button"
                                         class="absolute bottom-0 w-8 h-8 md:w-10 md:h-10 transform translate-y-1/2 
                                         flex items-center justify-center rounded-full border-4 cursor-pointer
@@ -43,9 +45,14 @@
                                         light:text-slate-400 light:group-hover:text-slate-600">
                                     </i>
                                 </button>
+                                
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 text-[0.70rem] md:text-sm text-text-1">
+                                @error('foto') 
+                                    <span class="text-red-500 text-sm col-span-2 text-center">{{ $message }}</span>
+                                @enderror
+
                                 <!-- Correo -->
                                 <div class="md:col-span-2">
                                     <label class="text-main-3 block" >Correo</label>
@@ -108,3 +115,20 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    const inputFoto = document.getElementById('subirFoto');
+    const preview = document.getElementById('fotoPreview');
+
+    inputFoto.addEventListener('change', function (e) {
+        const file = e.target.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
