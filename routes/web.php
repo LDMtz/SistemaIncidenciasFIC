@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\AreaController;
 
 /*
 Route::get('/', function () {
@@ -32,6 +33,7 @@ Route::middleware("auth")->group(function(){
     Route::patch('admin/usuarios/actualizar/{id}', [UsuarioController::class, 'admin_update'])-> name('admin.usuarios.actualizar');
     Route::delete('admin/usuarios/eliminar/{id}', [UsuarioController::class, 'destroy'])-> name('admin.usuarios.eliminar');
 
+    Route::get('admin/areas', [AreaController::class, 'admin_index'])-> name('admin.areas.index');
 
 
 });

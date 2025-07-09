@@ -1,6 +1,8 @@
-<div class="relative overflow-x-auto rounded-lg light:shadow-md light:shadow-slate-950/25">
+@props(['rounded' => true, 'shadow' => true]) <!-- True por default -->
+
+<div class="relative overflow-x-auto {{ $rounded ? 'rounded-lg' : '' }} {{ $shadow ? 'light:shadow-md light:shadow-slate-950/25' : '' }}">
     <table class="w-full font-roboto">
-        <thead class="border-b text-xs text-left dark:bg-slate-700 light:bg-slate-50 dark:text-slate-400 light:text-slate-500 dark:border-slate-400 light:border-slate-500">
+        <thead class="border-b text-xs text-left dark:bg-slate-700 light:bg-slate-100 dark:text-slate-400 light:text-slate-500 dark:border-slate-400 light:border-slate-500">
             <tr class="whitespace-nowrap">
                 {{ $headTable ?? '' }}
             </tr>
