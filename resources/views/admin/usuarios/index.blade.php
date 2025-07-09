@@ -199,7 +199,8 @@
                             <option class="dark:bg-slate-600 text-xs" value="apellidos" {{ request('campo') == 'apellidos' ? 'selected' : '' }}>Apellidos</option>
                             <option class="dark:bg-slate-600 text-xs" value="email" {{ request('campo') == 'email' ? 'selected' : '' }}>Correo</option>
                             <option class="dark:bg-slate-600 text-xs" value="telefono" {{ request('campo') == 'telefono' ? 'selected' : '' }}>Teléfono</option>
-                            <option class="dark:bg-slate-600 text-xs"alue="estado" {{ request('campo') == 'estado' ? 'selected' : '' }}>Estado (activo/inactivo)</option>
+                            <option class="dark:bg-slate-600 text-xs" value="estado" {{ request('campo') == 'estado' ? 'selected' : '' }}>Estado (activo/inactivo)</option>
+                            <option class="dark:bg-slate-600 text-xs" value="rol" {{ request('campo') == 'rol' ? 'selected' : '' }}>Rol (Admin/Encargado,Común)</option>
                         </select>
                     </div>
             

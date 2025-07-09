@@ -20,7 +20,7 @@ class UsuarioController extends Controller
         $query = User::query();
 
         // Campos válidos para filtrar
-        $camposPermitidos = ['nombres', 'apellidos', 'email', 'telefono', 'estado'];
+        $camposPermitidos = ['nombres', 'apellidos', 'email', 'telefono', 'estado', 'rol'];
 
         // Validamos y aplicamos filtro
         if ($campo && $valor !== null && in_array($campo, $camposPermitidos)) {
@@ -33,6 +33,11 @@ class UsuarioController extends Controller
                     $valor = 0;
                 }
                 $query->where($campo, $valor);
+            } elseif ($campo === 'rol') {
+                // Join con la tabla roles
+                $query->whereHas('rol', function ($q) use ($valor) {
+                    $q->where('nombre', 'like', '%' . $valor . '%');
+                });
             } else {
                 // Para texto: LIKE
                 $query->where($campo, 'like', '%' . $valor . '%');
