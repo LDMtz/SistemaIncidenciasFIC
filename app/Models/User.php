@@ -54,6 +54,11 @@ class User extends Authenticatable
         return $this->belongsTo(Rol::class);
     }
 
+    public function areas()
+    {
+        return $this->belongsToMany(Area::class, 'area_user');
+    }
+
     //PARA LA AUTENTICACION
     public function getAuthIdentifier()
     {
