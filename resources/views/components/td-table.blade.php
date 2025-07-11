@@ -1,6 +1,6 @@
-@props(['type', 'content','centered' => false])
+@props(['type', 'content','centered' => false, 'extraClasses' => ''])
 
-<td class="px-3 py-1 {{ $type === 'field_user' ? 'max-w-[10rem]' : '' }} {{ $centered ? 'text-center' : '' }}">
+<td class="px-3 py-1 {{ $type === 'field_user' ? 'max-w-[10rem]' : '' }} {{ $centered ? 'text-center' : '' }} {{ $extraClasses }}">
     @switch($type)
         @case('special_user')
             <div class="flex items-center space-x-3">

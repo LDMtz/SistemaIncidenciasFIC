@@ -265,8 +265,8 @@
                     <!-- Encabezado -->
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gray-600 pb-2 mb-2 md:pb-4 md:mb-4">
                         <div>
-                            <h2 id="nombreCompletoShow" class="text-sm md:text-lg font-bold text-text-1">Leoncio Daniel Martinez Gonzalez</h2>
-                            <p id="correoHeaderShow" class="text-xs md:text-sm text-text-1/80">dj.gonzalez18@info.uas.edu.mx</p>
+                            <h2 id="nombreCompletoShow" class="text-sm md:text-lg font-bold text-text-1"></h2>
+                            <p id="correoHeaderShow" class="text-xs md:text-sm text-text-1/80"></p>
                         </div>
                     </div>
 
@@ -366,8 +366,8 @@
                     <!-- Encabezado -->
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gray-600 pb-2 mb-2 md:pb-4 md:mb-4">
                         <div>
-                            <h2 id="nombreCompletoEdit" class="text-sm md:text-lg font-bold text-text-1">Leoncio Daniel Martinez Gonzalez</h2>
-                            <p id="correoHeaderEdit" class="text-xs md:text-sm text-text-1/80">dj.gonzalez18@info.uas.edu.mx</p>
+                            <h2 id="nombreCompletoEdit" class="text-sm md:text-lg font-bold text-text-1"></h2>
+                            <p id="correoHeaderEdit" class="text-xs md:text-sm text-text-1/80"></p>
                         </div>
                     </div>
 

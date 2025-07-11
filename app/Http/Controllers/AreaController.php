@@ -8,20 +8,20 @@ use App\Models\User;
 
 class AreaController extends Controller
 {
-     public function admin_index(){
+   public function admin_index(){
 
-        $areas = Area::withCount('encargados')
-        ->get()
-        ->map(function ($area) {
+      $areas = Area::withCount('encargados')
+      ->get()
+      ->map(function ($area) {
             return [
-                'id' => $area->id,
-                'nombre' => $area->nombre,
-                'estado' => $area->estado,
-                'encargados_count' => $area->encargados_count,
+               'id' => $area->id,
+               'nombre' => $area->nombre,
+               'estado' => $area->estado,
+               'encargados_count' => $area->encargados_count,
             ];
-        });
+      });
 
-        $encargados_disp = User::whereHas('rol', function ($query) {
+      $encargados_disp = User::whereHas('rol', function ($query) {
             $query->where('nombre', 'Encargado');
             })
             ->select('id', 'nombres', 'apellidos')
@@ -55,40 +55,107 @@ class AreaController extends Controller
 
          //dd($encargados_con_areas);
 
-        return view('admin.areas.index', compact('areas','encargados_disp','encargados_con_areas'));
-     }
+      return view('admin.areas.index', compact('areas','encargados_disp','encargados_con_areas'));
+   }
 
-     public function store(Request $request){
-        $request->validate([
-            'nombre_area' => 'required|string|max:255',
-            'encargados' => 'nullable|array',
-            'encargados.*' => 'exists:users,id',
-         ]);
+   public function store(Request $request){
+      $request->validate([
+         'nombre_area' => 'required|string|max:255',
+         'encargados' => 'nullable|array',
+         'encargados.*' => 'exists:users,id',
+      ]);
 
-         // 1. Crear el área
-         $area = Area::create(['nombre' => $request->nombre_area]);
+      // 1. Crear el área
+      $area = Area::create(['nombre' => $request->nombre_area]);
 
-         // 2. Asignar encargados seleccionados, si hay
-         if ($request->has('encargados')) {
-            $area->encargados()->attach($request->encargados);
-         }
+      // 2. Asignar encargados seleccionados, si hay
+      if ($request->has('encargados')) {
+         $area->encargados()->attach($request->encargados);
+      }
 
-         return redirect()->route('admin.areas.index')->with('success', 'Área creada correctamente.');
-     }
+      return redirect()->route('admin.areas.index')->with('success', 'Área creada correctamente.');
+   }
 
-     public function show($id){
-        //
-     }
+   public function show($id){
+      $area = Area::with('encargados')->withCount('encargados')->findOrFail($id);
 
-     public function edit($id){
-        //
-     }
+      return response()->json([
+         'nombre' => $area->nombre,
+         'estado' => $area->estado,
+         'created_at' => $area->created_at,
+         'encargados_count' => $area->encargados_count,
+         'encargados' => $area->encargados->map(function ($encargado) {
+            return [
+                  'nombres' => $encargado->nombres,
+                  'apellidos' => $encargado->apellidos,
+            ];
+         }),
+      ]);
+   }
 
-     public function update($id){
-        //
-     }
+   public function edit($id){
+      $area = Area::with('encargados')->withCount('encargados')->findOrFail($id);
 
-     public function destroy($id){
-        //
-     }
+      $encargados_disp = User::whereHas('rol', function ($query) {
+         $query->where('nombre', 'Encargado');
+         })
+         ->select('id', 'nombres', 'apellidos')
+         ->orderBy('apellidos')
+         ->get()
+         ->map(function ($user) {
+            return [
+                  'id' => $user->id,
+                  'nombres' => $user->nombres,
+                  'apellidos' => $user->apellidos,
+            ];
+      });
+
+      return response()->json([
+         'id' => $area->id,
+         'nombre' => $area->nombre,
+         'estado' => $area->estado,
+         'created_at' => $area->created_at,
+         'encargados_count' => $area->encargados_count,
+         'encargados_sel' => $area->encargados->map(function ($encargado) {
+            return [
+                  'id' => $encargado->id,
+                  'nombres' => $encargado->nombres,
+                  'apellidos' => $encargado->apellidos,
+            ];
+         }),
+         'encargados_disp' => $encargados_disp,
+      ]);
+   }
+
+   public function update(Request $request, $id){
+      $request->validate([
+         'nombre_area' => 'required|string|max:255',
+         'encargados' => 'nullable|array',
+         'encargados.*' => 'exists:users,id',
+         'estado' => 'required|boolean',
+      ]);
+          
+      $area = Area::findOrFail($id);
+
+      // Actualizar el nombre del área
+      $area->nombre = $request->nombre_area;
+      $area->estado = $request->estado;
+      $area->save();
+
+      // Sincronizar encargados (si no hay, los elimina todos)
+      $area->encargados()->sync($request->encargados ?? []);
+
+      return redirect()->route('admin.areas.index')->with('success', 'Área actualizada correctamente.');
+   }
+
+   public function destroy($id){
+      $area = Area::find($id);
+
+      if (!$area) return redirect()->route('admin.areas.index')->with('error', 'No se pudo eliminar el área.');
+
+      $area->delete();
+
+      return redirect()->route('admin.areas.index')->with('success', 'Área eliminada correctamente.');
+      //TODO: Validar que el area no tenga asociado un reporte o incidencia
+   }
 }
