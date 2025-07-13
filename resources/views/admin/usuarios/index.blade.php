@@ -176,6 +176,9 @@
 <!-- Error modal -->
 <x-error-modal/>
 
+<!-- Modal delete-user -->
+<x-delete-modal/>
+
 <!-- Modal Buscar -->
 <div id="search-modal" class="hidden">
     <div class="flex fixed top-0 left-0 w-full h-full bg-black/50 z-50 justify-center items-center ">
@@ -448,9 +451,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    //Le definimos esta ruta al script 'users-section-scripts.js', pq no puede ser interpretado 
-    // si se encuentra en otro archivo aparte
-    const rutaActualizarUsuario = "{{ url('admin/usuarios/actualizar') }}";
-</script>

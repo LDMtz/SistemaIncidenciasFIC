@@ -107,7 +107,7 @@ function editarElemento(id) {
 
         //Asignamos el action al form
         const form = document.getElementById('formEditArea');
-        form.setAttribute('action', `${rutaActualizarArea}/${data.id}`);
+        form.setAttribute('action', `/admin/areas/actualizar/${data.id}`);
 
         //LLenar datos
         document.getElementById('nombreAreaEdit').value  = data.nombre;
@@ -244,7 +244,14 @@ function verEncargado(id){
     
 }
 
+function borrarElemento(id) {
+    const form = document.getElementById('formDeleteModal');
+    form.action = `/admin/areas/eliminar/${id}`;
+    openModal('genericDeleteModal');
+}
+
 // Registrar funciones globales
 window.verElemento = verElemento;
 window.editarElemento = editarElemento;
+window.borrarElemento = borrarElemento;
 window.verEncargado = verEncargado;

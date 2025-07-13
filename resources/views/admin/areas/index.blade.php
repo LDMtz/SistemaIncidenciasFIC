@@ -149,6 +149,9 @@
 <!-- Error modal -->
 <x-error-modal/>
 
+<!-- Modal delete-area -->
+<x-delete-modal/>
+
 <!-- Modal show-area -->
 <div id="show-area-modal" class="hidden">
     <div class="flex fixed top-0 left-0 w-full h-full bg-black/50 z-50 justify-center items-center ">
@@ -391,9 +394,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    //Le definimos esta ruta al script 'areas-section-scripts.js', pq no puede ser interpretado 
-    // si se encuentra en otro archivo aparte
-    const rutaActualizarArea = "{{ url('admin/areas/actualizar') }}";
-</script>

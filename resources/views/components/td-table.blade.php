@@ -72,13 +72,9 @@
                     <i class="fa-solid fa-pen-to-square"></i>
                 </button>
                 <!-- Eliminar -->
-                <form action="{{ route($content['section'] . '.eliminar', ['id' => $content['id']]) }}" method="POST" class="inline-block">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="text-red-500 hover:text-red-400 transition-colors duration-100 cursor-pointer">
-                        <i class="fa-solid fa-trash-can"></i>
-                    </button>
-                </form>
+                <button onclick="borrarElemento({{$content['id']}})" class="text-red-500 hover:text-red-400 transition-colors duration-100 cursor-pointer">
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
 
             </div>
         @break

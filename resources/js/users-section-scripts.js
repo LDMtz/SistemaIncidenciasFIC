@@ -75,7 +75,7 @@ function editarElemento(id) {
 
         //Asignamos el action al form
         const form = document.getElementById('formEditUsuario');
-        form.setAttribute('action', `${rutaActualizarUsuario}/${data.id}`);
+        form.setAttribute('action', `/admin/usuarios/actualizar/${data.id}`);
 
         // Llenar datos
 
@@ -120,7 +120,14 @@ function editarElemento(id) {
     });
 }
 
+function borrarElemento(id) {
+    const form = document.getElementById('formDeleteModal');
+    form.action = `/admin/usuarios/eliminar/${id}`;
+    openModal('genericDeleteModal');
+}
+
 
 // Registrar funciones globales
 window.verElemento = verElemento;
 window.editarElemento = editarElemento;
+window.borrarElemento = borrarElemento;
