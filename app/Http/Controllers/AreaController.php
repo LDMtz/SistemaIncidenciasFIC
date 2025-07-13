@@ -158,4 +158,21 @@ class AreaController extends Controller
       return redirect()->route('admin.areas.index')->with('success', 'Área eliminada correctamente.');
       //TODO: Validar que el area no tenga asociado un reporte o incidencia
    }
+
+   public function show_user_areas($id){
+      $user = User::with('areas')->withCount('areas')->findOrFail($id);
+
+      return response()->json([
+         'nombre' => $user->apellidos.' '.$user->nombres,
+         'email' => $user->email,
+         'estado' => $user->estado,
+         'foto' => $user->foto,
+         'areas_count' => $user->areas_count,
+         'areas' => $user->areas->map(function ($area) {
+            return [
+                  'nombre' => $area->nombre,
+            ];
+         }),
+      ]);
+   }
 }

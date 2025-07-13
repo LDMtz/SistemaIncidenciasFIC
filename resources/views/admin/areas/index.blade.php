@@ -11,7 +11,7 @@
                 <div class="lg:col-span-4 space-y-6 ">
                         <h2 class="font-montserrat text-main-2 font-semibold mb-1 sm:text-lg text-base"><i class="fa-solid fa-location-dot mr-1"></i> Todas las áreas</h2>
 
-                        <div class="overflow-y-auto max-h-120 rounded-lg light:shadow-md light:shadow-slate-950/25">
+                        <div class="custom-scroll overflow-y-auto max-h-120 rounded-lg light:shadow-md light:shadow-slate-950/25">
                             <x-table :rounded="false" :shadow="false">
                                 <x-slot name="headTable">
                                     <x-th-table>Área</x-th-table>
@@ -56,23 +56,29 @@
                                     <span class="text-text-1"><span id="encargado-count">0</span> encargado(s)</span>
                                 </div>
 
-                                <div class="dark:bg-slate-700 light:bg-slate-200 text-text-1 rounded-md overflow-y-auto max-h-25">
+                                <div class="custom-scroll dark:bg-slate-700 light:bg-slate-200 text-text-1 rounded-md overflow-y-auto max-h-25">
                                     <table class="min-w-full text-sm">
-                                    <thead class="border-b border-white/20">
+                                    <thead class="border-b border-text-1/10">
                                         <tr class="text-left font-semibold">
                                             <th class="px-2 py-1">Sel.</th>
                                             <th class="py-1">Nombre</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($encargados_disp as $encargado)
+                                        @forelse ($encargados_disp as $encargado)
                                             <tr class="border-t border-text-1/10 hover:bg-text-1/5">
                                                 <td class="px-2">
                                                     <input type="checkbox" name="encargados[]" value="{{ $encargado['id'] }}" class="accent-blue-500" />
                                                 </td>
                                                 <td >{{$encargado['apellidos'] . ' '. $encargado['nombres']}}</td>
                                             </tr>
-                                        @endforeach
+                                        @empty
+                                        <tr>
+                                            <td colspan="2" class="text-center text-sm dark:text-slate-400 light:text-slate-500 py-2">
+                                                No hay usuarios con rol de encargado
+                                            </td>
+                                        </tr>
+                                        @endforelse
                                     </tbody>
                                     </table>
                                 </div>
@@ -92,7 +98,7 @@
                     <!-- Encargados de área -->
                     <div class="">
                         <h2 class="font-montserrat text-main-2 font-semibold mb-1 sm:text-lg text-base"><i class="fa-solid fa-users-rectangle mr-1"></i> Encargados de área</h2>
-                        <div class="overflow-y-auto max-h-40 rounded-lg light:shadow-md light:shadow-slate-950/25">
+                        <div class="custom-scroll overflow-y-auto max-h-40 rounded-lg light:shadow-md light:shadow-slate-950/25">
                             <x-table :rounded="false" :shadow="false">
                                 <x-slot name="headTable">
                                     <x-th-table>Nombres</x-th-table>
@@ -100,7 +106,7 @@
                                     <x-th-table :centered="true">Ajustar</x-th-table>
                                 </x-slot>
                                 <x-slot name="bodyTable">
-                                    @foreach($encargados_con_areas as $encargado)
+                                    @forelse($encargados_con_areas as $encargado)
                                     <tr class="text-sm border-b-1 last:border-b-0 whitespace-nowrap">
                                         <x-td-table type="special_user" 
                                             :content="['name' => $encargado['apellidos'].' '.$encargado['nombres'], 
@@ -108,12 +114,18 @@
                                                         'foto' => $encargado['foto'] ]" />
                                         <x-td-table type="normal" :content="$encargado['areas_count']" extra-classes="hidden sm:table-cell" :centered="true" />
                                         <td class="text-center">
-                                            <button onclick="" class="text-orange-500 hover:text-orange-400 transition-colors duration-100 cursor-pointer">
+                                            <button onclick="verEncargado({{$encargado['id']}})" class="text-orange-500 hover:text-orange-400 transition-colors duration-100 cursor-pointer">
                                                 <i class="fa-solid fa-sliders"></i>
                                             </button>
                                         </td>
                                     </tr>
-                                    @endforeach
+                                    @empty
+                                    <tr>
+                                        <td colspan="3" class="text-center text-sm dark:text-slate-400 light:text-slate-500 py-2">
+                                            No hay encargados con área asignada
+                                        </td>
+                                    </tr>
+                                    @endforelse
                                 </x-slot>
                                 <x-slot name="footTable">
                                 </x-slot>
@@ -126,6 +138,9 @@
             </div>
         </div>
     </div>
+    @push('scripts')
+        @vite('resources/js/areas-section-scripts.js')
+    @endpush
 </x-app-layout>
 
 <!-- Success modal -->
@@ -275,7 +290,7 @@
                             <!-- Lista de encargados -->
                             <div id="contenedorTablaEdit" class="md:col-span-2">
                                 <label class="text-main-3 block ">Asignar/Quitar encargado(s)</label>
-                                <x-table extra-classes="border-1 dark:border-slate-700 light:border-slate-100 overflow-y-auto max-h-40">
+                                <x-table extra-classes="custom-scroll border-1 dark:border-slate-700 light:border-slate-100 overflow-y-auto max-h-40">
                                     <x-slot name="headTable">
                                         <x-th-table>Sel.</x-th-table>
                                         <x-th-table>Encargado(s)</x-th-table>
@@ -305,186 +320,80 @@
     </div>
 </div>
 
+<div id="show-encargado-modal" class="hidden">
+    <div class="flex fixed top-0 left-0 w-full h-full bg-black/50 z-50 justify-center items-center ">
+        <div class="dark:bg-slate-800 light:bg-slate-50 rounded-lg shadow-lg w-full max-w-md overflow-hidden border-2 dark:border-slate-700 light:border-slate-300 m-10">
+
+            <!-- Spinner de carga -->
+            <div id="encargado-loading-show" class="hidden p-3">
+                <div class="flex flex-col items-center p-3 space-y-2">
+                    <p class="text-text-1 font-roboto font-medium">Cargando datos del encargado</p>
+                    <svg class="animate-spin h-8 w-8 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Contenido -->
+            <div id="encargado-detalles-show" class="">
+                <div class="relative light:bg-slate-300/60 dark:bg-slate-700/60 h-14 md:h-17 px-5 border-b-2 dark:border-slate-700 light:border-slate-300">
+                    <div class="absolute -bottom-8 md:-bottom-10">
+                        <img id="fotoShowEncargado" draggable="false" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 light:border-slate-300 dark:border-slate-700" src="" alt="Perfil">
+                    </div>
+                    <button onclick="closeModal('show-encargado-modal')" class="absolute top-2 right-4 text-slate-400 hover:text-red-500 cursor-pointer">
+                        <i class="fa-solid fa-x text-xs"></i>
+                    </button>
+                    <label id="estadoActivoShowEncargado" class="hidden absolute top-20 right-7 items-center text-[0.65rem] md:text-xs font-black font-roboto leading-none">
+                        <span class="self-center w-[0.40rem] h-[0.40rem] md:w-2 md:h-2 mr-2 rounded-full dark:bg-green-400 light:bg-green-600"></span>
+                        <span class="dark:text-green-400 light:text-green-600 leading-none">ACTIVO</span>
+                    </label>
+                    <label id="estadoInactivoShowEncargado" class="hidden absolute top-20 right-7 items-center text-[0.65rem] md:text-xs font-black font-roboto leading-none">
+                        <span class="self-center w-[0.40rem] h-[0.40rem] md:w-2 md:h-2 mr-2 rounded-full dark:bg-red-400 light:bg-red-600"></span>
+                        <span class="dark:text-red-400 light:text-red-600 leading-none">INACTIVO</span>
+                    </label>
+                </div>
+
+                <!-- Modal body -->
+                <div class="p-6 mt-6 max-w-2xl w-full mx-auto">
+                    <!-- Encabezado -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gray-600 pb-2 mb-2 md:pb-4 md:mb-4">
+                        <div>
+                            <h2 id="nombreShowEncargado" class="text-sm md:text-lg font-bold text-text-1"></h2>
+                            <p id="correoShowEncargado" class="text-xs md:text-sm text-text-1/80"></p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3 text-[0.70rem] md:text-sm text-text-1">
+
+                        <!-- Áreas asignadas -->
+                        <div id="contenedorTablaShowEncargado" class="md:col-span-2">
+                            <div class="flex justify-between items-center px-1">
+                                <label class="text-main-3 block">Áreas asignadas</label>
+                                <span id="countAreasEncargado" class="text-text-1 font-semibold text-xs"></span>
+                            </div>
+                            <x-table extra-classes="custom-scroll border-1 dark:border-slate-700 light:border-slate-100 overflow-y-auto max-h-40">
+                                <x-slot name="headTable">
+                                    <x-th-table>Área</x-th-table>
+                                </x-slot>
+                                <x-slot name="bodyTable"></x-slot>
+                                <x-slot name="footTable"></x-slot>
+                            </x-table>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
 
 <script>
-//Para el contador de encargados seleccionados en la seccion "Nueva área"
-document.addEventListener('DOMContentLoaded', function () {
-    const checkboxes = document.querySelectorAll('input[type="checkbox"][name="encargados[]"]');
-    const countSpan = document.getElementById('encargado-count');
-
-    function updateCount() {
-        const selected = Array.from(checkboxes).filter(cb => cb.checked).length;
-        countSpan.textContent = selected;
-    }
-
-    checkboxes.forEach(cb => {
-        cb.addEventListener('change', updateCount);
-    });
-
-    // Por si alguno ya viene marcado al renderizar la página
-    updateCount();
-});
-
-// --------------------------------------------------------------------------
-//Ver elemento para generalizar, pero elemento es "Área" en este caso
-function verElemento(id) {
-    openModal('show-area-modal');
-
-    const areaLoading = document.getElementById('area-loading-show');
-    const areaDetalles = document.getElementById('area-detalles-show');
-
-    // Mostrar el spinner, ocultar detalles
-    areaLoading.classList.remove('hidden');
-    areaDetalles.classList.add('hidden');
-
-    // Solicitud al backend
-    fetch(`/admin/areas/${id}`)
-    .then(res => res.json())
-    .then(data => {
-        //LLenar datos
-        document.getElementById('nombreAreaShow').value  = data.nombre;
-        document.getElementById('numEncargadosShow').value  = data.encargados_count;
-
-        if(data.estado){
-            document.getElementById('estadoActivoShow').style.display = 'inline-flex';
-            document.getElementById('estadoInactivoShow').style.display = 'none';
-        } else{
-            document.getElementById('estadoActivoShow').style.display = 'none';
-            document.getElementById('estadoInactivoShow').style.display = 'inline-flex';
-        }
-
-        if (data.created_at) {
-            const fecha = data.created_at.split('T')[0].trim(); // 1. Separa en ["2025-06-20", "08:40:39.000000Z"]
-            document.getElementById('fechaCreacionShow').value = fecha;
-        } else {
-            document.getElementById('fechaCreacionShow').value = 'Sin fecha';
-        }
-
-        //Cargamos los encargados
-        const tablaContenedor = document.getElementById('contenedorTablaShow');
-        const tbody = tablaContenedor.querySelector('tbody');
-        tbody.innerHTML = ''; //Limpiar contenido anterior
-        data.encargados.forEach(encargado => {
-            const tr = document.createElement('tr');
-            tr.className = 'text-sm border-b-1 last:border-b-0 whitespace-nowrap';
-
-            const td = document.createElement('td');
-            td.className = 'px-3';
-            td.textContent = `${encargado.apellidos} ${encargado.nombres}`;
-
-            tr.appendChild(td);
-            tbody.appendChild(tr);
-        });
-
-        // Ocultar spinner, mostrar contenido
-        areaLoading.classList.add('hidden');
-        areaDetalles.classList.remove('hidden');
-    })
-    .catch(error => {
-        console.error('Error al cargar área:', error);
-        areaLoading.innerHTML = '<p class="text-red-500">Error al cargar datos</p>';
-    });
-}
-
-/*
-                        BORRAR ESTO
-*/
-const rutaActualizarArea = "{{ url('admin/areas/actualizar') }}";
-
-function editarElemento(id) {
-    openModal('edit-area-modal');
-
-    const areaLoading = document.getElementById('area-loading-edit');
-    const areaDetalles = document.getElementById('area-detalles-edit');
-
-    // Mostrar el spinner, ocultar detalles
-    areaLoading.classList.remove('hidden');
-    areaDetalles.classList.add('hidden');
-
-    // Solicitud al backend
-    fetch(`/admin/areas/modificar/${id}`)
-    .then(res => res.json())
-    .then(data => {
-
-        //Asignamos el action al form
-        const form = document.getElementById('formEditArea');
-        form.setAttribute('action', `${rutaActualizarArea}/${data.id}`);
-
-        //LLenar datos
-        document.getElementById('nombreAreaEdit').value  = data.nombre;
-        document.getElementById('numEncargadosEdit').value  = data.encargados_count;
-        document.getElementById('estadoSelectEdit').value = data.estado ? '1' : '0';
-
-        //Llenar inputs
-
-        if(data.estado){
-            document.getElementById('estadoActivoEdit').style.display = 'inline-flex';
-            document.getElementById('estadoInactivoEdit').style.display = 'none';
-        } else{
-            document.getElementById('estadoActivoEdit').style.display = 'none';
-            document.getElementById('estadoInactivoEdit').style.display = 'inline-flex';
-        }
-
-        //Cargamos la tabla con los encargados y los seleccionados
-        const tablaContenedor = document.getElementById('contenedorTablaEdit');
-        const tbody = tablaContenedor.querySelector('tbody');
-        tbody.innerHTML = ''; //Limpiar contenido anterior
-
-        // Crear un Set con los IDs de los encargados ya asignados
-        const encargadosSelIds = new Set(data.encargados_sel.map(e => e.id));
-
-        // Agregar las filas
-        data.encargados_disp.forEach(encargado => {
-            const tr = document.createElement('tr');
-            tr.className = 'text-sm border-b-1 last:border-b-0 whitespace-nowrap';
-
-            // Columna del checkbox
-            const tdCheckbox = document.createElement('td');
-            tdCheckbox.className = 'px-3';
-
-            const checkbox = document.createElement('input');
-            checkbox.type = 'checkbox';
-            checkbox.name = 'encargados[]';
-            checkbox.value = encargado.id;
-            checkbox.checked = encargadosSelIds.has(encargado.id);
-
-            tdCheckbox.appendChild(checkbox);
-            tr.appendChild(tdCheckbox);
-
-            // Columna del nombre
-            const tdNombre = document.createElement('td');
-            tdNombre.className = 'px-3';
-            tdNombre.textContent = `${encargado.apellidos} ${encargado.nombres}`;
-            tr.appendChild(tdNombre);
-
-            tbody.appendChild(tr);
-        });
-
-        // Función para actualizar el número de encargados seleccionados
-        function actualizarContador() {
-            const seleccionados = tablaContenedor.querySelectorAll('input[name="encargados[]"]:checked');
-            document.getElementById('numEncargadosEdit').value = seleccionados.length;
-        }
-
-        // Escuchar cambios en los checkboxes
-        tablaContenedor.addEventListener('change', (event) => {
-            if (event.target && event.target.matches('input[name="encargados[]"]')) {
-                actualizarContador();
-            }
-        });
-
-        // Ocultar spinner, mostrar contenido
-        areaLoading.classList.add('hidden');
-        areaDetalles.classList.remove('hidden');
-    })
-    .catch(error => {
-        console.error('Error al cargar el área:', error);
-        areaLoading.innerHTML = '<p class="text-red-500">Error al cargar datos</p>';
-    });
-}
-
-
-// Registrar funciones globales
-window.verElemento = verElemento;
-window.editarElemento = editarElemento;
+    //Le definimos esta ruta al script 'areas-section-scripts.js', pq no puede ser interpretado 
+    // si se encuentra en otro archivo aparte
+    const rutaActualizarArea = "{{ url('admin/areas/actualizar') }}";
 </script>

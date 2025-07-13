@@ -36,6 +36,7 @@ Route::middleware("auth")->group(function(){
     Route::get('admin/areas', [AreaController::class, 'admin_index'])-> name('admin.areas.index');
     Route::post('admin/areas/guardar', [AreaController::class, 'store'])-> name('admin.areas.guardar');
     Route::get('admin/areas/{id}', [AreaController::class, 'show'])-> name('admin.areas.mostrar');
+    Route::get('admin/areas/usuario/{id}', [AreaController::class, 'show_user_areas'])-> name('admin.areas.usuario.mostrar');
     Route::get('admin/areas/modificar/{id}', [AreaController::class, 'edit'])-> name('admin.areas.modificar');
     Route::patch('admin/areas/actualizar/{id}', [AreaController::class, 'update'])-> name('admin.areas.actualizar');
     Route::delete('admin/areas/eliminar/{id}', [AreaController::class, 'destroy'])-> name('admin.areas.eliminar');

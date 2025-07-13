@@ -11,3 +11,8 @@
 [data-theme="dark"] .logo-light {
     display: none;
 }
+
+.custom-scroll {
+  scrollbar-width: thin; 
+  scrollbar-color: #8a8fa5 transparent;
+}
