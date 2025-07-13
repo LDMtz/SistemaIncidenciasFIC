@@ -103,7 +103,7 @@
                                 <x-slot name="headTable">
                                     <x-th-table>Nombres</x-th-table>
                                     <x-th-table :centered="true" extra-classes="hidden sm:table-cell">Áreas</x-th-table>
-                                    <x-th-table :centered="true">Ajustar</x-th-table>
+                                    <x-th-table :centered="true">Ver</x-th-table>
                                 </x-slot>
                                 <x-slot name="bodyTable">
                                     @forelse($encargados_con_areas as $encargado)
@@ -114,8 +114,8 @@
                                                         'foto' => $encargado['foto'] ]" />
                                         <x-td-table type="normal" :content="$encargado['areas_count']" extra-classes="hidden sm:table-cell" :centered="true" />
                                         <td class="text-center">
-                                            <button onclick="verEncargado({{$encargado['id']}})" class="text-orange-500 hover:text-orange-400 transition-colors duration-100 cursor-pointer">
-                                                <i class="fa-solid fa-sliders"></i>
+                                            <button onclick="verEncargado({{$encargado['id']}})" class="text-violet-500 hover:text-violet-400 transition-colors duration-100 cursor-pointer">
+                                                <i class="fa-solid fa-eye"></i>
                                             </button>
                                         </td>
                                     </tr>
