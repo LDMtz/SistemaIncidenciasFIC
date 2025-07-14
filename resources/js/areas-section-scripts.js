@@ -61,7 +61,7 @@ function verElemento(id) {
             const td = document.createElement('td');
 
             td.colSpan = 1; // Ajusta según el número de columnas que tenga tu tabla
-            td.className = 'text-center text-sm dark:text-slate-400 light:text-slate-500 py-2';
+            td.className = 'text-center text-xs md:text-sm dark:text-slate-400 light:text-slate-500 py-2';
             td.textContent = 'Sin encargados disponibles.';
 
             tr.appendChild(td);
@@ -69,7 +69,7 @@ function verElemento(id) {
         } else {
             data.encargados.forEach(encargado => {
                 const tr = document.createElement('tr');
-                tr.className = 'text-sm border-b-1 last:border-b-0 whitespace-nowrap';
+                tr.className = 'text-xs md:text-sm  border-b-1 last:border-b-0 whitespace-nowrap';
 
                 const td = document.createElement('td');
                 td.className = 'px-3';
@@ -135,7 +135,7 @@ function editarElemento(id) {
         // Agregar las filas
         data.encargados_disp.forEach(encargado => {
             const tr = document.createElement('tr');
-            tr.className = 'text-sm border-b-1 last:border-b-0 whitespace-nowrap';
+            tr.className = 'text-xs md:text-sm border-b-1 last:border-b-0 whitespace-nowrap';
 
             // Columna del checkbox
             const tdCheckbox = document.createElement('td');
@@ -223,7 +223,7 @@ function verEncargado(id){
 
         data.areas.forEach(area => {
             const tr = document.createElement('tr');
-            tr.className = 'text-sm border-b-1 last:border-b-0 whitespace-nowrap';
+            tr.className = 'text-xs md:text-sm border-b-1 last:border-b-0 whitespace-nowrap';
 
             const td = document.createElement('td');
             td.className = 'px-3';
