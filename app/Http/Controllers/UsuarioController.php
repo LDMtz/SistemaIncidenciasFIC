@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Rol;
+use App\Notifications\CambioRolNotification;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -60,13 +62,23 @@ class UsuarioController extends Controller
             'rol' => 'required|exists:roles,id',
             'estado' => 'required|boolean',
         ]);
+
         $usuario = User::findOrFail($id);
+        $cambioRol = $usuario->rol_id != $datos_validados['rol'];
+
         $actualizado = $usuario->update([
             'rol_id' => $datos_validados['rol'],
             'estado' => $datos_validados['estado'],
         ]);
 
         if ($actualizado) {
+            // Si hubo cambio de rol, enviamos una notificacion
+            if ($cambioRol) {
+                $nuevoRol = Rol::find($datos_validados['rol']);
+                $admin = Auth::user();
+                $usuario->notify(new CambioRolNotification($admin, $nuevoRol ));
+            }
+
             return redirect()->route('admin.usuarios.index')->with('success', 'Usuario actualizado correctamente.');
         } else {
             return redirect()->route('admin.usuarios.index')->with('error', 'No se pudo actualizar el usuario.');
