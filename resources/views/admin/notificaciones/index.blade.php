@@ -73,40 +73,7 @@
         </div>
 
     </div>
+@push('scripts')
+    @vite('resources/js/notifications-section-scripts.js')
+@endpush
 </x-app-layout>
-<script>
-    /*
-    document.addEventListener("DOMContentLoaded", () => {
-        const headers = document.querySelectorAll(".noti-header");
-
-        headers.forEach(header => {
-            header.addEventListener("click", () => {
-                const body = header.nextElementSibling;
-                
-                if (body.classList.contains("hidden")) {
-                    body.classList.remove("hidden");
-                    body.classList.add("flex");
-                } else {
-                    body.classList.remove("flex");
-                    body.classList.add("hidden");
-                }
-            });
-        });
-    });
-    */
-   document.querySelectorAll(".noti-header").forEach(header => {
-    header.addEventListener("click", (event) => {
-        const body = event.currentTarget.nextElementSibling; 
-        if (!body) return; // Por seguridad
-
-        if (body.classList.contains("hidden")) {
-            body.classList.remove("hidden");
-            body.classList.add("flex");
-        } else {
-            body.classList.remove("flex");
-            body.classList.add("hidden");
-        }
-    });
-});
-    
-</script>
