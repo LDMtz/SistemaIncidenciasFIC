@@ -89,7 +89,7 @@
             <div class="border-t dark:border-bg-logo light:border-bg-header pt-3 mt-2">
                 <x-sidebar-item route="usuarios.perfil" icon="fa-solid fa-circle-user" screen="mobile">Perfil</x-sidebar-item>
                 
-                <a href="{{ route('home') }}" class="menu-item block p-2 relative">
+                <a href="{{ route('admin.notificaciones.index') }}" class="menu-item block p-2 relative">
                     <i class="fa-solid fa-bell align-middle inline-block w-6 text-center relative">
                         @if(count(auth()->user()->unreadNotifications))
                             <span class="absolute -top-0.5 -right-[-0.28rem] bg-red-600 rounded-full h-[0.44rem] w-[0.44rem]"></span>

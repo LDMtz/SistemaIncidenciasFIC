@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\AreaController;
+use App\Http\Controllers\NotificacionController;
 
 /*
 Route::get('/', function () {
@@ -40,5 +41,11 @@ Route::middleware("auth")->group(function(){
     Route::get('admin/areas/modificar/{id}', [AreaController::class, 'edit'])-> name('admin.areas.modificar');
     Route::patch('admin/areas/actualizar/{id}', [AreaController::class, 'update'])-> name('admin.areas.actualizar');
     Route::delete('admin/areas/eliminar/{id}', [AreaController::class, 'destroy'])-> name('admin.areas.eliminar');
+
+    Route::get('admin/notificaciones', [NotificacionController::class, 'admin_index'])-> name('admin.notificaciones.index');
+    Route::patch('general/notificaciones/marcar-leida/{id}', [NotificacionController::class, 'mark_as_read'])->name('notificaciones.leer');
+    Route::patch('general/notificaciones/marcar-todas-leidas', [NotificacionController::class, 'mark_all_as_read'])->name('notificaciones.leer.todas');
+    Route::delete('general/notificaciones/eliminar/{id}', [NotificacionController::class, 'destroy'])->name('notificaciones.eliminar');
+    Route::delete('general/notificaciones/eliminar-todas', [NotificacionController::class, 'destroy_all'])->name('notificaciones.eliminar.todas');
 
 });

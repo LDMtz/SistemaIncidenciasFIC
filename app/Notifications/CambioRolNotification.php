@@ -43,9 +43,9 @@ class CambioRolNotification extends Notification
     {
         return [
             'titulo' => 'Tu rol de usuario ha sido cambiado',
-            'mensaje' => 'El administrador ' . $this->user->apellidos. ' ' . $this->user->nombres . ' cambió tu rol a ' . strtoupper($this->rol->nombre),
-            'foto' => $this->user->foto,
-            'icon' => 'fa-solid fa-bookmark',
+            'user_id' => $this->user->id,
+            'rol' => mb_strtoupper($this->rol->nombre),
+            'icono' => 'fa-solid fa-bookmark',
         ];
     }
 }
