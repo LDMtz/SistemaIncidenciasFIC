@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
+use App\Models\Area;
+
 class AuthController extends Controller
 {
     public function login_form(){
@@ -20,7 +22,10 @@ class AuthController extends Controller
             case 2:
                 return view('encargado.home');
             case 3:
-                return view('comun.home');
+                //Temportal solo para probar
+                $user = Auth::user(); 
+                $areas = Area::get()->map(function ($area){ return ['id' => $area->id,'nombre' => $area->nombre,];});
+                return view('comun.home', compact('user','areas'));
             default:
                 abort(403, 'Acceso no autorizado');
         }
