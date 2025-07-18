@@ -24,25 +24,36 @@ Route::middleware("auth")->group(function(){
     Route::get('/inicio', [AuthController::class, 'home'])-> name('home');
     Route::get('/to-logout', [AuthController::class, 'to_logout'])-> name('to_logout');
 
-    Route::get('usuarios/perfil', [UsuarioController::class, 'profile'])-> name('usuarios.perfil');
-    Route::patch('usuarios/perfil/actualizar/{id}', [UsuarioController::class, 'update_profile'])-> name('usuarios.perfil.actualizar');
-    
-    Route::get('admin/usuarios', [UsuarioController::class, 'admin_index'])-> name('admin.usuarios.index');
-    Route::post('admin/usuarios/guardar', [UsuarioController::class, 'store'])-> name('admin.usuarios.guardar');
-    Route::get('admin/usuarios/{id}', [UsuarioController::class, 'show'])-> name('admin.usuarios.mostrar');
-    Route::get('admin/usuarios/modificar/{id}', [UsuarioController::class, 'edit'])-> name('admin.usuarios.modificar');
-    Route::patch('admin/usuarios/actualizar/{id}', [UsuarioController::class, 'admin_update'])-> name('admin.usuarios.actualizar');
-    Route::delete('admin/usuarios/eliminar/{id}', [UsuarioController::class, 'destroy'])-> name('admin.usuarios.eliminar');
+    Route::middleware('rol:Administrador')->group(function () {
+        Route::get('admin/usuarios', [UsuarioController::class, 'admin_index'])-> name('admin.usuarios.index');
+        Route::post('admin/usuarios/guardar', [UsuarioController::class, 'store'])-> name('admin.usuarios.guardar');
+        Route::get('admin/usuarios/{id}', [UsuarioController::class, 'show'])-> name('admin.usuarios.mostrar');
+        Route::get('admin/usuarios/modificar/{id}', [UsuarioController::class, 'edit'])-> name('admin.usuarios.modificar');
+        Route::patch('admin/usuarios/actualizar/{id}', [UsuarioController::class, 'admin_update'])-> name('admin.usuarios.actualizar');
+        Route::delete('admin/usuarios/eliminar/{id}', [UsuarioController::class, 'destroy'])-> name('admin.usuarios.eliminar');
 
-    Route::get('admin/areas', [AreaController::class, 'admin_index'])-> name('admin.areas.index');
-    Route::post('admin/areas/guardar', [AreaController::class, 'store'])-> name('admin.areas.guardar');
-    Route::get('admin/areas/{id}', [AreaController::class, 'show'])-> name('admin.areas.mostrar');
-    Route::get('admin/areas/usuario/{id}', [AreaController::class, 'show_user_areas'])-> name('admin.areas.usuario.mostrar');
-    Route::get('admin/areas/modificar/{id}', [AreaController::class, 'edit'])-> name('admin.areas.modificar');
-    Route::patch('admin/areas/actualizar/{id}', [AreaController::class, 'update'])-> name('admin.areas.actualizar');
-    Route::delete('admin/areas/eliminar/{id}', [AreaController::class, 'destroy'])-> name('admin.areas.eliminar');
+        Route::get('admin/areas', [AreaController::class, 'admin_index'])-> name('admin.areas.index');
+        Route::post('admin/areas/guardar', [AreaController::class, 'store'])-> name('admin.areas.guardar');
+        Route::get('admin/areas/{id}', [AreaController::class, 'show'])-> name('admin.areas.mostrar');
+        Route::get('admin/areas/usuario/{id}', [AreaController::class, 'show_user_areas'])-> name('admin.areas.usuario.mostrar');
+        Route::get('admin/areas/modificar/{id}', [AreaController::class, 'edit'])-> name('admin.areas.modificar');
+        Route::patch('admin/areas/actualizar/{id}', [AreaController::class, 'update'])-> name('admin.areas.actualizar');
+        Route::delete('admin/areas/eliminar/{id}', [AreaController::class, 'destroy'])-> name('admin.areas.eliminar');
 
-    Route::get('admin/notificaciones', [NotificacionController::class, 'admin_index'])-> name('admin.notificaciones.index');
+        Route::get('admin/notificaciones', [NotificacionController::class, 'admin_index'])-> name('admin.notificaciones.index'); //Está se va a pasar a general
+    });
+
+    Route::middleware('rol:Encargado')->group(function (){
+       //
+    });
+
+    Route::middleware('rol:Común')->group(function (){
+       //
+    });
+
+    Route::get('general/usuarios/perfil', [UsuarioController::class, 'profile'])-> name('usuarios.perfil');
+    Route::patch('general/usuarios/perfil/actualizar/{id}', [UsuarioController::class, 'update_profile'])-> name('usuarios.perfil.actualizar');
+
     Route::patch('general/notificaciones/marcar-leida/{id}', [NotificacionController::class, 'mark_as_read'])->name('notificaciones.leer');
     Route::patch('general/notificaciones/marcar-todas-leidas', [NotificacionController::class, 'mark_all_as_read'])->name('notificaciones.leer.todas');
     Route::delete('general/notificaciones/eliminar/{id}', [NotificacionController::class, 'destroy'])->name('notificaciones.eliminar');
