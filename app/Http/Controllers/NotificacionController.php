@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class NotificacionController extends Controller
 {
-    public function admin_index(Request $request)
+    public function index(Request $request)
     {
         $user = Auth::user();
 
@@ -17,7 +17,7 @@ class NotificacionController extends Controller
             ? $user->notifications
             : $user->unreadNotifications;
 
-        return view('admin.notificaciones.index', compact('notificaciones','tipo'));
+        return view('general.notifications', compact('notificaciones','tipo'));
     }
 
     public function mark_as_read($id){

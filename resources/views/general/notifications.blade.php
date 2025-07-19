@@ -1,13 +1,16 @@
 <x-app-layout>
     <div class="flex w-full">
-        <x-sidebar-admin/>
 
         <!-- container -->
         <div class="mx-6 lg:mx-10 flex-1 overflow-auto">
             <div class="flex justify-between items-center mb-3">
-                <h1 class="font-roboto font-black sm:text-2xl text-xl">Notificaciones</h1>
+                <div class="flex items-center gap-x-2">
+                    <h1 class="font-roboto font-black sm:text-2xl text-xl">Usuario</h1>
+                    <i class="fa-solid fa-angle-right"></i>
+                    <h2 class="font-roboto text-text-1/50 font-black sm:text-lg text-base">Notificaciones</h2>
+                </div>
 
-                <a href="{{ url()->previous() }}" 
+                <a href="{{ route('home') }}" 
                 class="inline-flex items-center gap-x-1 text-sm sm:text-base font-semibold text-text-1 border-b border-transparent hover:border-text-1">
                     <i class="fa-solid fa-arrow-left text-sm"></i>
                     <span>Volver</span>
@@ -20,8 +23,8 @@
                     <!-- Header -->
                     <div class="flex flex-wrap justify-between items-center text-text-1 text-sm font-semibold border-b border-text-1 pb-3">
                         <div class="flex gap-x-4">
-                            <a href="{{ route('admin.notificaciones.index', ['tipo' => 'todas']) }}" class="hover:underline underline-offset-4 text-xs sm:text-sm {{ $tipo === 'todas' ? 'text-main-3' : '' }}">Todas</a>
-                            <a href="{{ route('admin.notificaciones.index', ['tipo' => 'nuevas']) }}" >
+                            <a href="{{ route('notificaciones.index', ['tipo' => 'todas']) }}" class="hover:underline underline-offset-4 text-xs sm:text-sm {{ $tipo === 'todas' ? 'text-main-3' : '' }}">Todas</a>
+                            <a href="{{ route('notificaciones.index', ['tipo' => 'nuevas']) }}" >
                                 <span class="hover:underline underline-offset-4 text-xs sm:text-sm {{ $tipo === 'nuevas' ? 'text-main-3' : '' }}">Nuevas</span>
                                 @if (auth()->user()->unreadNotifications->count())
                                      <span class="ml-1 bg-red-600 text-white text-[0.65rem] sm:text-[0.70rem] font-semibold px-1 rounded-full">

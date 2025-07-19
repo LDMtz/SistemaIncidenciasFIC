@@ -21,9 +21,21 @@ Route::middleware("guest")->group(function(){
 });
 
 Route::middleware("auth")->group(function(){
+
+    //Rutas generales
     Route::get('/inicio', [AuthController::class, 'home'])-> name('home');
     Route::get('/to-logout', [AuthController::class, 'to_logout'])-> name('to_logout');
 
+    Route::get('general/usuarios/perfil', [UsuarioController::class, 'profile'])-> name('usuarios.perfil');
+    Route::patch('general/usuarios/perfil/actualizar/{id}', [UsuarioController::class, 'update_profile'])-> name('usuarios.perfil.actualizar');
+
+    Route::get('general/notificaciones', [NotificacionController::class, 'index'])-> name('notificaciones.index');
+    Route::patch('general/notificaciones/marcar-leida/{id}', [NotificacionController::class, 'mark_as_read'])->name('notificaciones.leer');
+    Route::patch('general/notificaciones/marcar-todas-leidas', [NotificacionController::class, 'mark_all_as_read'])->name('notificaciones.leer.todas');
+    Route::delete('general/notificaciones/eliminar/{id}', [NotificacionController::class, 'destroy'])->name('notificaciones.eliminar');
+    Route::delete('general/notificaciones/eliminar-todas', [NotificacionController::class, 'destroy_all'])->name('notificaciones.eliminar.todas');
+
+    //Rutas basadas en el Rol del usuario
     Route::middleware('rol:Administrador')->group(function () {
         Route::get('admin/usuarios', [UsuarioController::class, 'admin_index'])-> name('admin.usuarios.index');
         Route::post('admin/usuarios/guardar', [UsuarioController::class, 'store'])-> name('admin.usuarios.guardar');
@@ -39,8 +51,6 @@ Route::middleware("auth")->group(function(){
         Route::get('admin/areas/modificar/{id}', [AreaController::class, 'edit'])-> name('admin.areas.modificar');
         Route::patch('admin/areas/actualizar/{id}', [AreaController::class, 'update'])-> name('admin.areas.actualizar');
         Route::delete('admin/areas/eliminar/{id}', [AreaController::class, 'destroy'])-> name('admin.areas.eliminar');
-
-        Route::get('admin/notificaciones', [NotificacionController::class, 'admin_index'])-> name('admin.notificaciones.index'); //Está se va a pasar a general
     });
 
     Route::middleware('rol:Encargado')->group(function (){
@@ -49,14 +59,6 @@ Route::middleware("auth")->group(function(){
 
     Route::middleware('rol:Común')->group(function (){
        //
-    });
-
-    Route::get('general/usuarios/perfil', [UsuarioController::class, 'profile'])-> name('usuarios.perfil');
-    Route::patch('general/usuarios/perfil/actualizar/{id}', [UsuarioController::class, 'update_profile'])-> name('usuarios.perfil.actualizar');
-
-    Route::patch('general/notificaciones/marcar-leida/{id}', [NotificacionController::class, 'mark_as_read'])->name('notificaciones.leer');
-    Route::patch('general/notificaciones/marcar-todas-leidas', [NotificacionController::class, 'mark_all_as_read'])->name('notificaciones.leer.todas');
-    Route::delete('general/notificaciones/eliminar/{id}', [NotificacionController::class, 'destroy'])->name('notificaciones.eliminar');
-    Route::delete('general/notificaciones/eliminar-todas', [NotificacionController::class, 'destroy_all'])->name('notificaciones.eliminar.todas');
+    });    
 
 });

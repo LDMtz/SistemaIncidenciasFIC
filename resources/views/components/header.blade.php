@@ -26,7 +26,7 @@
                         </li>
                         </li>
                         <li class="m-1">
-                            <a href="{{ route('admin.notificaciones.index') }}" class="relative flex items-center w-full rounded px-3 py-2 hover:text-main-2 dark:hover:bg-slate-700 light:hover:bg-slate-200">
+                            <a href="{{ route('notificaciones.index') }}" class="relative flex items-center w-full rounded px-3 py-2 hover:text-main-2 dark:hover:bg-slate-700 light:hover:bg-slate-200">
                                 <i class="fa-solid fa-bell mr-2 relative">
                                     @if(count(auth()->user()->unreadNotifications))
                                        <span class="absolute -top-0.5 -right-[0.07rem] bg-red-600 rounded-full h-1.5 w-1.5"></span>

@@ -188,16 +188,7 @@ class UsuarioController extends Controller
 
     public function profile(){
         $usuario = Auth::user();
-        switch ($usuario->rol_id) {
-            case 1:
-                return view('admin.usuarios.profile', compact('usuario'));
-            case 2:
-                return view('encargado.home', compact('usuario')); //Home temporalmente
-            case 3:
-                return view('comun.home', compact('usuario'));  //Home temporalmente
-            default:
-                abort(403, 'Acceso no autorizado');
-        }
+        return view('general.profile', compact('usuario'));
     }
 
 

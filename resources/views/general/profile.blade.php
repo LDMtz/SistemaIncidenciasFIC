@@ -1,18 +1,17 @@
 <x-app-layout>
     <div class="flex w-full">
-        <x-sidebar-admin/>
 
         <!-- container -->
         <div class="mx-6 lg:mx-10 flex-1 overflow-auto">
 
             <div class="flex justify-between items-center mb-3">
                 <div class="flex items-center gap-x-2">
-                    <h1 class="font-roboto font-black sm:text-2xl text-xl">Usuarios</h1>
+                    <h1 class="font-roboto font-black sm:text-2xl text-xl">Usuario</h1>
                     <i class="fa-solid fa-angle-right"></i>
                     <h2 class="font-roboto text-text-1/50 font-black sm:text-lg text-base">Perfil de usuario</h2>
                 </div>
 
-                <a href="{{ url()->previous() }}" 
+                <a href="{{ route('home') }}" 
                 class="inline-flex items-center gap-x-1 text-sm sm:text-base font-semibold text-text-1 border-b border-transparent hover:border-text-1">
                     <i class="fa-solid fa-arrow-left text-sm"></i>
                     <span>Volver</span>
