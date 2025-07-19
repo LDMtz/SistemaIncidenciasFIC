@@ -40,7 +40,7 @@ return new class extends Migration
             'rol_id' => 1,
             'apellidos' => 'Principal',
             'nombres' => 'Admin',
-            'email' => 'admin@gmail.com',
+            'email' => 'admin@info.uas.edu.mx',
             'telefono' => '0000000000',
             'password' => Hash::make('admin123'),
         ]);
