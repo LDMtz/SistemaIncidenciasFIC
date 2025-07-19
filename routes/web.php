@@ -28,6 +28,8 @@ Route::middleware("auth")->group(function(){
 
     Route::get('general/usuarios/perfil', [UsuarioController::class, 'profile'])-> name('usuarios.perfil');
     Route::patch('general/usuarios/perfil/actualizar/{id}', [UsuarioController::class, 'update_profile'])-> name('usuarios.perfil.actualizar');
+    Route::get('general/usuarios/perfil/nueva-clave', [UsuarioController::class, 'new_password'])-> name('clave.nueva');
+    Route::patch('general/usuarios/perfil/actualizar-clave/{id}', [UsuarioController::class, 'update_password'])-> name('clave.actualizar');
 
     Route::get('general/notificaciones', [NotificacionController::class, 'index'])-> name('notificaciones.index');
     Route::patch('general/notificaciones/marcar-leida/{id}', [NotificacionController::class, 'mark_as_read'])->name('notificaciones.leer');

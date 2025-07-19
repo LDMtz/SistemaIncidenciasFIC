@@ -9,6 +9,7 @@ use App\Notifications\CambioRolNotification;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 
 
 class UsuarioController extends Controller
@@ -85,45 +86,6 @@ class UsuarioController extends Controller
         }
     }
 
-    public function update_profile(Request $request, $id){
-        
-        $datos_validados = $request->validate([
-            'apellidos' => 'required|string|max:40',
-            'nombres' => 'required|string|max:40',
-            'telefono' => 'required|string|size:10',
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-        ]);
-
-        $usuario = User::findOrFail($id);
-
-        // Inicializa variable
-        $rutaFoto = $usuario->foto; // conserva la anterior por defecto
-
-        // Si se sube una nueva foto...
-        if ($request->hasFile('foto')) {
-            // Elimina la foto anterior si existe
-            if ($usuario->foto && Storage::disk('public')->exists($usuario->foto)) {
-                Storage::disk('public')->delete($usuario->foto);
-            }
-
-            // Guarda la nueva foto
-            $rutaFoto = $request->file('foto')->store('fotos', 'public');
-        }
-
-        $actualizado = $usuario->update([
-            'apellidos' => $datos_validados['apellidos'],
-            'nombres' => $datos_validados['nombres'],
-            'telefono' => $datos_validados['telefono'],
-            'foto' => $rutaFoto,
-        ]);
-
-        if ($actualizado) {
-            return redirect()->route('home')->with('success', 'Usuario actualizado correctamente.');
-        } else {
-            return redirect()->route('home')->with('error', 'No se pudo actualizar el usuario.');
-        }
-    }
-
     public function create(){
         //Asumimos que solo los usuarios comunes llaman esta funcion,
         // ya que el admin lo tiene en el index de user
@@ -189,6 +151,76 @@ class UsuarioController extends Controller
     public function profile(){
         $usuario = Auth::user();
         return view('general.profile', compact('usuario'));
+    }
+
+    public function update_profile(Request $request, $id){
+        
+        $datos_validados = $request->validate([
+            'apellidos' => 'required|string|max:40',
+            'nombres' => 'required|string|max:40',
+            'telefono' => 'required|string|size:10',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        $usuario = User::findOrFail($id);
+
+        // Inicializa variable
+        $rutaFoto = $usuario->foto; // conserva la anterior por defecto
+
+        // Si se sube una nueva foto...
+        if ($request->hasFile('foto')) {
+            // Elimina la foto anterior si existe
+            if ($usuario->foto && Storage::disk('public')->exists($usuario->foto)) {
+                Storage::disk('public')->delete($usuario->foto);
+            }
+
+            // Guarda la nueva foto
+            $rutaFoto = $request->file('foto')->store('fotos', 'public');
+        }
+
+        $actualizado = $usuario->update([
+            'apellidos' => $datos_validados['apellidos'],
+            'nombres' => $datos_validados['nombres'],
+            'telefono' => $datos_validados['telefono'],
+            'foto' => $rutaFoto,
+        ]);
+
+        if ($actualizado) {
+            return redirect()->route('home')->with('success', 'Usuario actualizado correctamente.');
+        } else {
+            return redirect()->route('home')->with('error', 'No se pudo actualizar el usuario.');
+        }
+    }
+
+    public function new_password(){
+         return view('general.new-password');
+    }
+
+    public function update_password(Request $request, $id){
+        $request->validate([
+            'actual' => 'required',
+            'nueva' => 'required|min:8',
+        ]);
+
+        $user = User::findOrFail($id);
+
+        // Verificar si la contraseña actual es correcta
+        if (!Hash::check($request->actual, $user->password)) 
+            throw ValidationException::withMessages(['actual' => 'La contraseña actual es incorrecta.',]);
+
+        // Verificar si las nuevas contraseñas coinciden
+        if ($request->nueva !== $request->nueva_confirmation) 
+            throw ValidationException::withMessages(['nueva' => 'La nueva contraseña no coincide.',]);
+
+        // Verificar si la nueva contraseña es diferente a la actual
+        if (Hash::check($request->nueva, $user->password)) 
+            throw ValidationException::withMessages(['nueva' => 'La nueva contraseña debe ser diferente a la actual.',]);
+
+        $user->update([
+            'password' => Hash::make($request->nueva),
+        ]);
+
+        return redirect()->route('home')->with('success', 'Contraseña actualizada correctamente.');
     }
 
 
