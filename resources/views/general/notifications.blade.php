@@ -24,8 +24,8 @@
                     <div class="flex flex-wrap justify-between items-center text-text-1 text-sm font-semibold border-b border-text-1 pb-3">
                         <div class="flex gap-x-4">
                             <a href="{{ route('notificaciones.index', ['tipo' => 'todas']) }}" class="hover:underline underline-offset-4 text-xs sm:text-sm {{ $tipo === 'todas' ? 'text-main-3' : '' }}">Todas</a>
-                            <a href="{{ route('notificaciones.index', ['tipo' => 'nuevas']) }}" >
-                                <span class="hover:underline underline-offset-4 text-xs sm:text-sm {{ $tipo === 'nuevas' ? 'text-main-3' : '' }}">Nuevas</span>
+                            <a href="{{ route('notificaciones.index', ['tipo' => 'nuevas']) }}" class="hover:underline underline-offset-4 text-xs sm:text-sm {{ $tipo === 'nuevas' ? 'text-main-3' : '' }}">
+                                Nuevas
                                 @if (auth()->user()->unreadNotifications->count())
                                      <span class="ml-1 bg-red-600 text-white text-[0.65rem] sm:text-[0.70rem] font-semibold px-1 rounded-full">
                                         {{ auth()->user()->unreadNotifications->count() }}
