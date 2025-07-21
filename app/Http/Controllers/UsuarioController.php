@@ -175,7 +175,7 @@ class UsuarioController extends Controller
             }
 
             // Guarda la nueva foto
-            $rutaFoto = $request->file('foto')->store('fotos', 'public');
+            $rutaFoto = $request->file('foto')->store('fotos/perfil', 'public');
         }
 
         $actualizado = $usuario->update([

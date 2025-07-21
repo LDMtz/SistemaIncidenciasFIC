@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\NotificacionController;
+use App\Http\Controllers\ReporteController;
 
 /*
 Route::get('/', function () {
@@ -36,6 +37,8 @@ Route::middleware("auth")->group(function(){
     Route::patch('general/notificaciones/marcar-todas-leidas', [NotificacionController::class, 'mark_all_as_read'])->name('notificaciones.leer.todas');
     Route::delete('general/notificaciones/eliminar/{id}', [NotificacionController::class, 'destroy'])->name('notificaciones.eliminar');
     Route::delete('general/notificaciones/eliminar-todas', [NotificacionController::class, 'destroy_all'])->name('notificaciones.eliminar.todas');
+
+    Route::post('general/reportes/guardar', [ReporteController::class, 'store'])->name('reportes.guardar');
 
     //Rutas basadas en el Rol del usuario
     Route::middleware('rol:Administrador')->group(function () {

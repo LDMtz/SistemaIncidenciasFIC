@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 use App\Models\Area;
+use App\Models\Severidad;
 
 class AuthController extends Controller
 {
@@ -24,8 +25,9 @@ class AuthController extends Controller
             case 3:
                 //Temportal solo para probar
                 $user = Auth::user(); 
+                $severidades = Severidad::get()->toArray();
                 $areas = Area::get()->map(function ($area){ return ['id' => $area->id,'nombre' => $area->nombre,];});
-                return view('comun.home', compact('user','areas'));
+                return view('comun.home', compact('user','areas','severidades'));
             default:
                 abort(403, 'Acceso no autorizado');
         }
