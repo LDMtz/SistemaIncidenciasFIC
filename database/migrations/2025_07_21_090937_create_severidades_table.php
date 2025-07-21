@@ -12,14 +12,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('severidades', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 40);
+            $table->string('nombre', 50);
         });
 
-        // Insertar los tres registros iniciales y unicos de roles
-        foreach(['Administrador','Encargado','Común'] as $type){
-            DB::table('roles')->insert(['nombre' => $type]);
+        //Insertando registros manualmente
+        foreach (['Sugerencia','Baja','Media','Alta','Crítica'] as $type){
+            DB::table('severidades')->insert(['nombre' => $type]);
         }
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('severidades');
     }
 };

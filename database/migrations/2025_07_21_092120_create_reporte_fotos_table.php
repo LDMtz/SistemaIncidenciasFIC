@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -12,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('reporte_fotos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 40);
+            $table->foreignId('reporte_id')->constrained('reportes')->onDelete('cascade');
+            $table->string('ruta');
         });
-
-        // Insertar los tres registros iniciales y unicos de roles
-        foreach(['Administrador','Encargado','Común'] as $type){
-            DB::table('roles')->insert(['nombre' => $type]);
-        }
     }
 
     /**
@@ -28,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('reporte_fotos');
     }
 };

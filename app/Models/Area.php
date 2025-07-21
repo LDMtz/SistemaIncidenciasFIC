@@ -21,4 +21,9 @@ class Area extends Model
     {
         return $this->belongsToMany(User::class, 'area_user');
     }
+
+    public function reportes()
+    {
+        return $this->hasMany(Reporte::class);
+    }
 }

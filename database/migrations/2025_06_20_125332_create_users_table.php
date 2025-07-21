@@ -43,6 +43,8 @@ return new class extends Migration
             'email' => 'admin@info.uas.edu.mx',
             'telefono' => '0000000000',
             'password' => Hash::make('admin123'),
+            'created_at' => now(), 
+            'updated_at' => now(),
         ]);
     }
 

@@ -59,6 +59,12 @@ class User extends Authenticatable
         return $this->belongsToMany(Area::class, 'area_user');
     }
 
+    public function reportes()
+    {
+        return $this->hasMany(Reporte::class);
+    }
+
+
     //PARA LA AUTENTICACION
     public function getAuthIdentifier()
     {
