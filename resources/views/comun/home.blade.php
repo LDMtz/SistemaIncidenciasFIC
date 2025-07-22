@@ -33,14 +33,14 @@
                             <option selected value="">Selecciona la severidad</option>
                             @php
                                 // En caso de aumentar las severidades en el futuro, agregar aquí los nuevos colores
-                                $colores = ['green', 'blue', 'yellow', 'orange', 'red'];
+                                $colores = ['text-green-400', 'text-blue-400', 'text-yellow-400', 'text-orange-400', 'text-red-400'];
                             @endphp
 
                             @foreach ($severidades as $index => $severidad)
                                 @php
-                                    $color = $colores[$index] ?? 'slate';
+                                    $text_color = $colores[$index] ?? 'slate';
                                 @endphp
-                                <option value="{{ $severidad['id'] }}" {{ old('severidad') == $severidad['id'] ? 'selected' : '' }} class="text-{{ $color }}-400">
+                                <option value="{{ $severidad['id'] }}" {{ old('severidad') == $severidad['id'] ? 'selected' : '' }} class="{{ $text_color }}">
                                     {{ $severidad['nombre'] }}
                                 </option>
                             @endforeach

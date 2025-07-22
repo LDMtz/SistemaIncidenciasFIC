@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reporte;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\NuevoReporteNotification;
 
 class ReporteController extends Controller
 {
@@ -18,8 +20,6 @@ class ReporteController extends Controller
             'comentario'  => 'required|string',
             'fotos.*'     => 'nullable|image|mimes:jpg,jpeg,png',
         ]);
-
-        //($request);
 
         $reporte = new Reporte();
         $reporte->user_id = Auth::user()->id;
@@ -37,6 +37,16 @@ class ReporteController extends Controller
                     'ruta' => Storage::url($ruta),
                 ]);
             }
+        }
+
+        // Obtener encargados del área
+        $encargados = $reporte->area->encargados ?? collect();
+
+        if ($encargados->isNotEmpty()) // Notificar a todos los encargados del área
+            foreach ($encargados as $encargado) $encargado->notify(new NuevoReporteNotification($reporte));
+        else { // Si no hay encargados, notificar al administrador
+            $admins = User::whereHas('rol', function ($q) {$q->where('nombre', 'Administrador');})->get();
+            foreach ($admins as $admin) $admin->notify(new NuevoReporteNotification($reporte));
         }
 
         return redirect()->back()->with('success', 'Reporte enviado correctamente.');

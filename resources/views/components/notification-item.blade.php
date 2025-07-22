@@ -7,9 +7,11 @@
     @case('CambioRolNotification')
         <x-notifications.cambio-rol :notification="$notification" />
         @break
-    
     @case('AreaAsignadaNotification')
         <x-notifications.area-asignada :notification="$notification" />
+        @break
+    @case('NuevoReporteNotification')
+        <x-notifications.nuevo-reporte :notification="$notification" />
         @break
 
     @default
