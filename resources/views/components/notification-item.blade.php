@@ -7,8 +7,12 @@
     @case('CambioRolNotification')
         <x-notifications.cambio-rol :notification="$notification" />
         @break
+    
+    @case('AreaAsignadaNotification')
+        <x-notifications.area-asignada :notification="$notification" />
+        @break
 
     @default
-        <div class="p-4 bg-gray-100 text-sm text-gray-600 rounded">Notificación desconocida</div>
+        <div class="p-2 bg-red-400 text-sm font-semibold text-white rounded">Notificación desconocida</div>
 
 @endswitch

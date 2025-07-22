@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Area;
 use App\Models\User;
+use App\Notifications\AreaAsignadaNotification;
+use Illuminate\Support\Facades\Auth;
 
 class AreaController extends Controller
 {
@@ -70,7 +72,16 @@ class AreaController extends Controller
 
       // 2. Asignar encargados seleccionados, si hay
       if ($request->has('encargados')) {
-         $area->encargados()->attach($request->encargados);
+         $area->encargados()->attach($request->encargados); //Les asigna el área
+         $admin = Auth::user();
+
+         //Le notificamos a todos los encargados
+         foreach ($request->encargados as $encargadoId) {
+            $usuario = User::find($encargadoId);
+            if ($usuario) {
+                $usuario->notify(new AreaAsignadaNotification($admin, $area));
+            }
+        }
       }
 
       return redirect()->route('admin.areas.index')->with('success', 'Área creada correctamente.');
@@ -128,22 +139,37 @@ class AreaController extends Controller
    }
 
    public function update(Request $request, $id){
-      $request->validate([
+      $request->validate([ 
          'nombre_area' => 'required|string|max:255',
          'encargados' => 'nullable|array',
          'encargados.*' => 'exists:users,id',
          'estado' => 'required|boolean',
       ]);
-          
+
       $area = Area::findOrFail($id);
 
-      // Actualizar el nombre del área
+      //Encargados actuales
+      $encargadosAnteriores = $area->encargados->pluck('id')->toArray();
+
+      // Actualizar los datos del área
       $area->nombre = $request->nombre_area;
       $area->estado = $request->estado;
       $area->save();
 
       // Sincronizar encargados (si no hay, los elimina todos)
       $area->encargados()->sync($request->encargados ?? []);
+
+      // Detectar nuevos encargados
+       $nuevosEncargados = array_diff($request->encargados ?? [], $encargadosAnteriores);
+
+      // Notificar a los nuevos encargados
+      $admin = Auth::user();
+      foreach ($nuevosEncargados as $idEncargado) {
+         $usuario = User::find($idEncargado);
+         if ($usuario) {
+               $usuario->notify(new AreaAsignadaNotification($admin, $area));
+         }
+      }
 
       return redirect()->route('admin.areas.index')->with('success', 'Área actualizada correctamente.');
    }

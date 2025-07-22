@@ -94,16 +94,16 @@
                                     <input id="rolShow" type="text" value="{{$usuario['rol']['nombre']}}" class="text-text-1/40 bg-transparent border light:border-slate-400 dark:border-slate-600 px-2 py-1.5 md:px-3 md:py-2 rounded w-full focus:outline-none focus:ring-0" readonly />
                                 </div>
 
-                                <div class="md:col-span-2 flex justify-center mt-2">
-                                    <a href="{{route('clave.nueva')}}" class="underline text-main-4 hover:text-text-1">¿Deseas cambiar la contraseña?</a>
-                                </div>
-
                                 <!-- Botón Editar -->
                                 <div class="md:col-span-2 flex justify-center mt-2">
                                     <button type="submit" class="font-montserrat inline-flex items-center justify-center gap-2 px-2 py-1 bg-blue-500 hover:bg-blue-400 text-white rounded-lg cursor-pointer">
                                         <i class="fa-solid fa-pen-to-square text-sm"></i>
                                         <span class="text-sm">Editar</span>
                                     </button>
+                                </div>
+                                
+                                <div class="md:col-span-2 flex justify-center mt-2">
+                                    <a href="{{route('clave.nueva')}}" class="underline text-main-4 hover:text-text-1">¿Deseas cambiar la contraseña?</a>
                                 </div>
 
                             </div>
