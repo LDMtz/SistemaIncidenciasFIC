@@ -17,7 +17,7 @@ class ReporteController extends Controller
             'area'     => 'required|exists:areas,id',
             'severidad' => 'required|exists:severidades,id',
             'titulo'      => 'required|string',
-            'comentario'  => 'required|string',
+            'descripcion'  => 'required|string',
             'fotos.*'     => 'nullable|image|mimes:jpg,jpeg,png',
         ]);
 
@@ -26,7 +26,7 @@ class ReporteController extends Controller
         $reporte->area_id = $request->area;
         $reporte->severidad_id = $request->severidad;
         $reporte->titulo = $request->titulo;
-        $reporte->comentario = $request->comentario;
+        $reporte->descripcion = $request->descripcion;
         $reporte->save();
 
         // Procesar fotos si vienen

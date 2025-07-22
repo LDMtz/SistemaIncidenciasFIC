@@ -52,16 +52,16 @@
 
                     <div class="mt-1">
                         <label class="font-semibold text-white">Título:</label>
-                        <input name="titulo" type="text" value="{{ old('titulo') }}" class="border-1 rounded-sm text-xs py-1 w-60 px-2" placeholder="Ej: Falla en proyector del aula 4">
+                        <input name="titulo" type="text" value="{{ old('titulo') }}" autocomplete="off" class="border-1 rounded-sm text-xs py-1 w-60 px-2" placeholder="Ej: Falla en proyector del aula 4">
                     </div>
                     @error('titulo')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror
                     <div class="flex flex-col mt-1">
-                        <label class="font-semibold text-white">Comentario:</label>
-                        <textarea name="comentario" class="border-1 rounded-sm bg-slate-900 text-xs p-2 h-20 resize-none">{{ old('comentario') }}</textarea>
+                        <label class="font-semibold text-white">Descripcion:</label>
+                        <textarea name="descripcion" class="border-1 rounded-sm bg-slate-900 text-xs p-2 h-20 resize-none">{{ old('descripcion') }}</textarea>
                     </div>
-                    @error('comentario')
+                    @error('descripcion')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                     @enderror
                     <div class="mt-2">

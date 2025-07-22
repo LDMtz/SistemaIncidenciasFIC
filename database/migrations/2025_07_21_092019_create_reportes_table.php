@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('area_id')->constrained('areas');
             $table->foreignId('severidad_id')->constrained('severidades');
             $table->string('titulo');
-            $table->text('comentario');
+            $table->text('descripcion');
             $table->timestamps();
         });
     }
