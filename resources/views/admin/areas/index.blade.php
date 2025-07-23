@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="flex w-full">
-        <x-sidebar-admin />
+        <x-sidebar rol="Administrador"/>
 
         <!-- Contenedor principal -->
         <div class="mx-6 lg:mx-10 flex-1 overflow-auto">

@@ -54,17 +54,11 @@
             </div>
             <span class="text-base font-semibold hidden lg:block truncate">{{ $usuario->apellidos . ' ' .  $usuario->nombres}}</span>
 
-            @php 
-                switch ($usuario->rol_id) {
-                    case 1: $sidebar_id = 'mobile-sidebar-toggle'; break;
-                    case 2: $sidebar_id = ''; break;
-                    case 3: $sidebar_id = ''; break;
-                    default: $sidebar_id = ''; break;
-                }
-            @endphp 
-            <button id="{{$sidebar_id}}" type="button" class="cursor-pointer block lg:hidden">
-                <i class="fa-solid fa-bars text-2xl"></i>
-            </button>
+            @unless(Route::is('notificaciones.index', 'usuarios.perfil'))
+                <button id="mobile-sidebar-toggle" type="button" class="cursor-pointer block lg:hidden">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            @endunless
 
         </div>
     @endauth
