@@ -146,6 +146,9 @@ class UsuarioController extends Controller
         if ($user->reportes()->count() > 0) // Verificar si tiene 
             return redirect()->route('admin.usuarios.index')->with('error', 'No se puede eliminar el usuario porque tiene reportes asociados. Cambia su estado en lugar de eliminarla.');
 
+        if ($user->foto && Storage::disk('public')->exists($user->foto)) // Si tiene una foto y existe en el disco, la eliminamos
+            Storage::disk('public')->delete($user->foto);
+
         $user->delete();
 
          return redirect()->route('admin.usuarios.index')->with('success', 'Usuario eliminado correctamente.');
