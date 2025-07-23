@@ -5,13 +5,13 @@
 @endphp
 
 @if($isNotifications)
-    <a href="{{ route($route) }}" class="menu-item block p-2 relative">
+    <a href="{{ route($route) }}" class="block p-2 relative">
         <i class="fa-solid fa-bell align-middle inline-block w-6 text-center relative">
             @if(count(auth()->user()->unreadNotifications))
                 <span class="absolute -top-0.5 -right-[-0.28rem] bg-red-600 rounded-full h-[0.44rem] w-[0.44rem]"></span>
             @endif
         </i>
-        <span class="sidebar-text inline-block align-middle ml-4">{{ $slot }}</span>
+        <span class="inline-block align-middle ml-4">{{ $slot }}</span>
     </a>
 @else
     @if($screen == 'desktop')
@@ -22,9 +22,9 @@
             </span>
         </a>
     @else
-        <a href="{{ route($route)}}" class="menu-item block p-2">
+        <a href="{{ route($route)}}" class="block p-2">
             <i class="{{ $icon}} align-middle inline-block w-6 text-center"></i>
-            <span class="sidebar-text inline-block align-middle ml-4">
+            <span class="inline-block align-middle ml-4">
                 {{ $slot }}
             </span>
         </a>
