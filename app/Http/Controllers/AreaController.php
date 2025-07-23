@@ -179,10 +179,15 @@ class AreaController extends Controller
 
       if (!$area) return redirect()->route('admin.areas.index')->with('error', 'No se pudo eliminar el área.');
 
+      // Verifica si tiene reportes asociados
+      if ($area->reportes()->count() > 0) {
+         return redirect()->route('admin.areas.index')
+               ->with('error', 'No se puede eliminar el área porque tiene reportes asociados. Cambia su estado en lugar de eliminarla.');
+      }
+
       $area->delete();
 
       return redirect()->route('admin.areas.index')->with('success', 'Área eliminada correctamente.');
-      //TODO: Validar que el area no tenga asociado un reporte o incidencia
    }
 
    public function show_user_areas($id){

@@ -140,12 +140,15 @@ class UsuarioController extends Controller
 
         $user = User::find($id);
 
-        if (!$user) return redirect()->route('admin.usuarios.index')->with('error', 'No se pudo eliminar el usuario.');
+        if (!$user) 
+            return redirect()->route('admin.usuarios.index')->with('error', 'No se pudo eliminar el usuario.');
+
+        if ($user->reportes()->count() > 0) // Verificar si tiene 
+            return redirect()->route('admin.usuarios.index')->with('error', 'No se puede eliminar el usuario porque tiene reportes asociados. Cambia su estado en lugar de eliminarla.');
 
         $user->delete();
 
          return redirect()->route('admin.usuarios.index')->with('success', 'Usuario eliminado correctamente.');
-         //TODO: Validar que el usuario no tenga asociado un reporte o incidencia
     }
 
     public function profile(){
