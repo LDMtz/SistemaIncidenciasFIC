@@ -83,6 +83,8 @@
                 </form>
             </div>
         </div>
+
+        <a href="{{route("reportes.mostrar", 1)}}" class="underline text-orange-400">ver reporte (prueba)</a>
     </div>
     
 </x-app-layout>

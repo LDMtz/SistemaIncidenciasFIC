@@ -51,4 +51,8 @@ class ReporteController extends Controller
 
         return redirect()->back()->with('success', 'Reporte enviado correctamente.');
     }
+
+    public function show($id){
+        return view("general.report");
+    }
 }

@@ -38,6 +38,7 @@ Route::middleware("auth")->group(function(){
     Route::delete('general/notificaciones/eliminar/{id}', [NotificacionController::class, 'destroy'])->name('notificaciones.eliminar');
     Route::delete('general/notificaciones/eliminar-todas', [NotificacionController::class, 'destroy_all'])->name('notificaciones.eliminar.todas');
 
+    Route::get('general/reportes/{id}', [ReporteController::class, 'show'])->name('reportes.mostrar');
     Route::post('general/reportes/guardar', [ReporteController::class, 'store'])->name('reportes.guardar');
 
     //Rutas basadas en el Rol del usuario
