@@ -62,14 +62,4 @@
 
         </div>
     @endauth
-
-    @if (request()->routeIs('login')||request()->routeIs('comun.usuarios.crear'))
-        <label class="inline-flex items-center cursor-pointer">
-            <input id="theme-toggle-header" type="checkbox" class="sr-only peer" checked>
-            <i id="icon-moon-header" class="fa-solid fa-moon text-main-2 text-2xl mr-3"></i>
-            <i id="icon-sun-header" class="fa-solid fa-sun text-main-2 text-2xl mr-3 hide-element"></i>
-            <div class="relative w-11 h-6 bg-gray-500 rounded-full peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-main-4"></div>
-        </label>
-    @endif
-    
 </header>
