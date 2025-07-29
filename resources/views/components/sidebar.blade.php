@@ -8,7 +8,7 @@
         <x-sidebar.sidebar-encargado/>
         @break
     @case("Comun")
-        
+        <x-sidebar.sidebar-comun/>
         @break
     @default
         
