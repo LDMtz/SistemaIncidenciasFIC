@@ -54,7 +54,8 @@
             </div>
             <span class="text-base font-semibold hidden lg:block truncate">{{ $usuario->apellidos . ' ' .  $usuario->nombres}}</span>
 
-            @unless(Route::is('notificaciones.index', 'usuarios.perfil'))
+            <!-- Si son rutas generales no -->
+            @unless(Route::is('notificaciones.index', 'usuarios.perfil','reportes.crear','reportes.mostrar'))
                 <button id="mobile-sidebar-toggle" type="button" class="cursor-pointer block lg:hidden">
                     <i class="fa-solid fa-bars text-2xl"></i>
                 </button>
