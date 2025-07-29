@@ -9,8 +9,19 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\NuevoReporteNotification;
 
+use App\Models\Area;
+use App\Models\Severidad;
+
 class ReporteController extends Controller
 {
+    public function create(){
+        $user = Auth::user(); 
+        $severidades = Severidad::get()->toArray();
+        $areas = Area::get()->map(function ($area){ return ['id' => $area->id,'nombre' => $area->nombre,];});
+
+        return view("general.reportes.create", compact('user','areas','severidades'));
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -53,6 +64,7 @@ class ReporteController extends Controller
     }
 
     public function show($id){
-        return view("general.report");
+        return view("general.reportes.show");
     }
+
 }

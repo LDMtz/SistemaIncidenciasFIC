@@ -20,8 +20,8 @@
 
             <!-- Card -->
             <div class="flex justify-center items-center ">
-                <div class="rounded-lg shadow-lg w-full max-w-md overflow-hidden border-2 
-                     dark:border-slate-700 light:border-slate-300 dark:bg-slate-800 light:bg-slate-50">
+                <div class="rounded-lg shadow-lg w-full max-w-md overflow-hidden border-1 
+                     dark:border-slate-600 light:border-slate-400 dark:bg-slate-800 light:bg-slate-50">
                     <div class="p-6 max-w-2xl w-full mx-auto">
 
                         <h2 class="font-montserrat text-lg md:text-xl font-bold text-text-1 text-center mb-2">Datos del usuario</h2>
