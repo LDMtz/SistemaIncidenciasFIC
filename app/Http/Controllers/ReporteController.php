@@ -14,6 +14,10 @@ use App\Models\Severidad;
 
 class ReporteController extends Controller
 {
+    public function admin_index(){
+        return view('admin.reportes.index');
+    }
+
     public function create(){
         $user = Auth::user(); 
         $severidades = Severidad::get()->toArray();

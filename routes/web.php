@@ -58,6 +58,8 @@ Route::middleware("auth")->group(function(){
         Route::get('admin/areas/modificar/{id}', [AreaController::class, 'edit'])-> name('admin.areas.modificar');
         Route::patch('admin/areas/actualizar/{id}', [AreaController::class, 'update'])-> name('admin.areas.actualizar');
         Route::delete('admin/areas/eliminar/{id}', [AreaController::class, 'destroy'])-> name('admin.areas.eliminar');
+
+        Route::get('admin/reportes', [ReporteController::class, 'admin_index'])-> name('admin.reportes.index');
     });
 
     Route::middleware('rol:Encargado')->group(function (){

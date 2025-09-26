@@ -6,7 +6,7 @@
     <nav class="font-montserrat font-semibold text-lg text-main-3 flex flex-col gap-2 flex-1">
         <x-sidebar.item route="home" icon="fa-solid fa-house" screen="desktop">Inicio</x-sidebar.item>
         <x-sidebar.item route="admin.usuarios.index" icon="fa-solid fa-user" screen="desktop">Usuarios</x-sidebar.item>
-        <x-sidebar.item route="home" icon="fa-solid fa-folder-open" screen="desktop">Reportes</x-sidebar.item>
+        <x-sidebar.item route="admin.reportes.index" icon="fa-solid fa-folder-open" screen="desktop">Reportes</x-sidebar.item>
         <x-sidebar.item route="home" icon="fa-solid fa-file-lines" screen="desktop">Informes</x-sidebar.item>
         <x-sidebar.item route="admin.areas.index" icon="fa-solid fa-layer-group" screen="desktop">Áreas</x-sidebar.item>
         <x-sidebar.theme-toggle screen="desktop"/>
@@ -30,7 +30,7 @@
 
             <x-sidebar.item route="home" icon="fa-solid fa-house" screen="mobile">Inicio</x-sidebar.item>
             <x-sidebar.item route="admin.usuarios.index" icon="fa-solid fa-user" screen="mobile">Usuarios</x-sidebar.item>
-            <x-sidebar.item route="home" icon="fa-solid fa-folder-open" screen="mobile">Reportes</x-sidebar.item>
+            <x-sidebar.item route="admin.reportes.index" icon="fa-solid fa-folder-open" screen="mobile">Reportes</x-sidebar.item>
             <x-sidebar.item route="home" icon="fa-solid fa-file-lines" screen="mobile">Informes</x-sidebar.item>
             <x-sidebar.item route="admin.areas.index" icon="fa-solid fa-layer-group" screen="mobile">Áreas</x-sidebar.item>
 
