@@ -3,11 +3,11 @@
 @import "@fortawesome/fontawesome-free/css/solid.css";
 @import "@fortawesome/fontawesome-free/css/brands.css";
 
-@import 'tailwindcss';
+@import "tailwindcss";
 @source "../views";
 
-@import './fonts.css';
-@import './custom_styles.css';
+@import "./fonts.css";
+@import "./custom_styles.css";
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -18,47 +18,47 @@
 @custom-variant dark   (&:where([data-theme=dark], [data-theme=dark] *));
 @custom-variant light  (&:where([data-theme=light], [data-theme=light] *));
 
-
 /* Colors */
 [data-theme="dark"] {
     --color-bg-main: #020618;
-    --color-main-1: #0741FF;
-    --color-main-2: #0178FF;
-    --color-main-3: #AED4FF;
-    --color-main-4: #00C8FF;
+    --color-main-1: #0741ff;
+    --color-main-2: #0178ff;
+    --color-main-3: #aed4ff;
+    --color-main-4: #00c8ff;
     --color-main-5: #073470;
-    --color-main-6: #0A0D3D;
+    --color-main-6: #0a0d3d;
     --color-main-7: #010021;
 
-    --color-bg-logo: #DAE5FB;
-    --color-bg-header: #0A0D3D;
+    --color-bg-logo: #dae5fb;
+    --color-bg-header: #0a0d3d;
 
-    --color-text-1: #FFFFFF;
-    --color-text-2: #B9B9B9;
+    --color-text-1: #ffffff;
+    --color-text-2: #b9b9b9;
     --color-text-3: #676767;
 }
 
 [data-theme="light"] {
-    --color-bg-main: #FFF6E9;
-    --color-main-1: #FFB407;
-    --color-main-2: #FF9D00;
-    --color-main-3: #AE7628;
-    --color-main-4: #FF8800;
-    --color-main-5: #FFBE63;
-    --color-main-6: #FFDD94;
-    --color-main-7: #FFE9CA;
+    --color-bg-main: #f5f3f0;
+    --color-main-1: #ffb407;
+    --color-main-2: #ff9d00;
+    --color-main-3: #ae7628;
+    --color-main-4: #ff8800;
+    --color-main-5: #ffbe63;
+    --color-main-6: #ffdd94;
+    --color-main-7: #ffe9ca;
 
-    --color-bg-logo: #FBEEDA;
-    --color-bg-header: #B98C44;
+    --color-bg-logo: #fbeeda;
+    --color-bg-header: #b98c44;
 
     --color-text-1: #000000;
-    --color-text-2: #573C00;
-    --color-text-3: #D39033;
+    --color-text-2: #573c00;
+    --color-text-3: #d39033;
 }
 
 @theme {
-    
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji','Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
     --font-montserrat: Montserrat;
     --font-roboto: Roboto;
 
@@ -78,6 +78,6 @@
     --color-text-2: var(--color-text-2);
     --color-text-3: var(--color-text-3);
 
-    --color-yellow-fic: #BC8836;
+    --color-yellow-fic: #bc8836;
     --color-blue-fic: #001737;
 }
