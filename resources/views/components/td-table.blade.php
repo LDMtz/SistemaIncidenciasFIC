@@ -79,6 +79,17 @@
             </div>
         @break
 
+        @case('severidad')
+            @switch($content)
+                @case("Sugerencia") <span class="text-green-400">{{$content}}</span> @break
+                @case("Baja") <span class="text-blue-400">{{$content}}</span> @break
+                @case("Media") <span class="text-yellow-400">{{$content}}</span> @break
+                @case("Alta") <span class="text-orange-400">{{$content}}</span> @break
+                @case("Crítica") <span class="text-red-400">{{$content}}</span> @break
+                @default <span>{{$content}}</span>
+            @endswitch
+        @break
+
         @default
             <!-- Celda normal con texto o valor -->
             {{ $content }}

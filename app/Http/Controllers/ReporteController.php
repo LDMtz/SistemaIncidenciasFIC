@@ -14,8 +14,44 @@ use App\Models\Severidad;
 
 class ReporteController extends Controller
 {
-    public function admin_index(){
-        return view('admin.reportes.index');
+    public function admin_index(Request $request){
+        $sortOrder = $request->get('sort', 'desc'); // ascendente o descendente
+        $campo = $request->get('campo');           // campo a buscar
+        $valor = $request->get('valor');           // valor a buscar
+
+        $query = Reporte::with(['usuario', 'area', 'severidad', 'estado']);
+
+        // Campos válidos para filtrar
+        $camposPermitidos = ['folio', 'estado', 'area', 'severidad', 'fecha'];
+
+        // Validamos y aplicamos filtro
+        if ($campo && $valor !== null && in_array($campo, $camposPermitidos)) {
+            if ($campo === 'estado') {
+                $query->whereHas('estado', function ($q) use ($valor) {
+                    $q->where('nombre', 'like', '%' . $valor . '%');
+                });
+            } elseif ($campo === 'area') {
+                $query->whereHas('area', function ($q) use ($valor) {
+                    $q->where('nombre', 'like', '%' . $valor . '%');
+                });
+            } elseif ($campo === 'severidad') {
+                $query->whereHas('severidad', function ($q) use ($valor) {
+                    $q->where('nombre', 'like', '%' . $valor . '%');
+                });
+            } elseif ($campo === 'fecha') {
+                $query->whereDate('created_at', 'like', '%' . $valor . '%');
+            }else {
+                $query->where($campo, 'like', '%' . $valor . '%');
+            }
+        }
+
+        $reportes = $query->orderBy('created_at', $sortOrder)
+                        ->paginate(10)
+                        ->appends($request->query());
+
+        //dd($reportes);
+
+        return view('admin.reportes.index', compact('reportes', 'sortOrder', 'campo', 'valor'));
     }
 
     public function create(){
