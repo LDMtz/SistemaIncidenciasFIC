@@ -11,3 +11,6 @@
         
     </div>
 </x-app-layout>
+
+<!-- Success modal -->
+<x-success-modal/>

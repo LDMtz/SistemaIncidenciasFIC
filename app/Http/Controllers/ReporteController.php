@@ -44,6 +44,9 @@ class ReporteController extends Controller
         $reporte->descripcion = $request->descripcion;
         $reporte->save();
 
+        $reporte->folio = 'REP-' . now()->format('Ymd') . '-' . str_pad($reporte->id, 4, '0', STR_PAD_LEFT);
+        $reporte->save();
+
         // Procesar fotos si vienen
         if ($request->hasFile('fotos')) {
             foreach ($request->file('fotos') as $foto) {
@@ -64,7 +67,8 @@ class ReporteController extends Controller
             foreach ($admins as $admin) $admin->notify(new NuevoReporteNotification($reporte));
         }
 
-        return redirect()->back()->with('success', 'Reporte enviado correctamente.');
+        //return redirect()->back()->with('success', 'Reporte enviado correctamente.');
+        return redirect()->route('home')->with('success', '¡Reporte enviado correctamente!');
     }
 
     public function show($id){

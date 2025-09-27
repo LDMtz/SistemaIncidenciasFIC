@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('area_id')->constrained('areas');
             $table->foreignId('severidad_id')->constrained('severidades');
+            $table->foreignId('estado_id')->default(1)->constrained('estados_reportes');
+            $table->string('folio')->nullable()->unique();
             $table->string('titulo');
             $table->text('descripcion');
             $table->timestamps();

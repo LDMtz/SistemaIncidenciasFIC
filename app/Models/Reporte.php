@@ -10,6 +10,7 @@ class Reporte extends Model
         'user_id',
         'area_id',
         'severidad_id',
+        'estado_id',
         'titulo',
         'comentario',
     ];
@@ -27,6 +28,11 @@ class Reporte extends Model
     public function severidad()
     {
         return $this->belongsTo(Severidad::class);
+    }
+
+    public function estado()
+    {
+        return $this->belongsTo(EstadoReporte::class);
     }
 
     public function fotos()
