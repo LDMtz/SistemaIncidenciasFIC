@@ -59,7 +59,7 @@
                         <x-td-table type="normal" :content="$reporte->estado?->nombre" />
                         <x-td-table type="normal" :content="$reporte['created_at'] ? $reporte['created_at']->format('Y-m-d') : 'Sin fecha'" />
                         <td class="text-center">
-                            <a href="#" class="text-violet-500 hover:text-violet-400 transition-colors duration-100 cursor-pointer">
+                            <a href="{{ route("admin.reportes.revisar", $reporte->id)}}" class="text-violet-500 hover:text-violet-400 transition-colors duration-100 cursor-pointer">
                                 <i class="fa-solid fa-eye"></i>
                             </a>
                         </td>

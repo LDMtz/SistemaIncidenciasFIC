@@ -14,7 +14,8 @@ use App\Models\Severidad;
 
 class ReporteController extends Controller
 {
-    public function admin_index(Request $request){
+    public function admin_index(Request $request)
+    {
         $sortOrder = $request->get('sort', 'desc'); // ascendente o descendente
         $campo = $request->get('campo');           // campo a buscar
         $valor = $request->get('valor');           // valor a buscar
@@ -40,26 +41,29 @@ class ReporteController extends Controller
                 });
             } elseif ($campo === 'fecha') {
                 $query->whereDate('created_at', 'like', '%' . $valor . '%');
-            }else {
+            } else {
                 $query->where($campo, 'like', '%' . $valor . '%');
             }
         }
 
         $reportes = $query->orderBy('created_at', $sortOrder)
-                        ->paginate(10)
-                        ->appends($request->query());
+            ->paginate(10)
+            ->appends($request->query());
 
         //dd($reportes);
 
         return view('admin.reportes.index', compact('reportes', 'sortOrder', 'campo', 'valor'));
     }
 
-    public function create(){
-        $user = Auth::user(); 
+    public function create()
+    {
+        $user = Auth::user();
         $severidades = Severidad::get()->toArray();
-        $areas = Area::get()->map(function ($area){ return ['id' => $area->id,'nombre' => $area->nombre,];});
+        $areas = Area::get()->map(function ($area) {
+            return ['id' => $area->id, 'nombre' => $area->nombre,];
+        });
 
-        return view("general.reportes.create", compact('user','areas','severidades'));
+        return view("general.reportes.create", compact('user', 'areas', 'severidades'));
     }
 
     public function store(Request $request)
@@ -86,9 +90,15 @@ class ReporteController extends Controller
         // Procesar fotos si vienen
         if ($request->hasFile('fotos')) {
             foreach ($request->file('fotos') as $foto) {
+                /*
                 $ruta = $foto->store('fotos/reportes', 'public');
                 $reporte->fotos()->create([
                     'ruta' => Storage::url($ruta),
+                ]);
+                */
+                $ruta = $foto->store('fotos/reportes', 'public');
+                $reporte->fotos()->create([
+                    'ruta' => $ruta, // 👈 guarda solo la ruta relativa
                 ]);
             }
         }
@@ -99,7 +109,9 @@ class ReporteController extends Controller
         if ($encargados->isNotEmpty()) // Notificar a todos los encargados del área
             foreach ($encargados as $encargado) $encargado->notify(new NuevoReporteNotification($reporte));
         else { // Si no hay encargados, notificar al administrador
-            $admins = User::whereHas('rol', function ($q) {$q->where('nombre', 'Administrador');})->get();
+            $admins = User::whereHas('rol', function ($q) {
+                $q->where('nombre', 'Administrador');
+            })->get();
             foreach ($admins as $admin) $admin->notify(new NuevoReporteNotification($reporte));
         }
 
@@ -107,8 +119,64 @@ class ReporteController extends Controller
         return redirect()->route('home')->with('success', '¡Reporte enviado correctamente!');
     }
 
-    public function show($id){
+    public function show($id)
+    {
         return view("general.reportes.show");
     }
 
+    public function review($id)
+    {
+        $reporte = Reporte::with(['usuario', 'area', 'severidad', 'estado', 'fotos'])
+            ->findOrFail($id);
+
+        //NOTA: Por el momento los encargados son los ADMINISTRADORES, temporalmente
+        //TODO: Pasarle los encargados correspondientes del Area
+        $encargados = User::whereHas('rol', function ($q) {
+            $q->where('nombre', 'Administrador');
+        })->get();
+
+        return view("admin.reportes.review", compact('reporte', 'encargados'));
+    }
+
+    public function update_state(Request $request, $id)
+    {
+        $request->validate([
+            'estado_id' => 'required|exists:estados_reportes,id',
+        ]);
+
+        $reporte = Reporte::findOrFail($id);
+        $reporte->estado_id = $request->estado_id;
+        $reporte->save();
+
+        return back()->with('success', 'Estado actualizado correctamente.');
+    }
+
+    public function update_severity(Request $request, $id)
+    {
+        $request->validate([
+            'severidad_id' => 'required|exists:severidades,id',
+        ]);
+
+        $reporte = Reporte::findOrFail($id);
+        $reporte->severidad_id = $request->severidad_id;
+        $reporte->save();
+
+        return back()->with('success', 'Severidad actualizada correctamente.');
+    }
+
+    public function admin_update(Request $request, $id)
+    {
+        $request->validate([
+            'estado_id' => 'required|exists:estados_reportes,id',
+            'severidad_id' => 'required|exists:severidades,id',
+        ]);
+
+        $reporte = Reporte::findOrFail($id);
+        $reporte->update([
+            'estado_id' => $request->estado_id,
+            'severidad_id' => $request->severidad_id,
+        ]);
+
+        return back()->with('success', 'Reporte actualizado correctamente.');
+    }
 }
