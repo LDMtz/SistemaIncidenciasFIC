@@ -27,7 +27,7 @@
                 {{ $notification->data['mensaje'] }} <span class="text-main-3">{{$notification->data['area']}}</span>
                 con el titulo <span class="text-main-3">"{{$notification->data['titulo_reporte']}}"</span>.
                 <br>
-                <a href="#" class="text-xs underline text-main-3">Ver reporte</a>
+                <a href="{{ route('reportes.mostrar', $notification->data['reporte_id']) }}" class="text-xs underline text-main-3">Ver reporte</a>
                 <br>
                 <br>
             </p>

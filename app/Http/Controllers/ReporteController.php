@@ -103,6 +103,9 @@ class ReporteController extends Controller
             }
         }
 
+        //TODO: NO deberia hacerlo así, deberia haber una tabla intermedia encargado_area, independientemente si el usuario es
+        // administrador o encargado, para no tener que estar haciendo esto
+        
         // Obtener encargados del área
         $encargados = $reporte->area->encargados ?? collect();
 
@@ -119,23 +122,28 @@ class ReporteController extends Controller
         return redirect()->route('home')->with('success', '¡Reporte enviado correctamente!');
     }
 
+    //Ruta general
     public function show($id)
-    {
-        return view("general.reportes.show");
-    }
-
-    public function review($id)
-    {
+    {   
         $reporte = Reporte::with(['usuario', 'area', 'severidad', 'estado', 'fotos'])
             ->findOrFail($id);
 
-        //NOTA: Por el momento los encargados son los ADMINISTRADORES, temporalmente
-        //TODO: Pasarle los encargados correspondientes del Area
-        $encargados = User::whereHas('rol', function ($q) {
-            $q->where('nombre', 'Administrador');
-        })->get();
+        //TODO: NO deberia hacerlo así, deberia haber una tabla intermedia encargado_area, independientemente si el usuario es
+        // administrador o encargado, para no tener que estar haciendo esto
+        //Encargados del área
+        $encargados = $reporte->area->encargados()->get();
 
-        return view("admin.reportes.review", compact('reporte', 'encargados'));
+        //Si no hay encargados
+        if ($encargados->isEmpty()) {
+            $encargados = User::whereHas('rol', function ($q) {
+                $q->where('nombre', 'Administrador');
+            })->get();
+        }
+
+        //Rol del usuario autenticado
+        $rol = Auth::user()->rol->nombre;
+
+        return view("general.reportes.show", compact('reporte','encargados','rol'));
     }
 
     public function update_state(Request $request, $id)
