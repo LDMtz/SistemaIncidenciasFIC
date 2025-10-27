@@ -55,6 +55,7 @@ class ReporteController extends Controller
         return view('admin.reportes.index', compact('reportes', 'sortOrder', 'campo', 'valor'));
     }
 
+    //Ruta general
     public function create()
     {
         $user = Auth::user();
@@ -66,6 +67,7 @@ class ReporteController extends Controller
         return view("general.reportes.create", compact('user', 'areas', 'severidades'));
     }
 
+    //Ruta general
     public function store(Request $request)
     {
         $request->validate([
@@ -90,35 +92,21 @@ class ReporteController extends Controller
         // Procesar fotos si vienen
         if ($request->hasFile('fotos')) {
             foreach ($request->file('fotos') as $foto) {
-                /*
                 $ruta = $foto->store('fotos/reportes', 'public');
                 $reporte->fotos()->create([
-                    'ruta' => Storage::url($ruta),
-                ]);
-                */
-                $ruta = $foto->store('fotos/reportes', 'public');
-                $reporte->fotos()->create([
-                    'ruta' => $ruta, // 👈 guarda solo la ruta relativa
+                    'ruta' => $ruta, // guarda solo la ruta relativa
                 ]);
             }
         }
 
-        //TODO: NO deberia hacerlo así, deberia haber una tabla intermedia encargado_area, independientemente si el usuario es
-        // administrador o encargado, para no tener que estar haciendo esto
-        
-        // Obtener encargados del área
-        $encargados = $reporte->area->encargados ?? collect();
+        // Obtener usuarios responsables del área (encargados o administradores)
+        $usuarios = $reporte->area->usuariosResponsables();
 
-        if ($encargados->isNotEmpty()) // Notificar a todos los encargados del área
-            foreach ($encargados as $encargado) $encargado->notify(new NuevoReporteNotification($reporte));
-        else { // Si no hay encargados, notificar al administrador
-            $admins = User::whereHas('rol', function ($q) {
-                $q->where('nombre', 'Administrador');
-            })->get();
-            foreach ($admins as $admin) $admin->notify(new NuevoReporteNotification($reporte));
+        // Notificar a todos los usuarios responsables (encargados o administradores [en caso de que el area no tenga encargados])
+        foreach ($usuarios as $usuario) {
+            $usuario->notify(new NuevoReporteNotification($reporte));
         }
 
-        //return redirect()->back()->with('success', 'Reporte enviado correctamente.');
         return redirect()->route('home')->with('success', '¡Reporte enviado correctamente!');
     }
 
@@ -128,17 +116,8 @@ class ReporteController extends Controller
         $reporte = Reporte::with(['usuario', 'area', 'severidad', 'estado', 'fotos'])
             ->findOrFail($id);
 
-        //TODO: NO deberia hacerlo así, deberia haber una tabla intermedia encargado_area, independientemente si el usuario es
-        // administrador o encargado, para no tener que estar haciendo esto
         //Encargados del área
-        $encargados = $reporte->area->encargados()->get();
-
-        //Si no hay encargados
-        if ($encargados->isEmpty()) {
-            $encargados = User::whereHas('rol', function ($q) {
-                $q->where('nombre', 'Administrador');
-            })->get();
-        }
+        $encargados = $reporte->area->usuariosResponsables();
 
         //Rol del usuario autenticado
         $rol = Auth::user()->rol->nombre;
