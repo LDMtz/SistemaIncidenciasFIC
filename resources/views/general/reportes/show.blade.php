@@ -108,25 +108,48 @@
                     </div>
 
                     <!-- Asignado a -->
-                    <div class="border-b-1 dark:border-slate-600 light:border-slate-400  p-1">
+                    <div class="border-b-1 dark:border-slate-600 light:border-slate-400 p-1">
                         <strong class="text-text-1">Asignado a:</strong>
-                        @foreach ($encargados as $encargado)
-                        <br>
-                            <span>{{$encargado->apellidos . ' ' . $encargado->nombres}}</span>
-                        @endforeach
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            @foreach ($encargados as $encargado)
+                                <div class="inline-flex items-center gap-2 rounded-full border 
+                                    px-2 py-0.5 sm:px-3 sm:py-1
+                                    dark:bg-slate-700 dark:text-slate-200  dark:border-slate-600 
+                                    light:bg-white  light:text-slate-700 light:border-slate-300">
+                                    <i class="fa-solid fa-user text-[0.70rem] sm:text-xs"></i>
+                                    <span class="text-[0.70rem] sm:text-xs">{{$encargado->apellidos . ' ' . $encargado->nombres}}</span>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
 
                     <!-- Fotos -->
                     <div class="p-1">
                         <strong class="text-text-1">Fotos:</strong>
-                        <br>
-                        @forelse($reporte->fotos as $foto)
-                            <img src="{{ asset('storage/' . $foto->ruta)  }}" alt="Foto del reporte"
-                                class="w-32 h-32 object-cover rounded-md inline-block m-1 border">
-                        @empty
-                            <p class="text-gray-500 italic">Reporte sin fotos</p>
-                        @endforelse
+                        <div class="flex flex-wrap gap-3">
+                            @forelse($reporte->fotos as $foto)
+                                <div class="relative group">
+                                    <img src="{{ asset('storage/' . $foto->ruta) }}" alt="Foto del reporte"
+                                        class="w-32 h-32 object-cover rounded-md border-2 dark:border-slate-700 light:border-slate-300
+                                        shadow-md hover:shadow-xl transition-all duration-200 hover:scale-105 cursor-pointer">
+                                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 
+                                        rounded-md transition-all duration-200 flex items-center justify-center">
+                                        <i class="fa-solid fa-search-plus text-white opacity-0 group-hover:opacity-100 
+                                            transition-opacity duration-200"></i>
+                                    </div>
+                                </div>
+                            @empty
+                                <div class="w-full p-5 mx-5 my-2 rounded-lg border-2 border-dashed dark:border-slate-700 light:border-slate-300 
+                                    dark:bg-slate-800/30 light:bg-slate-50 text-center">
+                                    <i class="fa-solid fa-image text-4xl dark:text-slate-600 light:text-slate-400 mb-2"></i>
+                                    <p class="dark:text-slate-500 light:text-slate-500 italic text-sm">
+                                        Reporte sin fotos adjuntas
+                                    </p>
+                                </div>
+                            @endforelse
+                        </div>
                     </div>
+
                 </div>
             </div>
 
