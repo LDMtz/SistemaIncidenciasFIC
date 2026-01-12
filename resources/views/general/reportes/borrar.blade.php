@@ -1,11 +1,6 @@
 <x-app-layout>
     <div class="flex w-full">
 
-        @php
-            $colores_severidades = [1 => 'text-green-400', 2 => 'text-blue-400', 3 => 'text-yellow-400', 4 => 'text-orange-400', 5 => 'text-red-400',];
-            $colores_estados = [1 => 'text-teal-400', 2 => 'text-sky-400', 3 => 'text-green-400', 4 => 'text-red-400', 5 => 'text-amber-400',];
-        @endphp
-
         <!-- container -->
         <div class="mx-2 sm:mx-4 flex-1 overflow-auto">
             <div class="flex justify-between items-center mb-3">
@@ -51,10 +46,9 @@
                                         <i class="fa-solid fa-flag text-blue-400 mr-2"></i>Estado
                                     </label>
                                     <select name="estado_id" id="estado_id" 
-                                        class="font-roboto w-full bg-slate-900/70 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:bg-slate-800 transition-all">
-                                        @foreach($estados as $index => $estado)
-                                             @php $color = $colores_estados[$index + 1] ?? 'text-slate-400'; @endphp
-                                            <option value="{{ $estado->id }}" {{ $reporte->estado_id == $estado->id ? 'selected' : '' }} class="{{ $color }} text-xs">
+                                        class="font-roboto w-full bg-slate-900/70 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all">
+                                        @foreach(App\Models\EstadoReporte::all() as $estado)
+                                            <option value="{{ $estado->id }}" {{ $reporte->estado_id == $estado->id ? 'selected' : '' }}>
                                                 {{ $estado->nombre }}
                                             </option>
                                         @endforeach
@@ -67,10 +61,9 @@
                                         <i class="fa-solid fa-gauge-high text-blue-400 mr-2"></i>Severidad
                                     </label>
                                     <select name="severidad_id" id="severidad_id" 
-                                        class="font-roboto w-full px-3 py-2 rounded-lg border border-slate-600 bg-slate-900/70 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:bg-slate-800 transition-all">
-                                        @foreach($severidades as $index => $severidad)
-                                            @php $color = $colores_severidades[$index + 1] ?? 'text-slate-400'; @endphp
-                                            <option value="{{ $severidad->id }}" {{ $reporte->severidad_id == $severidad->id ? 'selected' : '' }} class="{{ $color }} text-xs">
+                                        class="font-roboto w-full bg-slate-900/70 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all">
+                                        @foreach(App\Models\Severidad::all() as $severidad)
+                                            <option value="{{ $severidad->id }}" {{ $reporte->severidad_id == $severidad->id ? 'selected' : '' }}>
                                                 {{ $severidad->nombre }}
                                             </option>
                                         @endforeach
@@ -81,7 +74,7 @@
                                 <button type="submit" 
                                     class="group relative inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white text-sm font-semibold px-4 py-2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5 w-full sm:w-auto justify-center">
                                     <i class="fa-solid fa-save group-hover:scale-110 transition-transform"></i>
-                                    <span>Guardar</span>
+                                    <span>Guardar cambios</span>
                                 </button>
                             </form>
                         </div>
@@ -139,27 +132,26 @@
                                 <!-- Tabla de información -->
                                 <div class="bg-slate-900/50 rounded-xl border border-slate-700/50 overflow-hidden font-roboto">
                                     
-                                    <!-- Folio, Fecha, Hora, Descargar -->
+                                    <!-- Fila: Folio, Fecha, Hora, Descargar -->
                                     <div class="grid grid-cols-2 sm:grid-cols-4 border-b border-slate-700/50">
                                         <div class="p-2.5 border-r border-slate-700/50 order-1 sm:order-none">
                                             <span class="text-slate-400 text-xs font-medium uppercase tracking-wide block mb-1">
                                                 <i class="fa-solid fa-hashtag text-blue-400 mr-1"></i>Folio
                                             </span>
-                                            <span class="text-white text-sm font-medium">{{ $reporte->folio ?? 'Desconocido' }}</span>
+                                            <span class="text-white text-sm font-medium">REP-20251016-0001</span>
                                         </div>
                                         <div class="p-2.5 border-r border-slate-700/50 border-t sm:border-t-0 order-3 sm:order-none">
                                             <span class="text-slate-400 text-xs font-medium uppercase tracking-wide block mb-1">
                                                 <i class="fa-solid fa-calendar text-blue-400 mr-1"></i>Fecha
                                             </span>
-                                            <span class="text-white text-sm font-medium">{{ $reporte->created_at->format('d/m/y') ?? 'Desconocido' }}</span>
+                                            <span class="text-white text-sm font-medium">16/10/2025</span>
                                         </div>
                                         <div class="p-2.5 border-slate-700/50 border-t sm:border-t-0 order-4 sm:order-none">
                                             <span class="text-slate-400 text-xs font-medium uppercase tracking-wide block mb-1">
                                                 <i class="fa-solid fa-clock text-blue-400 mr-1"></i>Hora
                                             </span>
-                                            <span class="text-white text-sm font-medium">{{ $reporte->created_at->format('h:i A') ?? 'Desconocido' }}</span>
+                                            <span class="text-white text-sm font-medium">10:12 AM</span>
                                         </div>
-                                        <!-- TODO: Funcionalidad al boton-->
                                         <div class="p-2.5 flex items-center justify-start sm:justify-center cursor-pointer 
                                             border-l-0 sm:border-l border-slate-700/50
                                             hover:bg-blue-500/20 transition-colors text-base order-2 sm:order-none">
@@ -170,55 +162,61 @@
                                         </div>
                                     </div>
 
-                                    <!-- Área (mobile) -->
+                                    <!-- Fila: Área (mobile) -->
                                     <div class="p-2.5 border-b border-slate-700/50 sm:hidden">
                                         <span class="text-slate-400 text-xs font-medium uppercase tracking-wide block mb-1">
                                             <i class="fa-solid fa-location-dot text-blue-400 mr-1"></i>Área
                                         </span>
-                                        <span class="text-white text-sm font-medium">{{ $reporte->area->nombre ?? 'Desconocido' }}</span>
+                                        <span class="text-white text-sm font-medium">Seguimiento a egresados</span>
                                     </div>
 
-                                    <!-- Área, Severidad, Estado -->
+
+                                    <!-- Fila: Área, Severidad, Estado -->
                                     <div class="grid grid-cols-2 sm:grid-cols-3 border-b border-slate-700/50">
+                                        <!-- Área: desktop -->
                                         <div class="p-2.5 border-b sm:border-b-0 sm:border-r border-slate-700/50 hidden sm:block">
                                             <span class="text-slate-400 text-xs font-medium uppercase tracking-wide block mb-1">
                                                 <i class="fa-solid fa-location-dot text-blue-400 mr-1"></i>Área
                                             </span>
-                                            <span class="text-white text-sm font-medium">{{ $reporte->area->nombre ?? 'Desconocido' }}</span>
+                                            <span class="text-white text-sm font-medium">Seguimiento a egresados</span>
                                         </div>
+                                        
+                                        <!-- Severidad -->
                                         <div class="p-2.5 border-r-1 border-slate-700/50">
                                             <span class="text-slate-400 text-xs font-medium uppercase tracking-wide block mb-1">
                                                 <i class="fa-solid fa-gauge-high text-blue-400 mr-1"></i>Severidad
                                             </span>
-                                            @php $color = $colores_severidades[$reporte->severidad_id] ?? 'text-white'; @endphp
-                                            <span class="text-sm font-medium {{ $color }}">{{ $reporte->severidad->nombre ?? 'Desconocido' }}</span>
+                                            <span class="text-sm font-medium text-yellow-400">Media</span>
                                         </div>
+                                        
+                                        <!-- Estado -->
                                         <div class="p-2.5">
                                             <span class="text-slate-400 text-xs font-medium uppercase tracking-wide block mb-1">
                                                 <i class="fa-solid fa-circle text-blue-400 mr-1"></i>Estado
                                             </span>
-                                            @php $color = $colores_estados[$reporte->estado_id] ?? 'text-white'; @endphp
-                                            <span class="text-sm font-medium {{ $color }}">{{ $reporte->estado->nombre ?? 'Desconocido' }}</span>
+                                            <span class="text-sm font-medium text-green-400">Resuelto</span>
                                         </div>
                                     </div>
 
-                                    <!-- Título -->
+                                
+
+                                    <!-- Fila: Título -->
                                     <div class="p-2.5 border-b border-slate-700/50">
                                         <span class="text-slate-400 text-xs font-medium uppercase tracking-wide block mb-1">
                                             <i class="fa-solid fa-quote-left text-blue-400 mr-1"></i>Título
                                         </span>
-                                        <p class="text-white text-sm">{{$reporte->titulo ?? 'Desconocido'}}</p>
+                                        <p class="text-white text-sm">{{$reporte->titulo}}</p>
                                     </div>
 
-                                    <!-- Descripción -->
+                                    <!-- Fila: Descripción -->
                                     <div class="p-2.5 border-b border-slate-700/50">
                                         <span class="text-slate-400 text-xs font-medium uppercase tracking-wide block mb-1">
                                             <i class="fa-solid fa-align-left text-blue-400 mr-1"></i>Descripción
                                         </span>
-                                        <p class="text-white text-sm leading-relaxed">{{$reporte->descripcion ?? 'Desconocido'}}</p>
+                                        <p class="text-white text-sm leading-relaxed">{{$reporte->descripcion}}</p>
                                     </div>
 
-                                    <!-- Asignado a -->
+                                    <!-- Fila: Asignado a -->
                                     <div class="p-2.5 border-b border-slate-700/50">
                                         <span class="text-slate-400 text-xs font-medium uppercase tracking-wide block mb-2">
                                             <i class="fa-solid fa-users text-blue-400 mr-1"></i>Asignado a
@@ -239,16 +237,16 @@
                                         </div>
                                     </div>
 
-                                    <!-- Fotos -->
+                                    <!-- Fila: Fotos -->
                                     <div class="p-2.5">
                                         <span class="text-slate-400 text-xs font-medium uppercase tracking-wide block mb-2">
                                             <i class="fa-solid fa-camera text-blue-400 mr-1"></i>Evidencia fotográfica
                                         </span>
                                         <div class="flex flex-wrap gap-3">
                                             @forelse($reporte->fotos as $foto)
-                                                <div class="relative group hover:scale-105 transition-all duration-200">
+                                                <div class="relative group">
                                                     <img src="{{ asset('storage/' . $foto->ruta) }}" alt="Foto del reporte"
-                                                        class="w-24 h-24 sm:w-28 sm:h-28 object-cover rounded-lg shadow-md hover:shadow-xl transition-all duration-200  cursor-pointer"
+                                                        class="w-24 h-24 sm:w-28 sm:h-28 object-cover rounded-lg shadow-md hover:shadow-xl transition-all duration-200 hover:scale-105 cursor-pointer"
                                                         onclick="openImageModal('{{ asset('storage/' . $foto->ruta) }}')">
                                                     <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 rounded-lg transition-all duration-200 flex items-center justify-center pointer-events-none">
                                                         <i class="fa-solid fa-search-plus text-white text-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200"></i>
@@ -264,7 +262,6 @@
                                             @endforelse
                                         </div>
                                     </div>
-                                    
 
                                 </div>
                             </div>

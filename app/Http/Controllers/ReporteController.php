@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Notifications\NuevoReporteNotification;
 
 use App\Models\Area;
+use App\Models\EstadoReporte;
 use App\Models\Severidad;
 
 class ReporteController extends Controller
@@ -122,7 +123,20 @@ class ReporteController extends Controller
         //Rol del usuario autenticado
         $rol = Auth::user()->rol->nombre;
 
-        return view("general.reportes.show", compact('reporte','encargados','rol'));
+        // Solo si es Administrador se consultan estos catálogos
+        //TODO: Faltaría tambien validar la info para el panel de ENCARGADOS
+        if ($rol === 'Administrador') {
+            $estados = EstadoReporte::all();
+            $severidades = Severidad::all();
+        } else {
+            //Vacios
+            $estados = collect();
+            $severidades = collect();
+        }
+
+        //dd($reporte);
+
+        return view("general.reportes.show", compact('reporte','encargados','rol','estados', 'severidades'));
     }
 
     public function update_state(Request $request, $id)
