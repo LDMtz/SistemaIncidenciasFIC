@@ -13,6 +13,9 @@ use App\Models\Area;
 use App\Models\EstadoReporte;
 use App\Models\Severidad;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NuevoReporteCreado as NuevoReporteCreadoMail;
+
 class ReporteController extends Controller
 {
     public function admin_index(Request $request)
@@ -105,7 +108,15 @@ class ReporteController extends Controller
 
         // Notificar a todos los usuarios responsables (encargados o administradores [en caso de que el area no tenga encargados])
         foreach ($usuarios as $usuario) {
+            //Guarda notificacion en la BD
             $usuario->notify(new NuevoReporteNotification($reporte));
+            //Envia un correo
+            try{
+                Mail::to($usuario->email)->send(new NuevoReporteCreadoMail($reporte));
+            } catch (\Throwable $e) {
+                //Si falla no hacemos nada por el momento
+            }
+
         }
 
         return redirect()->route('home')->with('success', '¡Reporte enviado correctamente!');
