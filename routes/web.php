@@ -60,7 +60,6 @@ Route::middleware("auth")->group(function () {
         Route::delete('admin/areas/eliminar/{id}', [AreaController::class, 'destroy'])->name('admin.areas.eliminar');
 
         Route::get('admin/reportes', [ReporteController::class, 'admin_index'])->name('admin.reportes.index');
-        Route::get('admin/reportes/{id}', [ReporteController::class, 'review'])->name('admin.reportes.revisar');
         //Route::patch('admin/reportes/actualizar/{id}/estado', [ReporteController::class, 'update_state'])->name('admin.reportes.estado.actualizar');
         //Route::patch('admin/reportes/actualizar/{id}/severidad', [ReporteController::class, 'update_severity'])->name('admin.reportes.severidad.actualizar');
         Route::patch('admin/reportes/actualizar/{id}', [ReporteController::class, 'admin_update'])->name('admin.reportes.actualizar');
