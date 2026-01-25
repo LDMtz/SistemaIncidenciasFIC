@@ -8,7 +8,7 @@
     @vite('resources/js/header-scripts.js') 
     @vite('resources/js/generic-modal.js')
 </head>
-<body class="bg-bg-main flex flex-col min-h-screen" data-theme="dark">
+<body class="bg-bg-main flex flex-col min-h-screen">
     <x-logout-modal/>
     <x-header />
     <main class="flex-grow flex py-6 text-text-1">

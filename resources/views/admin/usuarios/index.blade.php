@@ -9,9 +9,7 @@
             <!-- Subtitulo -->
             <h2 class="font-montserrat text-main-2 font-semibold mb-1 sm:text-lg text-base"><i class="fa-solid fa-user-plus mr-1"></i> Crear usuario</h2>
 
-            <div class="rounded-lg px-5 py-3 w-full border-1 font-roboto light:shadow-md light:shadow-slate-950/25 mb-6
-                    light:bg-slate-50 light:border-white
-                    dark:bg-slate-800 light: border-slate-700">
+            <div class="rounded-lg px-5 py-3 w-full border-1 border-slate-700 font-roboto mb-6 bg-slate-800">
 
                 <form action="{{ route('admin.usuarios.guardar') }}" method="POST" class="grid grid-cols-1 md:grid-cols-4 gap-x-15 gap-y-3 text-sm">
                     @csrf
@@ -21,7 +19,7 @@
                     <div class="space-y-1">
                         <label class="block text-xs font-semibold text-main-3" for="apellidos">Apellidos:</label>
                         <input type="text" name="apellidos" value="{{ old('apellidos') }}" placeholder="Apellidos" required autocomplete="off"
-                            class="w-full bg-main-7 dark:bg-main-7/80 text-text-1 rounded-md border-1 border-main-1 px-3 py-0.5 focus:outline-none focus:ring-2 focus:border-0 focus:ring-main-2"
+                            class="w-full bg-main-7/80 text-text-1 rounded-md border-1 border-main-1 px-3 py-0.5 focus:outline-none focus:ring-2 focus:border-0 focus:ring-main-2"
                         />
                         @error('apellidos')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -31,7 +29,7 @@
                     <div class="space-y-1">
                         <label class="block text-xs font-semibold text-main-3" for="nombres">Nombres:</label>
                         <input type="text" name="nombres" value="{{ old('nombres') }}" placeholder="Nombres" required autocomplete="off"
-                            class="w-full bg-main-7 dark:bg-main-7/80 text-text-1 rounded-md border-1 border-main-1 px-3 py-0.5 focus:outline-none focus:ring-2 focus:border-0 focus:ring-main-2"
+                            class="w-full bg-main-7/80 text-text-1 rounded-md border-1 border-main-1 px-3 py-0.5 focus:outline-none focus:ring-2 focus:border-0 focus:ring-main-2"
                         />
                         @error('nombres')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -40,7 +38,7 @@
                     <div class="space-y-1">
                         <label class="block text-xs font-semibold text-main-3" for="clave">Contraseña:</label>
                         <input type="password" name="clave" placeholder="" required autocomplete="off"
-                            class="w-full bg-main-7 dark:bg-main-7/80 text-text-1 rounded-md border-1 border-main-1 px-3 py-0.5 focus:outline-none focus:ring-2 focus:border-0 focus:ring-main-2"
+                            class="w-full bg-main-7/80 text-text-1 rounded-md border-1 border-main-1 px-3 py-0.5 focus:outline-none focus:ring-2 focus:border-0 focus:ring-main-2"
                         />
                         @error('clave')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -49,7 +47,7 @@
                     <div class="space-y-1">
                         <label class="block text-xs font-semibold text-main-3" for="clave_confirmation">Confirmar contraseña:</label>
                         <input type="password" name="clave_confirmation" placeholder="" required autocomplete="off"
-                            class="w-full bg-main-7 dark:bg-main-7/80 text-text-1 rounded-md border-1 border-main-1 px-3 py-0.5 focus:outline-none focus:ring-2 focus:border-0 focus:ring-main-2"
+                            class="w-full bg-main-7/80 text-text-1 rounded-md border-1 border-main-1 px-3 py-0.5 focus:outline-none focus:ring-2 focus:border-0 focus:ring-main-2"
                         />
                         @error('clave_confirmation')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -61,7 +59,7 @@
                     <div class="space-y-1">
                         <label class="block text-xs font-semibold text-main-3" for="correo">Correo:</label>
                         <input type="email" name="correo" value="{{ old('correo') }}" placeholder="Correo" required autocomplete="off"
-                            class="w-full bg-main-7 dark:bg-main-7/80 text-text-1 rounded-md border-1 border-main-1 px-3 py-0.5 focus:outline-none focus:ring-2 focus:border-0 focus:ring-main-2"
+                            class="w-full bg-main-7/80 text-text-1 rounded-md border-1 border-main-1 px-3 py-0.5 focus:outline-none focus:ring-2 focus:border-0 focus:ring-main-2"
                         />
                          @error('correo')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -70,7 +68,7 @@
                     <div class="space-y-1">
                         <label class="block text-xs font-semibold text-main-3" for="telefono">Teléfono:</label>
                         <input type="text" name="telefono" value="{{ old('telefono') }}" placeholder="Teléfono" required autocomplete="off"
-                            class="w-full bg-main-7 dark:bg-main-7/80 text-text-1 rounded-md border-1 border-main-1 px-3 py-0.5 focus:outline-none focus:ring-2 focus:border-0 focus:ring-main-2"
+                            class="w-full bg-main-7/80 text-text-1 rounded-md border-1 border-main-1 px-3 py-0.5 focus:outline-none focus:ring-2 focus:border-0 focus:ring-main-2"
                         />
                         @error('telefono')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -79,7 +77,7 @@
                     <div class="space-y-1">
                         <label class="block text-xs font-semibold text-main-3" for="rol">Rol:</label>
                         <select name="rol"
-                        class="w-full bg-main-7 dark:bg-main-7/80 text-text-1 rounded-md border-1 border-main-1 px-3 py-0.5 focus:outline-none focus:ring-2 focus:border-0 focus:ring-main-2"
+                        class="w-full bg-main-7/80 text-text-1 rounded-md border-1 border-main-1 px-3 py-0.5 focus:outline-none focus:ring-2 focus:border-0 focus:ring-main-2"
                         >
                         <option value="1" {{ old('rol') == 1 ? 'selected' : '' }}>Administrador</option>
                         <option value="2" {{ old('rol') == 2 ? 'selected' : '' }}>Encargado</option>
@@ -107,7 +105,7 @@
                 <div class="flex items-center md:gap-2 gap-1">
                     @php $newSortOrder = $sortOrder === 'asc' ? 'desc' : 'asc';@endphp
                     <a href="{{ route('admin.usuarios.index', ['sort' => $newSortOrder]) }}"
-                    class="inline-flex items-center px-2 py-1 text-xs font-montserrat border rounded hover:bg-slate-200 dark:hover:bg-slate-700">
+                    class="inline-flex items-center px-2 py-1 text-xs font-montserrat border rounded hover:bg-slate-700">
                         <i class="fa-solid fa-calendar-days mr-1"></i>
                         <span class="hidden md:block">Ordenar por fecha</span>
                         @if ($sortOrder === 'asc')
@@ -182,9 +180,9 @@
 <!-- Modal Buscar -->
 <div id="search-modal" class="hidden">
     <div class="flex fixed top-0 left-0 w-full h-full bg-black/50 z-50 justify-center items-center ">
-        <div class="dark:bg-slate-800 light:bg-slate-50 rounded-lg shadow-lg w-full max-w-md overflow-hidden border dark:border-slate-700 light:border-slate-300 m-10">
+        <div class="bg-slate-800 rounded-lg shadow-lg w-full max-w-md overflow-hidden border border-slate-700 m-10">
             <!-- Modal header -->
-            <div class="flex justify-between items-center border-b dark:border-slate-700 light:border-slate-300 px-5 py-3 dark:bg-slate-700/60 light:bg-slate-100">
+            <div class="flex justify-between items-center border-b border-slate-700 px-5 py-3 bg-slate-700/60">
                 <h3 class="font-roboto text-sm font-semibold text-text-1">BUSCAR</h3>
                 <button onclick="closeModal('search-modal')"  class="text-slate-400 hover:text-red-500 cursor-pointer">
                     <i class="fa-solid fa-x text-xs"></i>
@@ -197,20 +195,20 @@
                     <!-- Contenedor del Select -->
                     <div class="mb-4">
                         <label for="campo" class="text-sm font-medium text-main-3">Filtrar por:</label>
-                        <select name="campo" class="w-full mt-1 border bg-transparent dark:border-slate-500 light:border-gray-800 dark:text-slate-300 light:text-slate-700 rounded-lg p-1 outline-none">
-                            <option class="dark:bg-slate-600 text-xs" value="nombres" {{ request('campo') == 'nombres' ? 'selected' : '' }}>Nombre</option>
-                            <option class="dark:bg-slate-600 text-xs" value="apellidos" {{ request('campo') == 'apellidos' ? 'selected' : '' }}>Apellidos</option>
-                            <option class="dark:bg-slate-600 text-xs" value="email" {{ request('campo') == 'email' ? 'selected' : '' }}>Correo</option>
-                            <option class="dark:bg-slate-600 text-xs" value="telefono" {{ request('campo') == 'telefono' ? 'selected' : '' }}>Teléfono</option>
-                            <option class="dark:bg-slate-600 text-xs" value="estado" {{ request('campo') == 'estado' ? 'selected' : '' }}>Estado (activo/inactivo)</option>
-                            <option class="dark:bg-slate-600 text-xs" value="rol" {{ request('campo') == 'rol' ? 'selected' : '' }}>Rol (Admin/Encargado,Común)</option>
+                        <select name="campo" class="w-full mt-1 border bg-transparent border-slate-500 text-slate-300 rounded-lg p-1 outline-none">
+                            <option class="bg-slate-600 text-xs" value="nombres" {{ request('campo') == 'nombres' ? 'selected' : '' }}>Nombre</option>
+                            <option class="bg-slate-600 text-xs" value="apellidos" {{ request('campo') == 'apellidos' ? 'selected' : '' }}>Apellidos</option>
+                            <option class="bg-slate-600 text-xs" value="email" {{ request('campo') == 'email' ? 'selected' : '' }}>Correo</option>
+                            <option class="bg-slate-600 text-xs" value="telefono" {{ request('campo') == 'telefono' ? 'selected' : '' }}>Teléfono</option>
+                            <option class="bg-slate-600 text-xs" value="estado" {{ request('campo') == 'estado' ? 'selected' : '' }}>Estado (activo/inactivo)</option>
+                            <option class="bg-slate-600 text-xs" value="rol" {{ request('campo') == 'rol' ? 'selected' : '' }}>Rol (Admin/Encargado,Común)</option>
                         </select>
                     </div>
             
                     <!-- Contenedor del Input -->
                     <div class="mb-4">
                         <label for="valor" class="text-sm font-medium text-main-3">Ingresa el dato:</label>
-                        <input name="valor" type="text" class="w-full mt-1 border bg-transparent dark:border-slate-500 light:border-gray-800 dark:text-slate-300 light:text-slate-700 rounded-lg p-1 outline-none" placeholder="Escribe el valor...">
+                        <input name="valor" type="text" class="w-full mt-1 border bg-transparent border-slate-500 text-slate-300 rounded-lg p-1 outline-none" placeholder="Escribe el valor...">
                     </div>
             
                     <!-- Contenedor del Botón -->
@@ -230,7 +228,7 @@
 <!-- Modal show-user -->
 <div id="show-user-modal" class="hidden">
     <div class="flex fixed top-0 left-0 w-full h-full bg-black/50 z-50 justify-center items-center ">
-        <div class="dark:bg-slate-800 light:bg-slate-50 rounded-lg shadow-lg w-full max-w-md overflow-hidden border-2 dark:border-slate-700 light:border-slate-300 m-10">
+        <div class="bg-slate-800 rounded-lg shadow-lg w-full max-w-md overflow-hidden border-2 border-slate-700 m-10">
 
             <!-- Spinner de carga -->
             <div id="usuario-loading-show" class="hidden p-3">
@@ -246,20 +244,20 @@
 
             <!-- Contenido -->
             <div id="usuario-detalles-show" class="">
-                <div class="relative light:bg-slate-300/60 dark:bg-slate-700/60 h-14 md:h-17 px-5 border-b-2 dark:border-slate-700 light:border-slate-300">
+                <div class="relative bg-slate-700/60 h-14 md:h-17 px-5 border-b-2 border-slate-700">
                     <div class="absolute -bottom-8 md:-bottom-10">
-                        <img id="fotoShow" draggable="false" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 light:border-slate-300 dark:border-slate-700" src="" alt="Perfil">
+                        <img id="fotoShow" draggable="false" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-slate-700" src="" alt="Perfil">
                     </div>
                     <button onclick="closeModal('show-user-modal')" class="absolute top-2 right-4 text-slate-400 hover:text-red-500 cursor-pointer">
                         <i class="fa-solid fa-x text-xs"></i>
                     </button>
                     <label id="estadoActivoShow" class="hidden absolute top-20 right-7 items-center text-[0.65rem] md:text-xs font-black font-roboto leading-none">
-                        <span class="self-center w-[0.40rem] h-[0.40rem] md:w-2 md:h-2 mr-2 rounded-full dark:bg-green-400 light:bg-green-600"></span>
-                        <span class="dark:text-green-400 light:text-green-600 leading-none">ACTIVO</span>
+                        <span class="self-center w-[0.40rem] h-[0.40rem] md:w-2 md:h-2 mr-2 rounded-full bg-green-400"></span>
+                        <span class="text-green-400 leading-none">ACTIVO</span>
                     </label>
                     <label id="estadoInactivoShow" class="hidden absolute top-20 right-7 items-center text-[0.65rem] md:text-xs font-black font-roboto leading-none">
-                        <span class="self-center w-[0.40rem] h-[0.40rem] md:w-2 md:h-2 mr-2 rounded-full dark:bg-red-400 light:bg-red-600"></span>
-                        <span class="dark:text-red-400 light:text-red-600 leading-none">INACTIVO</span>
+                        <span class="self-center w-[0.40rem] h-[0.40rem] md:w-2 md:h-2 mr-2 rounded-full bg-red-400 "></span>
+                        <span class="text-red-400 leading-none">INACTIVO</span>
                     </label>
                 </div>
 
@@ -331,7 +329,7 @@
 <!-- Modal edit-user -->
 <div id="edit-user-modal" class="hidden">
     <div class="flex fixed top-0 left-0 w-full h-full bg-black/50 z-50 justify-center items-center ">
-        <div class="dark:bg-slate-800 light:bg-slate-50 rounded-lg shadow-lg w-full max-w-md overflow-hidden border-2 dark:border-slate-700 light:border-slate-300 m-10">
+        <div class="bg-slate-800 rounded-lg shadow-lg w-full max-w-md overflow-hidden border-2 border-slate-700 m-10">
 
             <!-- Spinner de carga -->
             <div id="usuario-loading-edit" class="hidden p-3">
@@ -347,20 +345,20 @@
 
             <!-- Contenido -->
             <div id="usuario-detalles-edit" class="">
-                <div class="relative light:bg-slate-300/60 dark:bg-slate-700/60 h-14 md:h-17 px-5 border-b-2 dark:border-slate-700 light:border-slate-300">
+                <div class="relative bg-slate-700/60 h-14 md:h-17 px-5 border-b-2 border-slate-700">
                     <div class="absolute -bottom-8 md:-bottom-10">
-                        <img id="fotoEdit" draggable="false" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 light:border-slate-300 dark:border-slate-700" src="" alt="Perfil">
+                        <img id="fotoEdit" draggable="false" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-slate-700" src="" alt="Perfil">
                     </div>
                     <button onclick="closeModal('edit-user-modal')" class="absolute top-2 right-4 text-slate-400 hover:text-red-500 cursor-pointer">
                         <i class="fa-solid fa-x text-xs"></i>
                     </button>
                     <label id="estadoActivoEdit" class="hidden absolute top-20 right-7 items-center text-[0.65rem] md:text-xs font-black font-roboto leading-none">
-                        <span class="self-center w-[0.40rem] h-[0.40rem] md:w-2 md:h-2 mr-2 rounded-full dark:bg-green-400 light:bg-green-600"></span>
-                        <span class="dark:text-green-400 light:text-green-600 leading-none">ACTIVO</span>
+                        <span class="self-center w-[0.40rem] h-[0.40rem] md:w-2 md:h-2 mr-2 rounded-full bg-green-400"></span>
+                        <span class="text-green-400 leading-none">ACTIVO</span>
                     </label>
                     <label id="estadoInactivoEdit" class="hidden absolute top-20 right-7 items-center text-[0.65rem] md:text-xs font-black font-roboto leading-none">
-                        <span class="self-center w-[0.40rem] h-[0.40rem] md:w-2 md:h-2 mr-2 rounded-full dark:bg-red-400 light:bg-red-600"></span>
-                        <span class="dark:text-red-400 light:text-red-600 leading-none">INACTIVO</span>
+                        <span class="self-center w-[0.40rem] h-[0.40rem] md:w-2 md:h-2 mr-2 rounded-full bg-red-400"></span>
+                        <span class="text-red-400 leading-none">INACTIVO</span>
                     </label>
                 </div>
 
@@ -418,9 +416,9 @@
                             <div class="text-text-1">
                                 <label class="text-main-3 block">Rol</label>
                                 <select id="rolSelectEdit" name="rol" class="bg-transparent border border-slate-500 px-2 py-1.5 md:px-3 md:py-2 rounded w-full focus:outline-none focus:ring-0 focus:border-main-3">
-                                    <option class="dark:bg-slate-600 text-xs" value="1">Administrador</option>
-                                    <option class="dark:bg-slate-600 text-xs" value="2">Encargado</option>
-                                    <option class="dark:bg-slate-600 text-xs" value="3">Común</option>
+                                    <option class="bg-slate-600 text-xs" value="1">Administrador</option>
+                                    <option class="bg-slate-600 text-xs" value="2">Encargado</option>
+                                    <option class="bg-slate-600 text-xs" value="3">Común</option>
                                 </select>
                             </div>
 
@@ -428,8 +426,8 @@
                             <div class="text-text-1">
                                 <label class="text-main-3 block">Estado</label>
                                 <select id="estadoSelectEdit" name="estado" class="bg-transparent border border-slate-500 px-2 py-1.5 md:px-3 md:py-2 rounded w-full focus:outline-none focus:ring-0 focus:border-main-3">
-                                    <option class="dark:bg-slate-600 text-xs" value="1">Activo</option>
-                                    <option class="dark:bg-slate-600 text-xs" value="0">Inactivo</option>
+                                    <option class="bg-slate-600 text-xs" value="1">Activo</option>
+                                    <option class="bg-slate-600 text-xs" value="0">Inactivo</option>
                                 </select>
                             </div>
 

@@ -14,7 +14,7 @@
                 <div class="flex items-center md:gap-2 gap-1">
                     @php $newSortOrder = $sortOrder === 'asc' ? 'desc' : 'asc';@endphp
                     <a href="{{ route('admin.reportes.index', ['sort' => $newSortOrder]) }}"
-                    class="inline-flex items-center px-2 py-1 text-xs font-montserrat border rounded hover:bg-slate-200 dark:hover:bg-slate-700">
+                    class="inline-flex items-center px-2 py-1 text-xs font-montserrat border rounded hover:bg-slate-700">
                         <i class="fa-solid fa-calendar-days mr-1"></i>
                         <span class="hidden md:block">Ordenar por fecha</span>
                         @if ($sortOrder === 'asc')
@@ -78,9 +78,9 @@
 <!-- Modal Buscar -->
 <div id="search-modal" class="hidden">
     <div class="flex fixed top-0 left-0 w-full h-full bg-black/50 z-50 justify-center items-center ">
-        <div class="dark:bg-slate-800 light:bg-slate-50 rounded-lg shadow-lg w-full max-w-md overflow-hidden border dark:border-slate-700 light:border-slate-300 m-10">
+        <div class="bg-slate-800 rounded-lg shadow-lg w-full max-w-md overflow-hidden border border-slate-700 m-10">
             <!-- Modal header -->
-            <div class="flex justify-between items-center border-b dark:border-slate-700 light:border-slate-300 px-5 py-3 dark:bg-slate-700/60 light:bg-slate-100">
+            <div class="flex justify-between items-center border-b border-slate-700 px-5 py-3 bg-slate-700/60 ">
                 <h3 class="font-roboto text-sm font-semibold text-text-1">BUSCAR</h3>
                 <button onclick="closeModal('search-modal')"  class="text-slate-400 hover:text-red-500 cursor-pointer">
                     <i class="fa-solid fa-x text-xs"></i>
@@ -93,19 +93,19 @@
                     <!-- Contenedor del Select -->
                     <div class="mb-4">
                         <label for="campo" class="text-sm font-medium text-main-3">Filtrar por:</label>
-                        <select name="campo" class="w-full mt-1 border bg-transparent dark:border-slate-500 light:border-gray-800 dark:text-slate-300 light:text-slate-700 rounded-lg p-1 outline-none">
-                            <option class="dark:bg-slate-600 text-xs" value="folio" {{ request('campo') == 'folio' ? 'selected' : '' }}>Folio</option>
-                            <option class="dark:bg-slate-600 text-xs" value="area" {{ request('campo') == 'area' ? 'selected' : '' }}>Área</option>
-                            <option class="dark:bg-slate-600 text-xs" value="severidad" {{ request('campo') == 'severidad' ? 'selected' : '' }}>Severidad</option>
-                            <option class="dark:bg-slate-600 text-xs" value="estado" {{ request('campo') == 'estado' ? 'selected' : '' }}>Estado</option>
-                            <option class="dark:bg-slate-600 text-xs" value="fecha" {{ request('campo') == 'fecha' ? 'selected' : '' }}>Fecha</option>
+                        <select name="campo" class="w-full mt-1 border bg-transparent border-slate-500 text-slate-300 rounded-lg p-1 outline-none">
+                            <option class="bg-slate-600 text-xs" value="folio" {{ request('campo') == 'folio' ? 'selected' : '' }}>Folio</option>
+                            <option class="bg-slate-600 text-xs" value="area" {{ request('campo') == 'area' ? 'selected' : '' }}>Área</option>
+                            <option class="bg-slate-600 text-xs" value="severidad" {{ request('campo') == 'severidad' ? 'selected' : '' }}>Severidad</option>
+                            <option class="bg-slate-600 text-xs" value="estado" {{ request('campo') == 'estado' ? 'selected' : '' }}>Estado</option>
+                            <option class="bg-slate-600 text-xs" value="fecha" {{ request('campo') == 'fecha' ? 'selected' : '' }}>Fecha</option>
                         </select>
                     </div>
             
                     <!-- Contenedor del Input -->
                     <div class="mb-4">
                         <label for="valor" class="text-sm font-medium text-main-3">Ingresa el dato:</label>
-                        <input name="valor" type="text" class="w-full mt-1 border bg-transparent dark:border-slate-500 light:border-gray-800 dark:text-slate-300 light:text-slate-700 rounded-lg p-1 outline-none" placeholder="Escribe el valor...">
+                        <input name="valor" type="text" class="w-full mt-1 border bg-transparent border-slate-500 text-slate-300 rounded-lg p-1 outline-none" placeholder="Escribe el valor...">
                     </div>
             
                     <!-- Contenedor del Botón -->

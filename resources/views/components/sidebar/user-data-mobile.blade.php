@@ -1,4 +1,4 @@
-<div class="flex items-center gap-3 px-1 pb-3 border-b dark:border-bg-logo light:border-bg-header">
+<div class="flex items-center gap-3 px-1 pb-3 border-b border-bg-logo">
     @auth
         @php $usuario = Auth::user(); @endphp
     <div class="w-9 h-9 rounded-full overflow-hidden">

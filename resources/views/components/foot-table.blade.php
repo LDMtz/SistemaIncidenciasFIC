@@ -26,23 +26,23 @@
                 <span class="px-2 py-1 text-slate-500">&lt;</span>
             @else
                 <a href="{{ $paginator->previousPageUrl() . (request('sort') ? '&sort=' . request('sort') : '') }}"
-                class="px-2 py-1 rounded dark:hover:bg-slate-600 light:hover:bg-slate-200">&lt;</a>
+                class="px-2 py-1 rounded hover:bg-slate-600 ">&lt;</a>
             @endif
 
             {{-- Botones de página con solo 3 visibles --}}
             @for ($i = $start; $i <= $end; $i++)
                 @if ($i == $currentPage)
-                    <span class="px-2 py-1 dark:bg-slate-900 light:bg-slate-400 text-text-1 rounded">{{ $i }}</span>
+                    <span class="px-2 py-1 bg-slate-900 text-text-1 rounded">{{ $i }}</span>
                 @else
                     <a href="{{ $paginator->url($i) . (request('sort') ? '&sort=' . request('sort') : '') }}"
-                    class="px-2 py-1 rounded dark:hover:bg-slate-600 light:hover:bg-slate-200">{{ $i }}</a>
+                    class="px-2 py-1 rounded hover:bg-slate-600 ">{{ $i }}</a>
                 @endif
             @endfor
 
             {{-- Botón Siguiente --}}
             @if ($paginator->hasMorePages())
                 <a href="{{ $paginator->nextPageUrl() . (request('sort') ? '&sort=' . request('sort') : '') }}"
-                class="px-2 py-1 rounded dark:hover:bg-slate-600 light:hover:bg-slate-200">&gt;</a>
+                class="px-2 py-1 rounded hover:bg-slate-600 ">&gt;</a>
             @else
                 <span class="px-2 py-1 text-slate-500">&gt;</span>
             @endif

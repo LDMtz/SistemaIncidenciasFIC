@@ -22,7 +22,7 @@
 
             <x-sidebar.user-data-mobile/>
 
-            <div class="border-b dark:border-bg-logo light:border-bg-header pb-3 mb-2">
+            <div class="border-b border-bg-logo pb-3 mb-2">
                 <x-sidebar.item route="usuarios.perfil" icon="fa-solid fa-circle-user" screen="mobile">Perfil</x-sidebar.item>
                 <x-sidebar.item route="notificaciones.index" icon="fa-solid fa-bell" screen="mobile">Notificaciones</x-sidebar.item>
             </div>
@@ -30,7 +30,7 @@
             <x-sidebar.item route="home" icon="fa-solid fa-house" screen="mobile">Inicio</x-sidebar.item>
             <x-sidebar.item route="home" icon="fa-solid fa-folder-open" screen="mobile">Reportes</x-sidebar.item>
 
-            <div class="border-t dark:border-bg-logo light:border-bg-header pt-3 mt-1">
+            <div class="border-t border-bg-logo pt-3 mt-1">
                 <x-sidebar.btn-logout screen="mobile"/>
             </div>
 
@@ -39,5 +39,5 @@
 </div>
 
 @push('scripts')
-    @vite('resources/js/sidebar-comun.js')
+    @vite('resources/js/sidebar.js')
 @endpush

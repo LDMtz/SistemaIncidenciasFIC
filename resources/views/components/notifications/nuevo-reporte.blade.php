@@ -1,8 +1,8 @@
 
 <!-- Cambio de rol -->
-<div class="rounded-md w-full max-w-3xl overflow-hidden light:shadow-md mb-3 opacity-100 scale-100">
+<div class="rounded-md w-full max-w-3xl overflow-hidden mb-3 opacity-100 scale-100">
     <!-- header -->
-    <div onclick="" class="noti-header flex flex-wrap items-start px-3 py-2 sm:px-4 sm:py-3 light:bg-gray-200 dark:bg-slate-700 cursor-pointer">
+    <div onclick="" class="noti-header flex flex-wrap items-start px-3 py-2 sm:px-4 sm:py-3 bg-slate-700 cursor-pointer">
         <div class="flex flex-1 min-w-0 mr-3">
             <div class="mr-2 flex items-start pt-[3px]">
                 <i class="{{$notification->data['icono']}} text-text-1 text-xs sm:text-sm leading-none"></i>
@@ -21,7 +21,7 @@
         </span>
     </div>
     <!-- Body -->
-    <div class="noti-header hidden flex-col items-start gap-3 text-xs sm:text-sm text-text-1 px-3 py-2 sm:px-4 sm:py-3 light:bg-gray-300 dark:bg-slate-800">
+    <div class="noti-header hidden flex-col items-start gap-3 text-xs sm:text-sm text-text-1 px-3 py-2 sm:px-4 sm:py-3 bg-slate-800">
         <div class="flex gap-3">
             <p>
                 {{ $notification->data['mensaje'] }} <span class="text-main-3">{{$notification->data['area']}}</span>
@@ -44,8 +44,7 @@
                     @csrf
                     @method('PATCH')
                     <button class="flex items-center gap-1 border-1
-                            dark:text-green-400 dark:border-green-400 dark:hover:bg-green-800 dark:hover:text-white
-                            light:text-green-700 light:border-green-700 light:hover:bg-green-500 light:hover:text-white 
+                            text-green-400 border-green-400 hover:bg-green-800 hover:text-white
                             px-3 py-[0.15rem] sm:px-4 sm:py-1 rounded-lg">
                         <i class="fa-solid fa-check"></i>Leída
                     </button>
@@ -57,8 +56,7 @@
                 @csrf
                 @method('DELETE')
                 <button class="flex items-center gap-1 border-1 
-                    dark:text-red-400 dark:border-red-400 dark:hover:bg-red-800 dark:hover:text-white 
-                    light:text-red-700 light:border-red-700 light:hover:bg-red-500 light:hover:text-white
+                    text-red-400 border-red-400 hover:bg-red-800 hover:text-white
                     px-3 py-[0.15rem] sm:px-4 sm:py-1 rounded-lg">
                     <i class="fa-solid fa-xmark"></i> Borrar
                 </button>

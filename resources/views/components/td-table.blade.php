@@ -20,15 +20,15 @@
             <!-- Celda de estado, recibe un bool -->
             @if($content)
                 <!-- Si el estado es 'true' -->
-                <label class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold light:bg-green-400/60 dark:bg-green-900/70">
+                <label class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semiboldbg-green-900/70">
                     <span class="w-2 h-2 mr-2 rounded-full bg-green-500"></span>
-                    <span class="dark:text-green-400 light:text-green-600">Activo</span>
+                    <span class="text-green-400">Activo</span>
                 </label>
             @else
                 <!-- Si el estado es 'false' -->
-                <label class="inline-flex items-center px-2 py-1 rounded-full text-xs  font-semibold light:bg-red-400/60 dark:bg-red-900/70">
+                <label class="inline-flex items-center px-2 py-1 rounded-full text-xs  font-semibold bg-red-900/70">
                     <span class="w-2 h-2 mr-2 rounded-full bg-red-500"></span>
-                    <span class="dark:text-red-400 light:text-red-600">Inactivo</span>
+                    <span class="text-red-400">Inactivo</span>
                 </label>
             @endif
         @break
@@ -36,21 +36,21 @@
         @case('role')
             @switch($content)
                 @case(1)
-                    <div class="inline-block rounded-md border px-2 py-0.5 border-violet-500 dark:bg-violet-950 light:bg-violet-200">
+                    <div class="inline-block rounded-md border px-2 py-0.5 border-violet-500 bg-violet-950 ">
                         <span class="font-montserrat font-semibold text-violet-500 text-xs">
                             Administrador
                         </span>
                     </div>
                 @break
                 @case(2)
-                    <div class="inline-block rounded-md border px-2 py-0.5 border-blue-500 dark:bg-blue-950 light:bg-blue-200">
+                    <div class="inline-block rounded-md border px-2 py-0.5 border-blue-500 bg-blue-950">
                         <span class="font-montserrat font-semibold text-blue-500 text-xs">
                             Encargado
                         </span>
                     </div>
                 @break
                 @case(3)
-                    <div class="inline-block rounded-md border px-2 py-0.5 border-green-500 dark:bg-green-950 light:bg-green-200">
+                    <div class="inline-block rounded-md border px-2 py-0.5 border-green-500 bg-green-950">
                         <span class="font-montserrat font-semibold text-green-500 text-xs">
                             Común
                         </span>

@@ -1,7 +1,7 @@
 @props(['screen'])
 
 @if($screen == 'desktop')
-    <header class="border-b dark:border-bg-logo light:border-bg-header pb-3 mb-3">
+    <header class="border-b border-bg-logo pb-3 mb-3">
         <!-- Usamos un contenedor inline-block para logo y título -->
         <div class="whitespace-nowrap">
             <button id="toggle-expand" class="inline-block w-10 h-10 bg-bg-logo rounded-sm text-center align-middle cursor-pointer">
@@ -9,11 +9,11 @@
             </button>
             <!-- Título: inline-block para poder hacer transition en ancho/opacidad -->
             <span class="sidebar-title inline-block align-middle ml-2 font-black leading-5 transition-[width,opacity,margin] duration-300 whitespace-nowrap">
-                <span class="dark:text-white light:text-blue-fic block">SECRETARÍA</span>
+                <span class="text-white block">SECRETARÍA</span>
                 <span class="text-yellow-fic block">ACADÉMICA</span>
             </span>
             <!-- Botón colapsar -->
-            <button id="toggle-collapse" class="sidebar-collapse-btn inline-block align-middle ml-2 text-text-1 text-2xl hover:text-main-2 hover:cursor-pointer transition-[width,opacity,margin] duration-300 whitespace-nowrap">
+            <button id="toggle-collapse" class="sidebar-collapse-btn inline-block align-middle ml-4 text-text-1 text-2xl hover:text-main-2 hover:cursor-pointer transition-[width,opacity,margin] duration-300 whitespace-nowrap">
                 <i class="fa-solid fa-circle-left"></i>
             </button>
         </div>
@@ -25,7 +25,7 @@
         </div>
 
         <label class="font-black text-sm">
-            <span class="dark:text-white light:text-blue-fic mr-0.5">SECRETARÍA</span>
+            <span class="text-white mr-0.5">SECRETARÍA</span>
             <span class="text-yellow-fic">ACADÉMICA</span>
         </label>
 

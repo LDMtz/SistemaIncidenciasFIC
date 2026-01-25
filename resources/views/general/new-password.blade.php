@@ -15,7 +15,7 @@
         </div>
 
         <div class="flex-1 flex items-center justify-center px-4">
-            <div class="rounded-lg light:shadow-lg border-2 dark:border-slate-700 light:border-slate-300 p-4 sm:p-5 dark:bg-slate-900 light:bg-white">
+            <div class="rounded-lg border-2 border-slate-700 p-4 sm:p-5 bg-slate-900">
                 <h2 class="font-montserrat text-lg md:text-xl font-bold text-text-1 text-center mb-5">Actualizar contraseña</h2>
 
                 <form action="{{route('clave.actualizar',auth()->id())}}" method="POST">

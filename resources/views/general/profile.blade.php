@@ -21,7 +21,7 @@
             <!-- Card -->
             <div class="flex justify-center items-center ">
                 <div class="rounded-lg shadow-lg w-full max-w-md overflow-hidden border-1 
-                     dark:border-slate-600 light:border-slate-400 dark:bg-slate-800 light:bg-slate-50">
+                     border-slate-600 bg-slate-800">
                     <div class="p-6 max-w-2xl w-full mx-auto">
 
                         <h2 class="font-montserrat text-lg md:text-xl font-bold text-text-1 text-center mb-2">Datos del usuario</h2>
@@ -29,7 +29,7 @@
                             @csrf
                             @method('PATCH')
                             <div class="flex justify-center mb-5 md:mb-10 relative">
-                                <div class="w-22 h-22 md:w-28 md:h-28 rounded-full border-3 overflow-hidden dark:border-slate-500 light:border-slate-600">
+                                <div class="w-22 h-22 md:w-28 md:h-28 rounded-full border-3 overflow-hidden border-slate-500">
                                     <img id="fotoPreview" src="{{ $usuario->foto ? asset('storage/' . $usuario->foto) : asset('images/default-profile.jpg') }}"
                                         draggable="false" class="w-full h-full object-cover" />
                                 </div>
@@ -37,11 +37,9 @@
                                 <button onclick="document.getElementById('subirFoto').click()" type="button"
                                         class="absolute bottom-0 w-8 h-8 md:w-10 md:h-10 transform translate-y-1/2 
                                         flex items-center justify-center rounded-full border-4 cursor-pointer
-                                        light:bg-slate-300 light:border-slate-50 light:hover:bg-slate-400
-                                        dark:bg-slate-700 dark:border-slate-800 dark:hover:bg-slate-600 group">
+                                        bg-slate-700 border-slate-800 hover:bg-slate-600 group">
                                     <i class="fa-regular fa-pen-to-square text-xs md:text-base
-                                        dark:text-slate-500 dark:group-hover:text-slate-400
-                                        light:text-slate-400 light:group-hover:text-slate-600">
+                                        text-slate-500 group-hover:text-slate-400">
                                     </i>
                                 </button>
                                 
@@ -57,7 +55,7 @@
                                     <label class="text-main-3 block" >Correo</label>
                                     <div class="relative w-full">
                                         <i class="fa-solid fa-envelope absolute left-3 top-1/2 transform -translate-y-1/2 text-text-1/40"></i>
-                                        <input name="email" type="text" value="{{$usuario['email']}}" class="text-text-1/40 w-full bg-transparent border light:border-slate-400 dark:border-slate-600 pl-8 py-1.5 md:py-2 rounded focus:outline-none focus:ring-0" readonly/>
+                                        <input name="email" type="text" value="{{$usuario['email']}}" class="text-text-1/40 w-full bg-transparent border border-slate-600 pl-8 py-1.5 md:py-2 rounded focus:outline-none focus:ring-0" readonly/>
                                     </div>
                                 </div>
 
@@ -91,7 +89,7 @@
                                 <!-- Rol -->
                                 <div>
                                     <label class="text-main-3 block ">Rol</label>
-                                    <input id="rolShow" type="text" value="{{$usuario['rol']['nombre']}}" class="text-text-1/40 bg-transparent border light:border-slate-400 dark:border-slate-600 px-2 py-1.5 md:px-3 md:py-2 rounded w-full focus:outline-none focus:ring-0" readonly />
+                                    <input id="rolShow" type="text" value="{{$usuario['rol']['nombre']}}" class="text-text-1/40 bg-transparent border border-slate-600 px-2 py-1.5 md:px-3 md:py-2 rounded w-full focus:outline-none focus:ring-0" readonly />
                                 </div>
 
                                 <!-- Botón Editar -->

@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-<aside id="sidebar" class="sidebar hidden lg:flex flex-col p-3 w-[13rem] bg-main-6 border border-main-2 border-l-0 rounded-r-lg transition-[width] duration-300 ease-in-out overflow-hidden flex-shrink-0 ">
+<aside id="sidebar" class="sidebar hidden lg:flex flex-col p-3 w-[14rem] bg-main-6 border border-main-2 border-l-0 rounded-r-lg transition-[width] duration-300 ease-in-out overflow-hidden flex-shrink-0 ">
     
     <x-sidebar.header screen="desktop"/>
 
@@ -22,7 +22,7 @@
 
             <x-sidebar.user-data-mobile/>
 
-            <div class="border-b dark:border-bg-logo light:border-bg-header pb-3 mb-2">
+            <div class="border-b border-bg-logo pb-3 mb-2">
                 <x-sidebar.item route="usuarios.perfil" icon="fa-solid fa-circle-user" screen="mobile">Perfil</x-sidebar.item>
                 <x-sidebar.item route="notificaciones.index" icon="fa-solid fa-bell" screen="mobile">Notificaciones</x-sidebar.item>
             </div>
@@ -32,7 +32,7 @@
             <x-sidebar.item route="home" icon="fa-solid fa-file-lines" screen="mobile">Informes</x-sidebar.item>
             <x-sidebar.item route="admin.areas.index" icon="fa-solid fa-layer-group" screen="mobile">Áreas</x-sidebar.item>
 
-            <div class="border-t dark:border-bg-logo light:border-bg-header pt-3 mt-1">
+            <div class="border-t border-bg-logo pt-3 mt-1">
                 <x-sidebar.btn-logout screen="mobile"/>
             </div>
 

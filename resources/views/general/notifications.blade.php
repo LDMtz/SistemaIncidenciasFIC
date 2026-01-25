@@ -18,7 +18,7 @@
             </div>
 
             <div class="flex flex-1 items-center justify-center mt-4">
-                <div class="w-full max-w-3xl rounded-xl border border-text-1 p-4 sm:p-5 light:shadow dark:bg-slate-900 light:bg-white">
+                <div class="w-full max-w-3xl rounded-xl border border-text-1 p-4 sm:p-5 bg-slate-900">
                     
                     <!-- Header -->
                     <div class="flex flex-wrap justify-between items-center text-text-1 text-sm font-semibold border-b border-text-1 pb-3">

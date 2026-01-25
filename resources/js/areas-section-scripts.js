@@ -61,7 +61,7 @@ function verElemento(id) {
             const td = document.createElement('td');
 
             td.colSpan = 1; // Ajusta según el número de columnas que tenga tu tabla
-            td.className = 'text-center text-xs md:text-sm dark:text-slate-400 light:text-slate-500 py-2';
+            td.className = 'text-center text-xs md:text-sm text-slate-400 py-2';
             td.textContent = 'Sin encargados';
 
             tr.appendChild(td);
