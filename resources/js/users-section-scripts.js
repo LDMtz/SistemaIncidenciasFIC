@@ -75,7 +75,7 @@ function editarElemento(id) {
 
         //Asignamos el action al form
         const form = document.getElementById('formEditUsuario');
-        form.setAttribute('action', `/admin/usuarios/actualizar/${data.id}`);
+        form.setAttribute('action', `/admin/usuarios/${data.id}`);
 
         // Llenar datos
 
@@ -122,7 +122,7 @@ function editarElemento(id) {
 
 function borrarElemento(id) {
     const form = document.getElementById('formDeleteModal');
-    form.action = `/admin/usuarios/eliminar/${id}`;
+    form.action = `/admin/usuarios/${id}`;
     openModal('genericDeleteModal');
 }
 

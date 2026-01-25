@@ -107,7 +107,7 @@ function editarElemento(id) {
 
         //Asignamos el action al form
         const form = document.getElementById('formEditArea');
-        form.setAttribute('action', `/admin/areas/actualizar/${data.id}`);
+        form.setAttribute('action', `/admin/areas/${data.id}`);
 
         //LLenar datos
         document.getElementById('nombreAreaEdit').value  = data.nombre;
@@ -246,7 +246,7 @@ function verEncargado(id){
 
 function borrarElemento(id) {
     const form = document.getElementById('formDeleteModal');
-    form.action = `/admin/areas/eliminar/${id}`;
+    form.action = `/admin/areas/${id}`;
     openModal('genericDeleteModal');
 }
 
