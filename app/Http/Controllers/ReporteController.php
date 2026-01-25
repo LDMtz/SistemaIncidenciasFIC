@@ -10,7 +10,11 @@ use Illuminate\Support\Facades\Auth;
 use App\Notifications\NuevoReporteNotification;
 
 use App\Models\Area;
+use App\Models\EstadoReporte;
 use App\Models\Severidad;
+
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NuevoReporteCreado as NuevoReporteCreadoMail;
 
 class ReporteController extends Controller
 {
@@ -55,6 +59,7 @@ class ReporteController extends Controller
         return view('admin.reportes.index', compact('reportes', 'sortOrder', 'campo', 'valor'));
     }
 
+    //Ruta general
     public function create()
     {
         $user = Auth::user();
@@ -66,6 +71,7 @@ class ReporteController extends Controller
         return view("general.reportes.create", compact('user', 'areas', 'severidades'));
     }
 
+    //Ruta general
     public function store(Request $request)
     {
         $request->validate([
@@ -90,52 +96,58 @@ class ReporteController extends Controller
         // Procesar fotos si vienen
         if ($request->hasFile('fotos')) {
             foreach ($request->file('fotos') as $foto) {
-                /*
                 $ruta = $foto->store('fotos/reportes', 'public');
                 $reporte->fotos()->create([
-                    'ruta' => Storage::url($ruta),
-                ]);
-                */
-                $ruta = $foto->store('fotos/reportes', 'public');
-                $reporte->fotos()->create([
-                    'ruta' => $ruta, // 👈 guarda solo la ruta relativa
+                    'ruta' => $ruta, // guarda solo la ruta relativa
                 ]);
             }
         }
 
-        // Obtener encargados del área
-        $encargados = $reporte->area->encargados ?? collect();
+        // Obtener usuarios responsables del área (encargados o administradores)
+        $usuarios = $reporte->area->usuariosResponsables();
 
-        if ($encargados->isNotEmpty()) // Notificar a todos los encargados del área
-            foreach ($encargados as $encargado) $encargado->notify(new NuevoReporteNotification($reporte));
-        else { // Si no hay encargados, notificar al administrador
-            $admins = User::whereHas('rol', function ($q) {
-                $q->where('nombre', 'Administrador');
-            })->get();
-            foreach ($admins as $admin) $admin->notify(new NuevoReporteNotification($reporte));
+        // Notificar a todos los usuarios responsables (encargados o administradores [en caso de que el area no tenga encargados])
+        foreach ($usuarios as $usuario) {
+            //Guarda notificacion en la BD
+            $usuario->notify(new NuevoReporteNotification($reporte));
+            //Envia un correo
+            try{
+                Mail::to($usuario->email)->send(new NuevoReporteCreadoMail($reporte));
+            } catch (\Throwable $e) {
+                //Si falla no hacemos nada por el momento
+            }
+
         }
 
-        //return redirect()->back()->with('success', 'Reporte enviado correctamente.');
         return redirect()->route('home')->with('success', '¡Reporte enviado correctamente!');
     }
 
+    //Ruta general
     public function show($id)
-    {
-        return view("general.reportes.show");
-    }
-
-    public function review($id)
-    {
+    {   
         $reporte = Reporte::with(['usuario', 'area', 'severidad', 'estado', 'fotos'])
             ->findOrFail($id);
 
-        //NOTA: Por el momento los encargados son los ADMINISTRADORES, temporalmente
-        //TODO: Pasarle los encargados correspondientes del Area
-        $encargados = User::whereHas('rol', function ($q) {
-            $q->where('nombre', 'Administrador');
-        })->get();
+        //Encargados del área
+        $encargados = $reporte->area->usuariosResponsables();
 
-        return view("admin.reportes.review", compact('reporte', 'encargados'));
+        //Rol del usuario autenticado
+        $rol = Auth::user()->rol->nombre;
+
+        // Solo si es Administrador se consultan estos catálogos
+        //TODO: Faltaría tambien validar la info para el panel de ENCARGADOS
+        if ($rol === 'Administrador') {
+            $estados = EstadoReporte::all();
+            $severidades = Severidad::all();
+        } else {
+            //Vacios
+            $estados = collect();
+            $severidades = collect();
+        }
+
+        //dd($reporte);
+
+        return view("general.reportes.show", compact('reporte','encargados','rol','estados', 'severidades'));
     }
 
     public function update_state(Request $request, $id)

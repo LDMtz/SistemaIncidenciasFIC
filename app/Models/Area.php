@@ -26,4 +26,21 @@ class Area extends Model
     {
         return $this->hasMany(Reporte::class);
     }
+
+    /**
+     * Obtener los encargados del área.
+     * Si no hay encargados, retorna los usuarios con rol 'Administrador'.
+     */
+    public function usuariosResponsables()
+    {
+        $encargados = $this->encargados()
+            ->whereHas('rol', fn($q) => $q->where('nombre', 'Encargado'))
+            ->get();
+
+        if ($encargados->isEmpty()) {
+            $encargados = User::whereHas('rol', fn($q) => $q->where('nombre', 'Administrador'))->get();
+        }
+
+        return $encargados;
+    }
 }
