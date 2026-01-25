@@ -1,3 +1,5 @@
+<!-- Este archivo esá aquí pero no se usa, lo dejé aqui para futuras implementaciones -->
+
 @props(['screen'])
 
 @if($screen == 'desktop')

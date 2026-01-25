@@ -9,7 +9,7 @@
         <x-sidebar.item route="admin.reportes.index" icon="fa-solid fa-folder-open" screen="desktop">Reportes</x-sidebar.item>
         <x-sidebar.item route="home" icon="fa-solid fa-file-lines" screen="desktop">Informes</x-sidebar.item>
         <x-sidebar.item route="admin.areas.index" icon="fa-solid fa-layer-group" screen="desktop">Áreas</x-sidebar.item>
-        <x-sidebar.theme-toggle screen="desktop"/>
+        <x-sidebar.btn-logout screen="desktop"/>
     </nav>
 </aside>
 
@@ -35,8 +35,7 @@
             <x-sidebar.item route="admin.areas.index" icon="fa-solid fa-layer-group" screen="mobile">Áreas</x-sidebar.item>
 
             <div class="border-t dark:border-bg-logo light:border-bg-header pt-3 mt-1">
-                <x-sidebar.theme-toggle screen="mobile"/>
-                <x-sidebar.btn-logout-mobile screen="mobile"/>
+                <x-sidebar.btn-logout screen="mobile"/>
             </div>
 
         </nav>

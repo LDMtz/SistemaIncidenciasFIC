@@ -7,14 +7,8 @@
         <x-sidebar.item route="home" icon="fa-solid fa-house" screen="desktop">Inicio</x-sidebar.item>
         <x-sidebar.item route="usuarios.perfil" icon="fa-solid fa-circle-user" screen="desktop">Perfil</x-sidebar.item>
         <x-sidebar.item route="notificaciones.index" icon="fa-solid fa-bell" screen="desktop">Notificaciones</x-sidebar.item>
-        
         <x-sidebar.item route="home" icon="fa-solid fa-folder-open" screen="desktop">Reportes</x-sidebar.item>
-
-        <div class="pt-3 relative border-t dark:border-bg-logo light:border-bg-header mt-auto">
-            <x-sidebar.btn-logout-mobile screen="desktop"/>
-        </div>
-
-
+        <x-sidebar.btn-logout screen="desktop"/>
     </nav>
 </aside>
 
@@ -37,7 +31,7 @@
             <x-sidebar.item route="home" icon="fa-solid fa-folder-open" screen="mobile">Reportes</x-sidebar.item>
 
             <div class="border-t dark:border-bg-logo light:border-bg-header pt-3 mt-1">
-                <x-sidebar.btn-logout-mobile screen="mobile"/>
+                <x-sidebar.btn-logout screen="mobile"/>
             </div>
 
         </nav>
