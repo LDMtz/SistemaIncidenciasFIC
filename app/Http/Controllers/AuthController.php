@@ -49,7 +49,7 @@ class AuthController extends Controller
 
             return redirect()->route('home');
         }else{
-            return back()->withErrors(['login' => 'Credenciales incorrectas']);
+            return back()->withErrors(['login' => 'Credenciales incorrectas'])->withInput();;
         }
     }
 }

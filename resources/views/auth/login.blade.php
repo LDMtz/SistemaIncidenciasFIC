@@ -10,7 +10,7 @@
                 <label for="correo" class="text-main-3 text-md font-semibold">Correo electrónico:</label>
                 <div class="relative mb-6">
                     <i class="fa-solid fa-circle-user absolute left-2 top-1/2 transform -translate-y-1/2 text-main-2"></i>
-                    <input name="correo" type="email" autocomplete="off" class="py-1 text-sm border-1 rounded-lg pl-8 border-main-2 bg-main-7 focus:outline-none focus:border-main-4 w-full">
+                    <input name="correo" type="email" value="{{ old('correo') }}" autocomplete="off" class="py-1 text-sm border-1 rounded-lg pl-8 border-main-2 bg-main-7 focus:outline-none focus:border-main-4 w-full">
                 </div>
 
                 <label for="clave" class="text-main-3 text-md font-semibold">Contraseña:</label>
